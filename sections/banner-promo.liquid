@@ -1,0 +1,381 @@
+{% comment %}
+  Simple Banner Section - Premium Automotive Style
+  Compatible with Shopify themes
+  Supports different images for mobile and desktop
+{% endcomment %}
+
+<style>
+  /* Reset and protection against theme styles */
+  .banner-simple-section-wrapper * {
+    box-sizing: border-box !important;
+  }
+  
+  .banner-simple-section-wrapper {
+    all: initial;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .banner-simple-section {
+    background: {{ section.settings.background_color }};
+    width: 100%;
+    position: relative;
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  .banner-simple-container {
+    max-width: {{ section.settings.max_width }}px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .banner-simple-image-wrapper {
+    position: relative;
+    width: 100%;
+    border-radius: {{ section.settings.border_radius }}px;
+    overflow: hidden;
+    {% if section.settings.image_height == 'fixed' %}
+    height: {{ section.settings.fixed_height_mobile }}px;
+    {% endif %}
+  }
+
+  @media (min-width: 768px) {
+    .banner-simple-image-wrapper {
+      {% if section.settings.image_height == 'fixed' %}
+      height: {{ section.settings.fixed_height_desktop }}px;
+      {% endif %}
+    }
+  }
+
+  .banner-simple-image {
+    width: 100%;
+    display: block;
+    {% if section.settings.image_height == 'auto' %}
+    height: auto;
+    {% elsif section.settings.image_height == 'fixed' %}
+    height: 100%;
+    object-fit: {{ section.settings.image_fit }};
+    object-position: {{ section.settings.image_position }};
+    {% endif %}
+  }
+
+  .banner-simple-image-desktop {
+    display: none;
+  }
+
+  .banner-simple-image-mobile {
+    display: block;
+  }
+
+  @media (min-width: 768px) {
+    .banner-simple-image-desktop {
+      display: block;
+    }
+
+    .banner-simple-image-mobile {
+      display: none;
+    }
+  }
+
+  /* Link wrapper if enabled */
+  .banner-simple-link {
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
+
+  .banner-simple-link:hover {
+    opacity: 0.95;
+  }
+
+  .banner-simple-link:active,
+  .banner-simple-link:focus,
+  .banner-simple-link:visited {
+    text-decoration: none;
+    outline: none;
+  }
+</style>
+
+<div class="banner-simple-section-wrapper">
+  <div class="banner-simple-section">
+    <div class="banner-simple-container">
+      
+      {% if section.settings.link_url != blank %}
+        <!-- Banner with link -->
+        <a href="{{ section.settings.link_url }}" class="banner-simple-link">
+          <div class="banner-simple-image-wrapper">
+            <!-- Desktop Image -->
+            {% if section.settings.image_desktop %}
+              <img 
+                src="{{ section.settings.image_desktop | img_url: '1600x' }}" 
+                alt="{{ section.settings.image_alt | escape }}"
+                class="banner-simple-image banner-simple-image-desktop"
+                loading="lazy"
+              />
+            {% endif %}
+            
+            <!-- Mobile Image (fallback to desktop if not set) -->
+            {% if section.settings.image_mobile %}
+              <img 
+                src="{{ section.settings.image_mobile | img_url: '800x' }}" 
+                alt="{{ section.settings.image_alt | escape }}"
+                class="banner-simple-image banner-simple-image-mobile"
+                loading="lazy"
+              />
+            {% elsif section.settings.image_desktop %}
+              <img 
+                src="{{ section.settings.image_desktop | img_url: '800x' }}" 
+                alt="{{ section.settings.image_alt | escape }}"
+                class="banner-simple-image banner-simple-image-mobile"
+                loading="lazy"
+              />
+            {% else %}
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'banner-simple-image' }}
+            {% endif %}
+          </div>
+        </a>
+      {% else %}
+        <!-- Banner without link -->
+        <div class="banner-simple-image-wrapper">
+          <!-- Desktop Image -->
+          {% if section.settings.image_desktop %}
+            <img 
+              src="{{ section.settings.image_desktop | img_url: '1600x' }}" 
+              alt="{{ section.settings.image_alt | escape }}"
+              class="banner-simple-image banner-simple-image-desktop"
+              loading="lazy"
+            />
+          {% endif %}
+          
+          <!-- Mobile Image (fallback to desktop if not set) -->
+          {% if section.settings.image_mobile %}
+            <img 
+              src="{{ section.settings.image_mobile | img_url: '800x' }}" 
+              alt="{{ section.settings.image_alt | escape }}"
+              class="banner-simple-image banner-simple-image-mobile"
+              loading="lazy"
+            />
+          {% elsif section.settings.image_desktop %}
+            <img 
+              src="{{ section.settings.image_desktop | img_url: '800x' }}" 
+              alt="{{ section.settings.image_alt | escape }}"
+              class="banner-simple-image banner-simple-image-mobile"
+              loading="lazy"
+            />
+          {% else %}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'banner-simple-image' }}
+          {% endif %}
+        </div>
+      {% endif %}
+      
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Simple Banner Premium",
+  "tag": "section",
+  "class": "banner-simple-section-wrapper",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "Desktop image",
+      "info": "Recommended: 1600x600px or larger"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile image (optional)",
+      "info": "If not set, desktop image will be used. Recommended: 800x800px"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt text",
+      "default": "Promoción Banner",
+      "info": "Describe the image for accessibility"
+    },
+    {
+      "type": "header",
+      "content": "Link"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Banner link (optional)",
+      "info": "Make the entire banner clickable"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 1000,
+      "max": 2000,
+      "step": 50,
+      "unit": "px",
+      "label": "Maximum width",
+      "default": 1600
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 24
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#F7F7F7"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "Image Settings"
+    },
+    {
+      "type": "select",
+      "id": "image_height",
+      "label": "Image height",
+      "options": [
+        {
+          "value": "auto",
+          "label": "Auto"
+        },
+        {
+          "value": "fixed",
+          "label": "Fixed"
+        }
+      ],
+      "default": "auto"
+    },
+    {
+      "type": "range",
+      "id": "fixed_height_mobile",
+      "min": 100,
+      "max": 1000,
+      "step": 10,
+      "unit": "px",
+      "label": "Fixed height (mobile)",
+      "default": 300,
+      "info": "Height of the banner image on mobile devices (only applies when 'Fixed' height is selected)"
+    },
+    {
+      "type": "range",
+      "id": "fixed_height_desktop",
+      "min": 100,
+      "max": 1000,
+      "step": 10,
+      "unit": "px",
+      "label": "Fixed height (desktop)",
+      "default": 500,
+      "info": "Height of the banner image on desktop devices (only applies when 'Fixed' height is selected)"
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "Image fit",
+      "options": [
+        {
+          "value": "cover",
+          "label": "Cover"
+        },
+        {
+          "value": "contain",
+          "label": "Contain"
+        },
+        {
+          "value": "fill",
+          "label": "Fill"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "scale-down",
+          "label": "Scale-down"
+        }
+      ],
+      "default": "cover",
+      "info": "How the image should be resized to fit its container (only applies when 'Fixed' height is selected)"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "options": [
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        }
+      ],
+      "default": "center",
+      "info": "Position of the image within its container (only applies when 'Fixed' height is selected)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Simple Banner Premium"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,320 @@
+{% comment %}
+  Product Features Grid Section
+  - Editable colors for all elements
+  - 4 customizable features with vector icons
+  - Responsive 2-column grid layout
+  - Professional automotive theme
+{% endcomment %}
+
+<style>
+  .product-features-section-{{ section.id }} * {
+    box-sizing: border-box;
+  }
+  
+  .product-features-section-{{ section.id }} {
+    font-family: 'TT Norms Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: {{ section.settings.background_color }};
+    border: 1px solid {{ section.settings.border_color }};
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .product-features-grid-{{ section.id }} {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  @media (min-width: 640px) {
+    .product-features-grid-{{ section.id }} {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .product-feature-item-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .product-feature-icon-{{ section.id }} {
+    width: 40px;
+    height: 40px;
+    background: {{ section.settings.icon_background }};
+    border-radius: {{ section.settings.icon_border_radius }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .product-feature-icon-{{ section.id }} svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .product-feature-content-{{ section.id }} {
+    flex: 1;
+  }
+
+  .product-feature-title-{{ section.id }} {
+    color: {{ section.settings.title_color }};
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.4;
+    margin: 0 0 0.125rem 0;
+  }
+
+  .product-feature-description-{{ section.id }} {
+    color: {{ section.settings.description_color }};
+    font-size: 12px;
+    line-height: 1.4;
+    margin: 0;
+  }
+</style>
+
+<div class="product-features-section-{{ section.id }}">
+  <div class="product-features-grid-{{ section.id }}">
+    
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'feature' and block.settings.enabled -%}
+        <div class="product-feature-item-{{ section.id }}" {{ block.shopify_attributes }}>
+          <div class="product-feature-icon-{{ section.id }}">
+            {%- case block.settings.icon -%}
+              {%- when 'shield' -%}
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2L3 7V12C3 16.55 6.84 20.74 12 22C17.16 20.74 21 16.55 21 12V7L12 2Z" 
+                        fill="{{ section.settings.icon_color }}" 
+                        fill-opacity="0.2" 
+                        stroke="{{ section.settings.icon_color }}" 
+                        stroke-width="1.5" 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round"/>
+                  <path d="M9 12L11 14L15 10" 
+                        stroke="{{ section.settings.icon_color }}" 
+                        stroke-width="2" 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round"/>
+                </svg>
+              {%- when 'apps' -%}
+                <svg viewBox="0 0 24 24" fill="none">
+                  <rect x="3" y="3" width="7" height="7" rx="1.5" 
+                        fill="{{ section.settings.icon_color }}" 
+                        fill-opacity="0.2" 
+                        stroke="{{ section.settings.icon_color }}" 
+                        stroke-width="1.5"/>
+                  <rect x="14" y="3" width="7" height="7" rx="1.5" 
+                        fill="{{ section.settings.icon_color }}" 
+                        fill-opacity="0.2" 
+                        stroke="{{ section.settings.icon_color }}" 
+                        stroke-width="1.5"/>
+                  <rect x="3" y="14" width="7" height="7" rx="1.5" 
+                        fill="{{ section.settings.icon_color }}" 
+                        fill-opacity="0.2" 
+                        stroke="{{ section.settings.icon_color }}" 
+                        stroke-width="1.5"/>
+                  <rect x="14" y="14" width="7" height="7" rx="1.5" 
+                        fill="{{ section.settings.icon_color }}" 
+                        fill-opacity="0.2" 
+                        stroke="{{ section.settings.icon_color }}" 
+                        stroke-width="1.5"/>
+                  <circle cx="17.5" cy="6.5" r="1.5" fill="{{ section.settings.icon_color }}"/>
+                </svg>
+              {%- when 'lightning' -%}
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" 
+                        fill="{{ section.settings.icon_color }}" 
+                        fill-opacity="0.2" 
+                        stroke="{{ section.settings.icon_color }}" 
+                        stroke-width="1.5" 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round"/>
+                </svg>
+              {%- when 'globe' -%}
+                <svg viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="9" 
+                          fill="{{ section.settings.icon_color }}" 
+                          fill-opacity="0.2" 
+                          stroke="{{ section.settings.icon_color }}" 
+                          stroke-width="1.5"/>
+                  <path d="M12 3C12 3 8 7 8 12C8 17 12 21 12 21" 
+                        stroke="{{ section.settings.icon_color }}" 
+                        stroke-width="1.5" 
+                        stroke-linecap="round"/>
+                  <path d="M12 3C12 3 16 7 16 12C16 17 12 21 12 21" 
+                        stroke="{{ section.settings.icon_color }}" 
+                        stroke-width="1.5" 
+                        stroke-linecap="round"/>
+                  <path d="M3 12H21" 
+                        stroke="{{ section.settings.icon_color }}" 
+                        stroke-width="1.5" 
+                        stroke-linecap="round"/>
+                </svg>
+            {%- endcase -%}
+          </div>
+          <div class="product-feature-content-{{ section.id }}">
+            <div class="product-feature-title-{{ section.id }}">{{ block.settings.title }}</div>
+            <div class="product-feature-description-{{ section.id }}">{{ block.settings.description }}</div>
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product Features Grid",
+  "tag": "section",
+  "class": "section-product-features",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colores Generales"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Color de fondo",
+      "default": "#eff6ff"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Color del borde",
+      "default": "#dbeafe"
+    },
+    {
+      "type": "color",
+      "id": "icon_background",
+      "label": "Fondo del ícono",
+      "default": "#111827"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Color del ícono",
+      "default": "#00D9FF"
+    },
+    {
+      "type": "range",
+      "id": "icon_border_radius",
+      "label": "Radio de borde del ícono",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "default": 8,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Color del título",
+      "default": "#111827"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Color de la descripción",
+      "default": "#4b5563"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "enabled",
+          "label": "Mostrar característica",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Ícono",
+          "options": [
+            {
+              "value": "shield",
+              "label": "🛡️ Escudo (Shield)"
+            },
+            {
+              "value": "apps",
+              "label": "📱 Aplicaciones (Apps)"
+            },
+            {
+              "value": "lightning",
+              "label": "⚡ Rayo (Lightning)"
+            },
+            {
+              "value": "globe",
+              "label": "🌍 Globo (Globe)"
+            }
+          ],
+          "default": "shield"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Característica del producto"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Descripción",
+          "default": "Descripción breve"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Features Grid",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "enabled": true,
+            "icon": "shield",
+            "title": "CarPlay & Android Auto",
+            "description": "Conexión inalámbrica instantánea"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "enabled": true,
+            "icon": "apps",
+            "title": "Apps Integradas",
+            "description": "Netflix, YouTube, Spotify y más"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "enabled": true,
+            "icon": "lightning",
+            "title": "Instalación Rápida",
+            "description": "Plug & Play en minutos"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "enabled": true,
+            "icon": "globe",
+            "title": "Compatibilidad Universal",
+            "description": "Funciona en todos los vehículos"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

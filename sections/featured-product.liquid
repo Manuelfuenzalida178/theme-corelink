@@ -1,0 +1,447 @@
+{% comment %}
+  Featured Products Section - Premium Automotive Style
+  Compatible with Shopify themes
+  Allows customization of products, spacing, and styling
+{% endcomment %}
+
+<style>
+  /* Reset and protection against theme styles */
+  .featured-products-section-wrapper * {
+    box-sizing: border-box !important;
+  }
+  
+  .featured-products-section-wrapper {
+    all: initial;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .featured-products-section {
+    background: #F7F7F7;
+    width: 100%;
+    position: relative;
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  .featured-products-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .featured-products-header {
+    margin-bottom: 48px;
+  }
+
+  .featured-products-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #000000;
+    margin: 0 0 8px 0;
+    padding: 0;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .featured-products-subtitle {
+    font-size: 16px;
+    font-weight: 400;
+    color: #6B7280;
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+  }
+
+  .featured-products-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  @media (min-width: 768px) {
+    .featured-products-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .featured-products-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .product-card {
+    position: relative;
+    background: #ffffff;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+  }
+
+  .product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    text-decoration: none;
+  }
+
+  .product-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 10;
+    padding: 6px 12px;
+    background: linear-gradient(90deg, #06B6D4 0%, #2563EB 100%);
+    color: #ffffff;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  @media (min-width: 768px) {
+    .product-badge {
+      top: 16px;
+      left: 16px;
+      padding: 8px 16px;
+      font-size: 14px;
+    }
+  }
+
+  .product-image-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    background: linear-gradient(135deg, #F8FAFC 0%, #DBEAFE 100%);
+    overflow: hidden;
+  }
+
+  .product-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.5s ease;
+  }
+
+  .product-image-primary {
+    z-index: 2;
+    opacity: 1;
+  }
+
+  .product-image-secondary {
+    z-index: 1;
+    opacity: 0;
+  }
+
+  .product-card:hover .product-image-primary {
+    opacity: 0;
+  }
+
+  .product-card:hover .product-image-secondary {
+    opacity: 1;
+  }
+
+  .product-content {
+    padding: 12px;
+  }
+
+  @media (min-width: 768px) {
+    .product-content {
+      padding: 24px;
+    }
+  }
+
+  .product-category {
+    font-size: 11px;
+    font-weight: 400;
+    color: #6B7280;
+    margin: 0 0 4px 0;
+    padding: 0;
+    display: block;
+    line-height: 1.4;
+  }
+
+  @media (min-width: 768px) {
+    .product-category {
+      font-size: 14px;
+      font-weight: 600;
+      margin: 0 0 8px 0;
+    }
+  }
+
+  .product-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #000000;
+    margin: 0 0 6px 0;
+    padding: 0;
+    line-height: 1.3;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @media (min-width: 768px) {
+    .product-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0 0 8px 0;
+      line-height: 1.4;
+    }
+  }
+
+  .product-description {
+    font-size: 12px;
+    font-weight: 400;
+    color: #6B7280;
+    margin: 0 0 8px 0;
+    padding: 0;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @media (min-width: 768px) {
+    .product-description {
+      font-size: 13px;
+      margin: 0 0 16px 0;
+      line-height: 1.5;
+    }
+  }
+
+  .product-price {
+    font-size: 16px;
+    font-weight: 700;
+    color: #000000;
+    margin: 0;
+    padding: 0;
+    line-height: 1.3;
+  }
+
+  @media (min-width: 768px) {
+    .product-price {
+      font-size: 24px;
+    }
+  }
+
+  /* Remove any default link styling */
+  .product-card:active,
+  .product-card:focus,
+  .product-card:visited {
+    text-decoration: none;
+    outline: none;
+  }
+</style>
+
+<div class="featured-products-section-wrapper">
+  <div class="featured-products-section">
+    <div class="featured-products-container">
+      
+      {% if section.settings.show_header %}
+      <!-- Section Header -->
+      <div class="featured-products-header">
+        <h2 class="featured-products-title">{{ section.settings.section_title }}</h2>
+        <p class="featured-products-subtitle">{{ section.settings.section_subtitle }}</p>
+      </div>
+      {% endif %}
+
+      <!-- Products Grid -->
+      <div class="featured-products-grid">
+        {% for block in section.blocks %}
+          {% if block.settings.product != blank %}
+            {% assign product = block.settings.product %}
+            <a href="{{ product.url }}" class="product-card" {{ block.shopify_attributes }}>
+              
+              <!-- Badge -->
+              {% if block.settings.badge_text != blank %}
+              <div class="product-badge">
+                {{ block.settings.badge_text }}
+              </div>
+              {% endif %}
+              
+              <!-- Product Image -->
+              <div class="product-image-wrapper">
+                {% if product.featured_image %}
+                  <img 
+                    src="{{ product.featured_image | img_url: '800x800', crop: 'center' }}" 
+                    alt="{{ product.featured_image.alt | escape }}"
+                    class="product-image product-image-primary"
+                    loading="lazy"
+                  />
+                {% else %}
+                  {{ 'product-1' | placeholder_svg_tag: 'product-image' }}
+                {% endif %}
+                {% if product.images.size > 1 %}
+                  <img 
+                    src="{{ product.images[1] | img_url: '800x800', crop: 'center' }}" 
+                    alt="{{ product.images[1].alt | escape }}"
+                    class="product-image product-image-secondary"
+                    loading="lazy"
+                  />
+                {% endif %}
+              </div>
+              
+              <!-- Product Content -->
+              <div class="product-content">
+                {% if block.settings.category_text != blank %}
+                <span class="product-category">{{ block.settings.category_text }}</span>
+                {% endif %}
+                
+                <h3 class="product-title">{{ product.title }}</h3>
+                
+                {% if block.settings.custom_description != blank %}
+                <p class="product-description">{{ block.settings.custom_description }}</p>
+                {% elsif product.description != blank %}
+                <p class="product-description">{{ product.description | strip_html | truncate: 80 }}</p>
+                {% endif %}
+                
+                <div class="product-price">
+                  {% if product.compare_at_price > product.price %}
+                    <span>{{ product.price | money }}</span>
+                  {% else %}
+                    <span>{{ product.price | money }}</span>
+                  {% endif %}
+                </div>
+              </div>
+              
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured Products Premium",
+  "tag": "section",
+  "class": "featured-products-section-wrapper",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_header",
+      "label": "Show section header",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section title",
+      "default": "Productos Destacados"
+    },
+    {
+      "type": "text",
+      "id": "section_subtitle",
+      "label": "Section subtitle",
+      "default": "Los accesorios más populares para tu auto"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product Card",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Badge text (optional)",
+          "info": "Example: 55% OFF, Bestseller, Nuevo",
+          "default": "Bestseller"
+        },
+        {
+          "type": "text",
+          "id": "category_text",
+          "label": "Category text (optional)",
+          "info": "Example: Iluminación, Multimedia, Performance"
+        },
+        {
+          "type": "textarea",
+          "id": "custom_description",
+          "label": "Custom description (optional)",
+          "info": "Leave blank to use product description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Products Premium",
+      "blocks": [
+        {
+          "type": "product",
+          "settings": {
+            "badge_text": "55% OFF",
+            "category_text": "Iluminación"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "badge_text": "Bestseller",
+            "category_text": "Multimedia"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "badge_text": "Nuevo",
+            "category_text": "Performance"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "badge_text": "40% OFF",
+            "category_text": "Accesorios"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

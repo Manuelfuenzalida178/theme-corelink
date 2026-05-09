@@ -1,0 +1,364 @@
+{% comment %}
+  Customer Testimonials Section
+  Compatible with Shopify themes (pre-2.0 and 2.0)
+  Editable from Theme Customizer
+{% endcomment %}
+
+<style>
+  .customer-testimonials-{{ section.id }} {
+    background-color: {{ section.settings.background_color }};
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+  }
+
+  .testimonials-container-{{ section.id }} {
+    max-width: {{ section.settings.container_width }}px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .testimonials-header-{{ section.id }} {
+    margin-bottom: 1.25rem;
+  }
+
+  .testimonials-title-{{ section.id }} {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: {{ section.settings.title_color }};
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+
+  .testimonials-subtitle-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: {{ section.settings.subtitle_color }};
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+
+  .info-icon-{{ section.id }} {
+    width: 1rem;
+    height: 1rem;
+    color: {{ section.settings.icon_color }};
+    flex-shrink: 0;
+  }
+
+  .testimonials-grid-{{ section.id }} {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .testimonials-grid-{{ section.id }} {
+      grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
+    }
+  }
+
+  .testimonial-image-wrapper-{{ section.id }} {
+    position: relative;
+    width: 100%;
+    padding-bottom: {{ section.settings.image_aspect_ratio }}%;
+    overflow: hidden;
+    border-radius: {{ section.settings.border_radius }}px;
+    background-color: #f3f4f6;
+  }
+
+  .testimonial-image-{{ section.id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .testimonial-image-wrapper-{{ section.id }}:hover .testimonial-image-{{ section.id }} {
+    transform: scale({{ section.settings.hover_zoom }});
+  }
+
+  @media (max-width: 639px) {
+    .testimonials-title-{{ section.id }} {
+      font-size: 1.25rem;
+    }
+    
+    .testimonials-subtitle-{{ section.id }} {
+      font-size: 0.875rem;
+    }
+
+    .testimonials-grid-{{ section.id }} {
+      grid-template-columns: repeat({{ section.settings.columns_mobile }}, 1fr);
+    }
+  }
+</style>
+
+<div class="customer-testimonials-{{ section.id }}">
+  <div class="testimonials-container-{{ section.id }}">
+    
+    {% if section.settings.show_header %}
+      <!-- Header -->
+      <div class="testimonials-header-{{ section.id }}">
+        {% if section.settings.title != blank %}
+          <h2 class="testimonials-title-{{ section.id }}">{{ section.settings.title }}</h2>
+        {% endif %}
+        
+        {% if section.settings.subtitle != blank %}
+          <div class="testimonials-subtitle-{{ section.id }}">
+            {% if section.settings.show_icon %}
+              <svg class="info-icon-{{ section.id }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+              </svg>
+            {% endif %}
+            <span>{{ section.settings.subtitle }}</span>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <!-- Images Grid -->
+    <div class="testimonials-grid-{{ section.id }}">
+      {% for block in section.blocks %}
+        {% if block.type == 'image' %}
+          <div class="testimonial-image-wrapper-{{ section.id }}" {{ block.shopify_attributes }}>
+            {% if block.settings.image != blank %}
+              <img 
+                class="testimonial-image-{{ section.id }}" 
+                src="{{ block.settings.image | img_url: '800x' }}" 
+                alt="{{ block.settings.image_alt | escape }}"
+                loading="lazy"
+              />
+            {% else %}
+              <!-- Placeholder cuando no hay imagen -->
+              <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background-color: #e5e7eb;">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="1.5">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                  <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                  <polyline points="21 15 16 10 5 21"></polyline>
+                </svg>
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Customer Testimonials",
+  "class": "section-customer-testimonials",
+  "max_blocks": 20,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "min": 800,
+      "max": 1400,
+      "step": 50,
+      "unit": "px",
+      "label": "Container Width",
+      "default": 1200
+    },
+    {
+      "type": "header",
+      "content": "Header Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_header",
+      "label": "Show Header",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Recomendado por clientes"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#111827"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Más de 100,000 coches ya lo usan cada día."
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle Color",
+      "default": "#4b5563"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_icon",
+      "label": "Show Info Icon",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon Color",
+      "default": "#3b82f6"
+    },
+    {
+      "type": "header",
+      "content": "Grid Settings"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "label": "Columns (Desktop)",
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns (Mobile)",
+      "options": [
+        {
+          "value": "1",
+          "label": "1 Column"
+        },
+        {
+          "value": "2",
+          "label": "2 Columns"
+        }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "header",
+      "content": "Image Settings"
+    },
+    {
+      "type": "range",
+      "id": "image_aspect_ratio",
+      "min": 75,
+      "max": 150,
+      "step": 5,
+      "unit": "%",
+      "label": "Image Aspect Ratio",
+      "default": 135,
+      "info": "100 = Square, 135 = Portrait (3:4), 75 = Landscape (4:3)"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Border Radius",
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "hover_zoom",
+      "label": "Hover Zoom Effect",
+      "options": [
+        {
+          "value": "1",
+          "label": "None"
+        },
+        {
+          "value": "1.05",
+          "label": "Small (5%)"
+        },
+        {
+          "value": "1.1",
+          "label": "Medium (10%)"
+        },
+        {
+          "value": "1.15",
+          "label": "Large (15%)"
+        }
+      ],
+      "default": "1.05"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 24
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Customer Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image Alt Text",
+          "default": "Customer testimonial image",
+          "info": "Describe the image for SEO and accessibility"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Customer Testimonials",
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

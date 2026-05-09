@@ -1,0 +1,928 @@
+<!-- 
+╔═══════════════════════════════════════════════════════════════════════════╗
+║  📸 CARRUSEL DE INSTAGRAM - AIRPURE CHILE                                 ║
+╠═══════════════════════════════════════════════════════════════════════════╣
+║  INSTRUCCIONES:                                                           ║
+║  1. Sube tus imágenes/videos en Shopify Admin > Contenido > Archivos     ║
+║  2. Copia las URLs de cada archivo                                        ║
+║  3. Reemplaza "TU_URL_AQUI" con las URLs reales                          ║
+║  4. Personaliza likes y captions según tu contenido                       ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+-->
+
+<div class="stories-carousel-widget">
+  <div class="carousel-wrapper">
+    
+    <!-- Header -->
+    <div class="carousel-header">
+      <div class="header-badge">
+        <svg class="instagram-icon" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+        <span class="header-username">@airpurecl</span>
+      </div>
+      <h2 class="carousel-title">Lo que dicen nuestros clientes</h2>
+      <p class="carousel-subtitle">Miles de personas ya están respirando mejor con AirPure®</p>
+    </div>
+
+    <!-- Carousel Container -->
+    <div class="carousel-container">
+      
+      <!-- Navigation Buttons -->
+      <button class="nav-button nav-prev" id="prevButton" aria-label="Anterior">
+        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+      </button>
+
+      <button class="nav-button nav-next" id="nextButton" aria-label="Siguiente">
+        <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+      </button>
+
+      <!-- Stories Scroll -->
+      <div class="stories-scroll" id="storiesScroll">
+        
+        <!-- Story Card 1 -->
+        <div class="story-card active" data-index="0">
+          <div class="card-wrapper">
+            <div class="story-content">
+              <img src="https://cdn.shopify.com/s/files/1/0658/4981/9245/files/Generated_Image_October_15_2025_-_1_47PM.png?v=1760548300" alt="AirPure Chile" class="story-image">
+              <div class="gradient-overlay"></div>
+              <div class="instagram-badge">
+                <svg class="badge-icon" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/>
+                </svg>
+              </div>
+              <div class="story-info">
+                <div class="user-info">
+                  <img src="https://cdn.shopify.com/s/files/1/0658/4981/9245/files/454237720_122100094688455721_548058627099955873_n.jpg?v=1760548605" alt="AirPure" class="user-avatar">
+                  <div class="user-details">
+                    <p class="username">@airpurecl</p>
+                    <div class="likes-count">
+                      <svg class="heart-icon" viewBox="0 0 24 24">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                      </svg>
+                      <span>2.4k</span>
+                    </div>
+                  </div>
+                </div>
+                <p class="story-caption">¡Respira mejor, duerme mejor! 💙 #AirPure</p>
+              </div>
+            </div>
+            <div class="active-indicator"></div>
+          </div>
+        </div>
+
+        <!-- Story Card 2 -->
+        <div class="story-card" data-index="1">
+          <div class="card-wrapper">
+            <div class="story-content">
+              <img src="https://cdn.shopify.com/s/files/1/0658/4981/9245/files/Generated_Image_October_15_2025_-_2_14PM.png?v=1760548486" alt="AirPure Chile" class="story-image">
+              <div class="gradient-overlay"></div>
+              <div class="instagram-badge">
+                <svg class="badge-icon" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/>
+                </svg>
+              </div>
+              <div class="story-info">
+                <div class="user-info">
+                  <img src="https://cdn.shopify.com/s/files/1/0658/4981/9245/files/454237720_122100094688455721_548058627099955873_n.jpg?v=1760548605" alt="AirPure" class="user-avatar">
+                  <div class="user-details">
+                    <p class="username">@airpurecl</p>
+                    <div class="likes-count">
+                      <svg class="heart-icon" viewBox="0 0 24 24">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                      </svg>
+                      <span>1.8k</span>
+                    </div>
+                  </div>
+                </div>
+                <p class="story-caption">Testimonios reales de clientes felices ✨</p>
+              </div>
+            </div>
+            <div class="active-indicator"></div>
+          </div>
+        </div>
+
+        <!-- Story Card 3 -->
+        <div class="story-card" data-index="2">
+          <div class="card-wrapper">
+            <div class="story-content">
+              <img src="https://cdn.shopify.com/s/files/1/0658/4981/9245/files/Generated_Image_October_15_2025_-_2_22PM.png?v=1760548959" alt="AirPure Chile" class="story-image">
+              <div class="gradient-overlay"></div>
+              <div class="instagram-badge">
+                <svg class="badge-icon" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/>
+                </svg>
+              </div>
+              <div class="story-info">
+                <div class="user-info">
+                  <img src="https://cdn.shopify.com/s/files/1/0658/4981/9245/files/454237720_122100094688455721_548058627099955873_n.jpg?v=1760548605" alt="AirPure" class="user-avatar">
+                  <div class="user-details">
+                    <p class="username">@airpurecl</p>
+                    <div class="likes-count">
+                      <svg class="heart-icon" viewBox="0 0 24 24">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                      </svg>
+                      <span>3.1k</span>
+                    </div>
+                  </div>
+                </div>
+                <p class="story-caption">Adiós ronquidos 😴 Hola buen descanso</p>
+              </div>
+            </div>
+            <div class="active-indicator"></div>
+          </div>
+        </div>
+
+        <!-- Story Card 4 -->
+        <div class="story-card" data-index="3">
+          <div class="card-wrapper">
+            <div class="story-content">
+              <img src="https://cdn.shopify.com/s/files/1/0777/9100/2647/files/Generated_Image_October_15_2025_-_6_59PM.png?v=1764334435" alt="AirPure Chile" class="story-image">
+              <div class="gradient-overlay"></div>
+              <div class="instagram-badge">
+                <svg class="badge-icon" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/>
+                </svg>
+              </div>
+              <div class="story-info">
+                <div class="user-info">
+                  <img src="https://cdn.shopify.com/s/files/1/0658/4981/9245/files/454237720_122100094688455721_548058627099955873_n.jpg?v=1760548605" alt="AirPure" class="user-avatar">
+                  <div class="user-details">
+                    <p class="username">@airpurecl</p>
+                    <div class="likes-count">
+                      <svg class="heart-icon" viewBox="0 0 24 24">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                      </svg>
+                      <span>2.9k</span>
+                    </div>
+                  </div>
+                </div>
+                <p class="story-caption">Mejor rendimiento deportivo 🏃‍♂️</p>
+              </div>
+            </div>
+            <div class="active-indicator"></div>
+          </div>
+        </div>
+
+        <!-- Story Card 5 -->
+        <div class="story-card" data-index="4">
+          <div class="card-wrapper">
+            <div class="story-content">
+              <img src="https://cdn.shopify.com/s/files/1/0777/9100/2647/files/Generated_Image_October_29_2025_-_6_35AM_1.png?v=1764334401" alt="AirPure Chile" class="story-image">
+              <div class="gradient-overlay"></div>
+              <div class="instagram-badge">
+                <svg class="badge-icon" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/>
+                </svg>
+              </div>
+              <div class="story-info">
+                <div class="user-info">
+                  <img src="https://cdn.shopify.com/s/files/1/0658/4981/9245/files/454237720_122100094688455721_548058627099955873_n.jpg?v=1760548605" alt="AirPure" class="user-avatar">
+                  <div class="user-details">
+                    <p class="username">@airpurecl</p>
+                    <div class="likes-count">
+                      <svg class="heart-icon" viewBox="0 0 24 24">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                      </svg>
+                      <span>4.2k</span>
+                    </div>
+                  </div>
+                </div>
+                <p class="story-caption">Solución natural para respirar mejor 💙</p>
+              </div>
+            </div>
+            <div class="active-indicator"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Dots Indicator -->
+      <div class="dots-container">
+        <button class="dot active" data-index="0" aria-label="Historia 1"></button>
+        <button class="dot" data-index="1" aria-label="Historia 2"></button>
+        <button class="dot" data-index="2" aria-label="Historia 3"></button>
+        <button class="dot" data-index="3" aria-label="Historia 4"></button>
+        <button class="dot" data-index="4" aria-label="Historia 5"></button>
+      </div>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-container">
+      <a href="https://instagram.com/airpurecl" target="_blank" rel="noopener noreferrer" class="cta-link">
+        <svg class="cta-instagram" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/>
+        </svg>
+        Síguenos en Instagram
+        <svg class="cta-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  /* === RESET Y BASE === */
+  .stories-carousel-widget * {
+    box-sizing: border-box;
+  }
+
+  .stories-carousel-widget {
+    width: 100%;
+    background: #ffffff;
+    padding: 2rem 0.75rem;
+    overflow: hidden;
+  }
+
+  @media (min-width: 768px) {
+    .stories-carousel-widget {
+      padding: 3rem 1rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .stories-carousel-widget {
+      padding: 5rem 1rem;
+    }
+  }
+
+  .carousel-wrapper {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 0.75rem;
+  }
+
+  @media (min-width: 768px) {
+    .carousel-wrapper {
+      padding: 0 1rem;
+    }
+  }
+
+  /* === HEADER === */
+  .carousel-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    padding: 0 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .carousel-header {
+      margin-bottom: 2.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .carousel-header {
+      margin-bottom: 4rem;
+    }
+  }
+
+  .header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(to right, #eff6ff, #ecfeff);
+    border: 1px solid #dbeafe;
+    border-radius: 9999px;
+    margin-bottom: 0.75rem;
+  }
+
+  @media (min-width: 768px) {
+    .header-badge {
+      gap: 0.75rem;
+      padding: 0.75rem 1.5rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  .instagram-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #3b82f6;
+  }
+
+  @media (min-width: 768px) {
+    .instagram-icon {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+  .header-username {
+    font-weight: 600;
+    background: linear-gradient(to right, #2563eb, #0891b2);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 0.875rem;
+  }
+
+  @media (min-width: 768px) {
+    .header-username {
+      font-size: 1rem;
+    }
+  }
+
+  .carousel-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(to right, #2563eb, #0891b2, #2563eb);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin: 0 0 0.5rem 0;
+  }
+
+  @media (min-width: 768px) {
+    .carousel-title {
+      font-size: 1.875rem;
+      margin: 0 0 0.75rem 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .carousel-title {
+      font-size: 2.25rem;
+    }
+  }
+
+  .carousel-subtitle {
+    color: #4b5563;
+    max-width: 42rem;
+    margin: 0 auto;
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  @media (min-width: 768px) {
+    .carousel-subtitle {
+      font-size: 1rem;
+    }
+  }
+
+  /* === CAROUSEL CONTAINER === */
+  .carousel-container {
+    position: relative;
+  }
+
+  /* === NAVIGATION BUTTONS === */
+  .nav-button {
+    position: absolute;
+    top: 50%;
+    margin-top: -18px;
+    z-index: 20;
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
+    max-width: 36px !important;
+    max-height: 36px !important;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #f3f4f6;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    padding: 0;
+  }
+
+  @media (min-width: 768px) {
+    .nav-button {
+      width: 48px !important;
+      height: 48px !important;
+      min-width: 48px !important;
+      min-height: 48px !important;
+      max-width: 48px !important;
+      max-height: 48px !important;
+      margin-top: -24px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+  }
+
+  .nav-button:hover:not(:disabled) {
+    background: #f9fafb;
+  }
+
+  .nav-button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .nav-prev {
+    left: 4px;
+  }
+
+  @media (min-width: 768px) {
+    .nav-prev {
+      left: 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .nav-prev {
+      left: -1.5rem;
+    }
+  }
+
+  .nav-next {
+    right: 4px;
+  }
+
+  @media (min-width: 768px) {
+    .nav-next {
+      right: 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .nav-next {
+      right: -1.5rem;
+    }
+  }
+
+  .nav-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #374151;
+  }
+
+  @media (min-width: 768px) {
+    .nav-icon {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+  /* === STORIES SCROLL === */
+  .stories-scroll {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 0 0.5rem 1rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-snap-type: x mandatory;
+  }
+
+  @media (min-width: 768px) {
+    .stories-scroll {
+      gap: 1.5rem;
+      padding: 0 2rem 2rem;
+    }
+  }
+
+  .stories-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* === STORY CARD === */
+  .story-card {
+    flex-shrink: 0;
+    width: calc(100vw - 1.5rem);
+    max-width: 380px;
+    transition: all 0.5s;
+    transform: scale(1);
+    opacity: 1;
+    scroll-snap-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .story-card {
+      transform: scale(0.9);
+      opacity: 0.6;
+    }
+
+    .story-card.active {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  .card-wrapper {
+    position: relative;
+    background: white;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.2);
+    border: 1px solid #f3f4f6;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  @media (min-width: 768px) {
+    .card-wrapper {
+      border-radius: 1.5rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+  }
+
+  .card-wrapper:hover {
+    box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.3);
+  }
+
+  .story-content {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    background: linear-gradient(to bottom right, #f3f4f6, #e5e7eb);
+  }
+
+  .story-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* === OVERLAYS === */
+  .gradient-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.4) 40%, transparent 66%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .instagram-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 50%;
+    padding: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    z-index: 5;
+  }
+
+  .badge-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: white;
+    display: block;
+  }
+
+  /* === STORY INFO - FORZADO EN BOTTOM === */
+  .story-info {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    padding-left: 16px;
+    padding-right: 60px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    z-index: 10;
+  }
+
+  .user-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .user-avatar {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    object-fit: cover;
+    flex-shrink: 0;
+    display: block;
+    margin-top: 2px;
+  }
+
+  .user-details {
+    min-width: 0;
+    padding-top: 2px;
+  }
+
+  .username {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    margin: 0px !important;
+    margin-bottom: 3px !important;
+    padding: 0px !important;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+    font-size: 14px !important;
+    line-height: 16px !important;
+    font-family: system-ui, -apple-system, sans-serif !important;
+  }
+
+  .likes-count {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 13px !important;
+    line-height: 16px !important;
+  }
+
+  .likes-count span {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    line-height: 16px !important;
+    font-family: system-ui, -apple-system, sans-serif !important;
+  }
+
+  .heart-icon {
+    width: 14px !important;
+    height: 14px !important;
+    fill: #ef4444;
+    flex-shrink: 0;
+  }
+
+  .story-caption {
+    color: #ffffff !important;
+    font-size: 12px !important;
+    line-height: 16px !important;
+    margin: 0px !important;
+    padding: 0px !important;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-weight: 400 !important;
+    font-family: system-ui, -apple-system, sans-serif !important;
+  }
+
+  /* === ACTIVE INDICATOR === */
+  .active-indicator {
+    position: absolute;
+    bottom: -0.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5rem;
+    height: 0.25rem;
+    background: linear-gradient(to right, #3b82f6, #06b6d4);
+    border-radius: 9999px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .story-card.active .active-indicator {
+    opacity: 1;
+  }
+
+  /* === DOTS === */
+  .dots-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.375rem;
+    margin-top: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .dots-container {
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .dots-container {
+      margin-top: 2rem;
+    }
+  }
+
+  .dot {
+    width: 0.375rem;
+    height: 0.375rem;
+    border-radius: 9999px;
+    background: #d1d5db;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    padding: 0;
+  }
+
+  @media (min-width: 768px) {
+    .dot {
+      width: 0.5rem;
+      height: 0.5rem;
+    }
+  }
+
+  .dot:hover {
+    background: #9ca3af;
+  }
+
+  .dot.active {
+    width: 1.5rem;
+    height: 0.375rem;
+    background: linear-gradient(to right, #3b82f6, #06b6d4);
+  }
+
+  @media (min-width: 768px) {
+    .dot.active {
+      width: 2rem;
+      height: 0.5rem;
+    }
+  }
+
+  /* === CTA === */
+  .cta-container {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 0 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .cta-container {
+      margin-top: 2.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .cta-container {
+      margin-top: 3rem;
+    }
+  }
+
+  .cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(to right, #3b82f6, #06b6d4, #3b82f6);
+    color: white;
+    border-radius: 9999px;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);
+    transition: all 0.2s;
+    font-size: 0.875rem;
+  }
+
+  @media (min-width: 768px) {
+    .cta-link {
+      gap: 0.75rem;
+      padding: 1rem 2rem;
+      font-size: 1.3rem;
+    }
+  }
+
+  .cta-link:hover {
+    box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.3);
+    transform: scale(1.05);
+  }
+
+  .cta-instagram {
+    width: 1.25rem;
+    height: 1.25rem;
+    transition: transform 0.2s;
+  }
+
+  @media (min-width: 768px) {
+    .cta-instagram {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+  .cta-link:hover .cta-instagram {
+    transform: rotate(12deg);
+  }
+
+  .cta-arrow {
+    width: 1rem;
+    height: 1rem;
+    transition: transform 0.2s;
+  }
+
+  @media (min-width: 768px) {
+    .cta-arrow {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+
+  .cta-link:hover .cta-arrow {
+    transform: translateX(0.25rem);
+  }
+</style>
+
+<script>
+(function() {
+  'use strict';
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCarousel);
+  } else {
+    initCarousel();
+  }
+  
+  function initCarousel() {
+    var currentIndex = 0;
+    var autoPlayEnabled = true;
+    var autoPlayTimer = null;
+    var storiesScroll = document.getElementById('storiesScroll');
+    var prevButton = document.getElementById('prevButton');
+    var nextButton = document.getElementById('nextButton');
+    var cards = document.querySelectorAll('.story-card');
+    var dots = document.querySelectorAll('.dot');
+
+    if (!storiesScroll || !prevButton || !nextButton || cards.length === 0) {
+      return;
+    }
+
+    function stopAutoPlay() {
+      autoPlayEnabled = false;
+      if (autoPlayTimer) {
+        clearInterval(autoPlayTimer);
+        autoPlayTimer = null;
+      }
+    }
+
+    function scrollToStory(index, isAutoPlay) {
+      currentIndex = index;
+      
+      if (!isAutoPlay) {
+        stopAutoPlay();
+      }
+      
+      cards.forEach(function(card, i) {
+        if (i === index) {
+          card.classList.add('active');
+        } else {
+          card.classList.remove('active');
+        }
+      });
+
+      dots.forEach(function(dot, i) {
+        if (i === index) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+
+      var targetCard = cards[index];
+      var scrollLeft = targetCard.offsetLeft - (storiesScroll.offsetWidth / 2) + (targetCard.offsetWidth / 2);
+      storiesScroll.scrollTo({
+        left: scrollLeft,
+        behavior: 'smooth'
+      });
+
+      prevButton.disabled = index === 0;
+      nextButton.disabled = index === cards.length - 1;
+    }
+
+    prevButton.addEventListener('click', function() {
+      if (currentIndex > 0) {
+        scrollToStory(currentIndex - 1, false);
+      }
+    });
+
+    nextButton.addEventListener('click', function() {
+      if (currentIndex < cards.length - 1) {
+        scrollToStory(currentIndex + 1, false);
+      }
+    });
+
+    dots.forEach(function(dot, index) {
+      dot.addEventListener('click', function() {
+        scrollToStory(index, false);
+      });
+    });
+
+    cards.forEach(function(card, index) {
+      card.addEventListener('click', function() {
+        scrollToStory(index, false);
+      });
+    });
+
+    function startAutoPlay() {
+      if (!autoPlayEnabled) return;
+      
+      autoPlayTimer = setInterval(function() {
+        if (!autoPlayEnabled) return;
+        
+        var nextIndex = currentIndex < cards.length - 1 ? currentIndex + 1 : 0;
+        scrollToStory(nextIndex, true);
+      }, 3500);
+    }
+
+    scrollToStory(0, true);
+    startAutoPlay();
+  }
+})();
+</script>

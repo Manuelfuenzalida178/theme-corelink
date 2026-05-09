@@ -1,0 +1,102 @@
+{% comment %}
+  Announcement Bar con animación marquee
+{% endcomment %}
+
+<style>
+  .announcement-bar {
+    background-color: {{ section.settings.bg_color }};
+    color: {{ section.settings.text_color }};
+    padding: 8px 0;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+  
+  .announcement-bar__marquee {
+    white-space: nowrap;
+    animation: marquee {{ section.settings.animation_speed }}s linear infinite;
+    display: inline-block;
+  }
+  
+  .announcement-bar__text {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: inline-block;
+  }
+  
+  .announcement-bar__separator {
+    margin: 0 32px;
+    display: inline-block;
+  }
+  
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  /* Pausar animación al hover */
+  .announcement-bar:hover .announcement-bar__marquee {
+    animation-play-state: paused;
+  }
+</style>
+
+<div class="announcement-bar">
+  <div class="announcement-bar__marquee">
+    {% comment %} Repetir el mensaje 8 veces para efecto continuo {% endcomment %}
+    {% for i in (1..8) %}
+      <span class="announcement-bar__text">
+        {{ section.settings.message | escape }}
+      </span>
+      {% unless forloop.last %}
+        <span class="announcement-bar__separator">•</span>
+      {% endunless %}
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "message",
+      "label": "Mensaje",
+      "default": "Obtén envío gratis por compras sobre $49.990"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Color de fondo",
+      "default": "#60a5fa"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Color de texto",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "animation_speed",
+      "label": "Velocidad de animación (segundos)",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "default": 30,
+      "info": "Mayor número = más lento"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement Bar",
+      "category": "Promotional"
+    }
+  ]
+}
+{% endschema %}

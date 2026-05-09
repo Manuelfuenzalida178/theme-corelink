@@ -1,0 +1,163 @@
+{% comment %}
+  Sección "Qué Incluye" - Lista de contenido del producto
+  
+  Usage:
+  {% section 'secciones' %}
+{% endcomment %}
+
+<style>
+  .product-includes {
+    font-family: "TT Norms Pro", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell;
+    padding: 40px 0;
+    border-top: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+    margin: 40px 0;
+  }
+  
+  .product-includes__title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+  
+  .product-includes__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px 40px;
+  }
+  
+  .product-includes__item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .product-includes__icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #10b981;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .product-includes__icon svg {
+    width: 12px;
+    height: 12px;
+    fill: white;
+    stroke: white;
+    stroke-width: 2;
+  }
+  
+  .product-includes__text {
+    font-size: 15px;
+    color: #374151;
+    line-height: 1.4;
+    font-weight: 400;
+  }
+  
+  @media screen and (max-width: 749px) {
+    .product-includes {
+      padding: 30px 0;
+      margin: 30px 0;
+    }
+    
+    .product-includes__grid {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    
+    .product-includes__title {
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
+    
+    .product-includes__text {
+      font-size: 14px;
+    }
+  }
+</style>
+
+<div class="product-includes">
+  <h3 class="product-includes__title">{{ section.settings.title }}</h3>
+  
+  <div class="product-includes__grid">
+    {% for block in section.blocks %}
+      {% if block.type == 'include_item' %}
+        <div class="product-includes__item" {{ block.shopify_attributes }}>
+          <div class="product-includes__icon">
+            <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 6L5 9L10 3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span class="product-includes__text">{{ block.settings.text }}</span>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Qué Incluye",
+  "tag": "section",
+  "class": "section-product-includes",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Qué incluye:"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "include_item",
+      "name": "Item Incluido",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto",
+          "default": "Producto incluido"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Qué Incluye",
+      "blocks": [
+        {
+          "type": "include_item",
+          "settings": {
+            "text": "Vibro Sculpt"
+          }
+        },
+        {
+          "type": "include_item",
+          "settings": {
+            "text": "Cable de Corriente"
+          }
+        },
+        {
+          "type": "include_item",
+          "settings": {
+            "text": "6 Almohadillas Moldeadoras"
+          }
+        },
+        {
+          "type": "include_item",
+          "settings": {
+            "text": "Guía Plan Nutricional"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

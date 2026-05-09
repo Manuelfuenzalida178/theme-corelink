@@ -1,0 +1,100 @@
+{% comment %}
+  Renders product pricing with discount badge
+  
+  Usage:
+  {% render 'product-price', variant: current_variant %}
+{% endcomment %}
+
+{%- liquid
+  assign variant = variant | default: product.selected_or_first_available_variant
+  assign compare_at_price = variant.compare_at_price
+  assign price = variant.price
+  assign available = variant.available
+  
+  if compare_at_price and compare_at_price > price
+    assign on_sale = true
+    assign discount_percentage = compare_at_price | minus: price | times: 100 | divided_by: compare_at_price | round
+  else
+    assign on_sale = false
+  endif
+-%}
+
+<style>
+  .product-price-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 20px 0;
+  }
+  
+  .product-price__compare {
+    font-size: 14px;
+    color: #999;
+    text-decoration: line-through;
+    line-height: 1.2;
+  }
+  
+  .product-price__current {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1.2;
+  }
+  
+  .product-price__discount-badge {
+    background: #ff4444;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  
+  .product-price__unavailable {
+    font-size: 16px;
+    color: #999;
+  }
+  
+  @media screen and (max-width: 749px) {
+    .product-price__current {
+      font-size: 28px;
+    }
+    
+    .product-price__compare {
+      font-size: 13px;
+    }
+    
+    .product-price__discount-badge {
+      font-size: 10px;
+      padding: 3px 10px;
+    }
+  }
+</style>
+
+{% if available == false %}
+  <div class="product-price__unavailable">
+    {{ 'products.product.sold_out' | t }}
+  </div>
+{% else %}
+  <div class="product-price-wrapper">
+    {% if on_sale %}
+      <span class="product-price__compare">
+        {{ compare_at_price | money }}
+      </span>
+    {% endif %}
+    
+    <span class="product-price__current" data-product-price>
+      {{ price | money }}
+    </span>
+    
+    {% if on_sale %}
+      <span class="product-price__discount-badge">
+        {{ discount_percentage }}% DE DESCUENTO
+      </span>
+    {% endif %}
+  </div>
+{% endif %}

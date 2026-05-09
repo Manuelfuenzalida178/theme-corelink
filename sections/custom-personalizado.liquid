@@ -1,0 +1,217 @@
+{% comment %}
+  Sección de Liquid Personalizado
+  Permite insertar código Liquid personalizado desde el Theme Editor
+{% endcomment %}
+
+{%- liquid
+  assign bg_color = section.settings.background_color
+  assign color_scheme = section.settings.color_scheme
+-%}
+
+<div class="custom-liquid-section color-scheme-{{ color_scheme }}{% if section.settings.remove_spacing %} section-remove-spacing{% endif %}" 
+     data-section-id="{{ section.id }}" 
+     data-section-type="custom-liquid"
+     style="{% if bg_color != 'rgba(0,0,0,0)' and bg_color != blank %}background-color: {{ bg_color }};{% endif %}">
+  
+  <div class="{% if section.settings.layout == 'full_width' %}page-width--full{% else %}page-width{% endif %}">
+    <div class="custom-liquid-wrapper section-{{ section.id }}-padding">
+      
+      {% if section.settings.custom_liquid != blank %}
+        <div class="custom-liquid-content" style="text-align: {{ section.settings.text_alignment }};">
+          {{ section.settings.custom_liquid }}
+        </div>
+      {% else %}
+        <div class="custom-liquid-placeholder" style="padding: 40px; text-align: center; border: 2px dashed #d0d0d0; background: #fafafa; border-radius: 8px;">
+          <p style="color: #666; margin: 0;">
+            <strong>Sección de Liquid Personalizado</strong><br>
+            Agrega tu código Liquid personalizado en el Theme Editor
+          </p>
+        </div>
+      {% endif %}
+      
+    </div>
+  </div>
+</div>
+
+<style>
+  .custom-liquid-section {
+    width: 100%;
+    display: block;
+  }
+
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  .custom-liquid-wrapper {
+    width: 100%;
+  }
+
+  .custom-liquid-content {
+    width: 100%;
+  }
+
+  /* Estilos para cuando está en full width */
+  .page-width--full {
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100% !important;
+  }
+
+  /* Eliminar espaciado por defecto entre secciones */
+  .section-remove-spacing {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* Color schemes */
+  .color-scheme-1 {
+    background-color: #ffffff;
+    color: #000000;
+  }
+
+  .color-scheme-2 {
+    background-color: #f7f7f7;
+    color: #000000;
+  }
+
+  .color-scheme-3 {
+    background-color: #000000;
+    color: #ffffff;
+  }
+
+  /* Responsive padding móvil */
+  @media screen and (max-width: 749px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Liquid Personalizado",
+  "class": "section-custom-liquid",
+  "settings": [
+    {
+      "type": "header",
+      "content": "General"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "container",
+          "label": "Container"
+        },
+        {
+          "value": "full_width",
+          "label": "Full width"
+        }
+      ],
+      "default": "full_width"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color schema",
+      "options": [
+        {
+          "value": "1",
+          "label": "Esquema 1"
+        },
+        {
+          "value": "2",
+          "label": "Esquema 2"
+        },
+        {
+          "value": "3",
+          "label": "Esquema 3"
+        }
+      ],
+      "default": "1",
+      "info": "Esquema 1: Blanco, Esquema 2: Gris claro, Esquema 3: Negro"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Color de fondo personalizado",
+      "info": "Opcional. Sobrescribe el color schema si se selecciona"
+    },
+    {
+      "type": "header",
+      "content": "Content options"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Custom liquid"
+    },
+    {
+      "type": "liquid",
+      "id": "custom_liquid",
+      "label": "Custom liquid",
+      "info": "Add app snippets or other Liquid code to create advanced customizations."
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 36
+    },
+    {
+      "type": "checkbox",
+      "id": "remove_spacing",
+      "label": "Remove default space between sections",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Liquid Personalizado"
+    }
+  ]
+}
+{% endschema %}

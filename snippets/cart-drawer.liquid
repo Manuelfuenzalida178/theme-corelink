@@ -1,0 +1,769 @@
+{% comment %}
+  Cart Drawer - VibroSculpt
+  Popup lateral del carrito con animaciones suaves
+{% endcomment %}
+
+{% assign warranty_variant_id = 43280591814739 %}
+{% assign warranty_in_cart = false %}
+{% assign warranty_item = null %}
+
+{% for item in cart.items %}
+  {% if item.variant_id == warranty_variant_id %}
+    {% assign warranty_in_cart = true %}
+    {% assign warranty_item = item %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+<!-- Overlay (fondo oscuro) -->
+<div id="cartDrawerOverlay" class="cart-drawer-overlay hidden" onclick="closeCartDrawer()"></div>
+
+<!-- Cart Drawer (popup lateral) -->
+<div id="cartDrawer" class="cart-drawer hidden">
+  
+  <!-- Barra de anuncio animada superior -->
+  <div style="background: #000; color: #fff; padding: 10px 0; overflow: hidden; position: relative;">
+    <div style="display: flex; white-space: nowrap;">
+      <div class="animate-marquee" style="padding-right: 80px;">
+        <span style="font-size: 13px; font-weight: 500; letter-spacing: 0.5px;">✨ ENVÍO GRATIS A TODO CHILE</span>
+        <span style="margin: 0 40px;">•</span>
+        <span style="font-size: 13px; font-weight: 500; letter-spacing: 0.5px;">🎁 PREVENTA EXCLUSIVA</span>
+        <span style="margin: 0 40px;">•</span>
+        <span style="font-size: 13px; font-weight: 500; letter-spacing: 0.5px;">⚡ PAGO SEGURO Y PROTEGIDO</span>
+      </div>
+      <div class="animate-marquee" style="padding-right: 80px;">
+        <span style="font-size: 13px; font-weight: 500; letter-spacing: 0.5px;">✨ ENVÍO GRATIS A TODO CHILE</span>
+        <span style="margin: 0 40px;">•</span>
+        <span style="font-size: 13px; font-weight: 500; letter-spacing: 0.5px;">🎁 PREVENTA EXCLUSIVA</span>
+        <span style="margin: 0 40px;">•</span>
+        <span style="font-size: 13px; font-weight: 500; letter-spacing: 0.5px;">⚡ PAGO SEGURO Y PROTEGIDO</span>
+      </div>
+      <div class="animate-marquee" style="padding-right: 80px;">
+        <span style="font-size: 13px; font-weight: 500; letter-spacing: 0.5px;">✨ ENVÍO GRATIS A TODO CHILE</span>
+        <span style="margin: 0 40px;">•</span>
+        <span style="font-size: 13px; font-weight: 500; letter-spacing: 0.5px;">🎁 PREVENTA EXCLUSIVA</span>
+        <span style="margin: 0 40px;">•</span>
+        <span style="font-size: 13px; font-weight: 500; letter-spacing: 0.5px;">⚡ PAGO SEGURO Y PROTEGIDO</span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Header del Drawer -->
+  <div style="display: flex; justify-content: space-between; align-items: center; padding: 24px; border-bottom: 1px solid #e5e7eb;">
+    <h2 style="margin: 0; font-size: 20px; font-weight: 600; letter-spacing: -0.025em;">TU CARRITO</h2>
+    <button onclick="closeCartDrawer()" style="background: none; border: none; cursor: pointer; padding: 8px; display: flex; align-items: center; justify-content: center;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Contenido del carrito -->
+  <div style="flex: 1; overflow-y: auto; padding: 24px; min-height: 0;" id="cartItemsContainer">
+    
+    {% if cart.item_count > 0 %}
+      
+      <!-- Items del carrito (excluyendo la garantía) -->
+      {% for item in cart.items %}
+        {% unless item.variant_id == warranty_variant_id %}
+          <div style="display: flex; gap: 16px; margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid #f3f4f6;">
+            
+            <!-- Imagen del producto -->
+            <div style="flex-shrink: 0;">
+              <img src="{{ item.image | img_url: '120x120' }}" 
+                   alt="{{ item.title }}" 
+                   style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
+            </div>
+            
+            <!-- Info del producto -->
+            <div style="flex: 1;">
+              <h3 style="margin: 0 0 8px 0; font-size: 14px; font-weight: 600;">{{ item.product.title }}</h3>
+              
+              {% unless item.variant.title contains 'Default' %}
+                <p style="margin: 0 0 8px 0; font-size: 13px; color: #6b7280;">{{ item.variant.title }}</p>
+              {% endunless %}
+              
+              <!-- Cantidad y precio -->
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px;">
+                
+                <!-- Selector de cantidad -->
+                <div style="display: flex; align-items: center; gap: 12px; border: 1px solid #e5e7eb; border-radius: 6px; padding: 4px 8px;">
+                  <button onclick="updateCartItemQuantity({{ forloop.index }}, {{ item.quantity | minus: 1 }})" 
+                          style="background: none; border: none; cursor: pointer; font-size: 18px; padding: 0 4px;">−</button>
+                  <span style="font-size: 14px; min-width: 20px; text-align: center;">{{ item.quantity }}</span>
+                  <button onclick="updateCartItemQuantity({{ forloop.index }}, {{ item.quantity | plus: 1 }})" 
+                          style="background: none; border: none; cursor: pointer; font-size: 18px; padding: 0 4px;">+</button>
+                </div>
+                
+                <!-- Precio -->
+                <div style="text-align: right;">
+                  <p style="margin: 0; font-size: 15px; font-weight: 600;">{{ item.final_line_price | money }}</p>
+                </div>
+                
+              </div>
+            </div>
+            
+            <!-- Botón eliminar -->
+            <button onclick="removeCartItem({{ forloop.index }})" 
+                    style="background: none; border: none; cursor: pointer; color: #6b7280; align-self: flex-start;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+              </svg>
+            </button>
+            
+          </div>
+        {% endunless %}
+      {% endfor %}
+      
+    {% else %}
+      
+      <!-- Carrito vacío -->
+      <div style="text-align: center; padding: 40px 20px;">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin: 0 auto 16px;">
+          <circle cx="8" cy="21" r="1"></circle>
+          <circle cx="19" cy="21" r="1"></circle>
+          <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+        </svg>
+        <p style="font-size: 16px; color: #6b7280; margin: 0;">Tu carrito está vacío</p>
+      </div>
+      
+    {% endif %}
+    
+  </div>
+
+  <!-- Footer con total y checkout (SIEMPRE en el DOM, controlado por JS) -->
+  <div id="cartFooter" style="border-top: 1px solid #e5e7eb; padding: 24px; background: white; flex-shrink: 0; display: {% if cart.item_count > 0 %}block{% else %}none{% endif %};">
+    
+    <!-- Topbar de Garantía con Switch Toggle -->
+    <div style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1px solid #bbf7d0; border-radius: 12px; padding: 16px; margin-bottom: 20px;">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+        
+        <!-- Icono y texto -->
+        <div style="display: flex; align-items: center; gap: 12px; flex: 1;">
+          <div style="background: #22c55e; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              <path d="M9 12l2 2 4-4"></path>
+            </svg>
+          </div>
+          <div style="flex: 1;">
+            <h4 style="margin: 0 0 2px 0; font-size: 14px; font-weight: 700; color: #166534; letter-spacing: -0.01em;">Envío protegido 2.990</h4>
+            <p style="margin: 0; font-size: 12px; color: #15803d; line-height: 1.4;">Protege tu pedido contra pérdidas, daño o robo
+</p>
+          </div>
+        </div>
+        
+        <!-- Switch Toggle -->
+        <button id="warrantyToggle" onclick="toggleWarranty()" class="warranty-toggle {% if warranty_in_cart %}active{% endif %}" style="flex-shrink: 0;">
+          <div class="warranty-toggle-ball"></div>
+        </button>
+        
+      </div>
+      
+      <!-- Precio de la garantía (mostrar cuando está activo) -->
+      <div id="warrantyPrice" style="{% unless warranty_in_cart %}display: none;{% endunless %} margin-top: 12px; padding-top: 12px; border-top: 1px solid #bbf7d0; overflow: hidden;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 13px; color: #166534; font-weight: 600;">Envío protegido</span>
+          <span id="warrantyPriceAmount" style="font-size: 14px; font-weight: 700; color: #166534;">
+            {% if warranty_in_cart %}
+              {{ warranty_item.final_line_price | money }}
+            {% endif %}
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Subtotal -->
+    <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+      <span style="font-size: 15px; color: #6b7280;">Subtotal</span>
+      <span id="cartSubtotal" style="font-size: 18px; font-weight: 600;">{{ cart.total_price | money }}</span>
+    </div>
+    
+    <!-- Nota de envío -->
+    <p style="font-size: 13px; color: #6b7280; margin: 0 0 16px 0; text-align: center;">
+      Los impuestos y envío se calculan en el checkout
+    </p>
+    
+    <!-- Botón de checkout -->
+    <a id="checkoutButton" 
+       href="/checkout" 
+       data-action="checkout"
+       style="display: block; width: 100%; padding: 16px; background: #000; color: #fff; text-align: center; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 15px; letter-spacing: 0.025em;">
+      FINALIZAR COMPRA
+    </a>
+    
+    <!-- Continuar comprando -->
+    <button onclick="closeCartDrawer()" 
+            style="display: block; width: 100%; padding: 12px; margin-top: 12px; background: none; border: 1px solid #e5e7eb; color: #374151; text-align: center; border-radius: 8px; font-size: 14px; cursor: pointer; font-weight: 500;">
+      Continuar comprando
+    </button>
+    
+  </div>
+  
+</div>
+
+<script>
+  // Función para sincronizar el estado del toggle con el carrito
+  function syncWarrantyToggleState() {
+    const WARRANTY_VARIANT_ID = 43280591814739;
+    const toggleButton = document.getElementById('warrantyToggle');
+    
+    if (!toggleButton) return;
+    
+    fetch('/cart.js')
+    .then(response => response.json())
+    .then(cart => {
+      const warrantyInCart = cart.items.some(item => item.variant_id === WARRANTY_VARIANT_ID);
+      
+      console.log('🔄 Sincronizando estado del switch. Warranty in cart:', warrantyInCart);
+      
+      if (warrantyInCart) {
+        toggleButton.classList.add('active');
+      } else {
+        toggleButton.classList.remove('active');
+      }
+    })
+    .catch(error => {
+      console.error('Error al sincronizar toggle:', error);
+    });
+  }
+
+  // Verificar si debemos abrir el drawer automáticamente después de reload
+  document.addEventListener('DOMContentLoaded', function() {
+    // Sincronizar estado del toggle cuando carga la página
+    syncWarrantyToggleState();
+    
+    if (sessionStorage.getItem('openCartDrawer') === 'true') {
+      console.log('🎯 Abriendo drawer después de reload');
+      sessionStorage.removeItem('openCartDrawer');
+      
+      // Pequeño delay para asegurar que todo esté renderizado
+      setTimeout(function() {
+        if (typeof window.openCartDrawer === 'function') {
+          window.openCartDrawer();
+        }
+      }, 100);
+    }
+  });
+
+  // Abrir el drawer del carrito
+  window.openCartDrawer = function() {
+    const overlay = document.getElementById('cartDrawerOverlay');
+    const drawer = document.getElementById('cartDrawer');
+    
+    console.log('🚪 openCartDrawer llamada');
+    console.log('📍 Overlay encontrado:', !!overlay);
+    console.log('📍 Drawer encontrado:', !!drawer);
+    
+    if (overlay && drawer) {
+      overlay.classList.remove('hidden');
+      drawer.classList.remove('hidden');
+      document.body.style.overflow = 'hidden'; // Prevenir scroll del body
+      console.log('✅ Drawer abierto exitosamente');
+      
+      // IMPORTANTE: Actualizar el carrito dinámicamente
+      console.log('🔄 Actualizando contenido del carrito...');
+      if (typeof window.updateCartUI === 'function') {
+        window.updateCartUI();
+      }
+      
+      // IMPORTANTE: Sincronizar el estado del switch cuando se abre el drawer
+      syncWarrantyToggleState();
+    } else {
+      console.error('❌ No se encontraron elementos del drawer');
+    }
+  };
+  
+  // Cerrar el drawer del carrito
+  window.closeCartDrawer = function() {
+    const overlay = document.getElementById('cartDrawerOverlay');
+    const drawer = document.getElementById('cartDrawer');
+    
+    if (overlay && drawer) {
+      overlay.classList.add('hidden');
+      drawer.classList.add('hidden');
+      document.body.style.overflow = ''; // Restaurar scroll del body
+    }
+  };
+  
+  // Actualizar cantidad de un item
+  function updateCartItemQuantity(line, quantity) {
+    if (quantity < 1) {
+      removeCartItem(line);
+      return;
+    }
+    
+    // Deshabilitar botones temporalmente
+    const buttons = document.querySelectorAll('#cartItemsContainer button');
+    buttons.forEach(btn => btn.style.pointerEvents = 'none');
+    
+    fetch('/cart/change.js', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        line: line,
+        quantity: quantity
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('✅ Cantidad actualizada:', data);
+      // Actualizar UI dinámicamente sin recargar
+      updateCartUI().then(() => {
+        // Reactivar botones
+        const buttons = document.querySelectorAll('#cartItemsContainer button');
+        buttons.forEach(btn => btn.style.pointerEvents = 'auto');
+      });
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      // Reactivar botones en caso de error
+      const buttons = document.querySelectorAll('#cartItemsContainer button');
+      buttons.forEach(btn => btn.style.pointerEvents = 'auto');
+    });
+  }
+  
+  // Eliminar item del carrito
+  function removeCartItem(line) {
+    // Deshabilitar botones temporalmente
+    const buttons = document.querySelectorAll('#cartItemsContainer button');
+    buttons.forEach(btn => btn.style.pointerEvents = 'none');
+    
+    fetch('/cart/change.js', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        line: line,
+        quantity: 0
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('✅ Item eliminado:', data);
+      // Actualizar UI dinámicamente sin recargar
+      updateCartUI().then(() => {
+        // Reactivar botones
+        const buttons = document.querySelectorAll('#cartItemsContainer button');
+        buttons.forEach(btn => btn.style.pointerEvents = 'auto');
+      });
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      // Reactivar botones en caso de error
+      const buttons = document.querySelectorAll('#cartItemsContainer button');
+      buttons.forEach(btn => btn.style.pointerEvents = 'auto');
+    });
+  }
+  
+  // Cerrar con tecla ESC
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      closeCartDrawer();
+    }
+  });
+  
+  // Función para togglear la garantía
+  function toggleWarranty() {
+    const toggleButton = document.getElementById('warrantyToggle');
+    const WARRANTY_VARIANT_ID = 46555287322799; // Variant ID correcto de la garantía
+    
+    if (!toggleButton) return;
+    
+    // Verificar el estado REAL del carrito antes de hacer el toggle
+    fetch('/cart.js')
+    .then(response => response.json())
+    .then(cart => {
+      const warrantyInCart = cart.items.some(item => item.variant_id === WARRANTY_VARIANT_ID);
+      
+      if (warrantyInCart) {
+        // Si está en el carrito, remover
+        removeWarrantyFromCart();
+      } else {
+        // Si no está, agregar
+        addWarrantyToCart(WARRANTY_VARIANT_ID);
+      }
+    })
+    .catch(error => {
+      console.error('Error al verificar estado del carrito:', error);
+    });
+  }
+  
+  // Agregar garantía al carrito
+  function addWarrantyToCart(variantId) {
+    console.log('Agregando garantía al carrito, Variant ID:', variantId);
+    
+    // Deshabilitar el botón temporalmente
+    const toggleButton = document.getElementById('warrantyToggle');
+    if (toggleButton) {
+      toggleButton.style.pointerEvents = 'none';
+      toggleButton.style.opacity = '0.6';
+    }
+    
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: variantId,
+        quantity: 1
+      })
+    })
+    .then(response => {
+      console.log('Response status:', response.status);
+      if (!response.ok) {
+        return response.json().then(err => {
+          console.error('Error al agregar:', err);
+          throw new Error(err.description || err.message || 'Error al agregar garantía');
+        });
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('✅ Garantía agregada exitosamente:', data);
+      
+      // IMPORTANTE: Activar el switch INMEDIATAMENTE para feedback visual instantáneo
+      if (toggleButton) {
+        toggleButton.classList.add('active');
+      }
+      
+      // Esperar un momento para que el servidor procese, luego actualizar el UI
+      // Usamos un pequeño delay para asegurar que el carrito del servidor esté actualizado
+      return new Promise(resolve => {
+        setTimeout(() => {
+          updateCartUI(true).then(resolve);
+        }, 150);
+      });
+    })
+    .then(() => {
+      // Reactivar el botón después de que todo se actualice
+      if (toggleButton) {
+        toggleButton.style.pointerEvents = 'auto';
+        toggleButton.style.opacity = '1';
+      }
+    })
+    .catch(error => {
+      console.error('Error completo:', error);
+      alert('Error al agregar la garantía: ' + error.message);
+      if (toggleButton) {
+        toggleButton.style.pointerEvents = 'auto';
+        toggleButton.style.opacity = '1';
+      }
+    });
+  }
+  
+  // Remover garantía del carrito
+  function removeWarrantyFromCart() {
+    const WARRANTY_VARIANT_ID = 52812535595373;
+    
+    console.log('Removiendo garantía del carrito, Variant ID:', WARRANTY_VARIANT_ID);
+    
+    // Deshabilitar el botón temporalmente
+    const toggleButton = document.getElementById('warrantyToggle');
+    if (toggleButton) {
+      toggleButton.style.pointerEvents = 'none';
+      toggleButton.style.opacity = '0.6';
+    }
+    
+    // Primero obtener el carrito para encontrar el line item
+    fetch('/cart.js')
+    .then(response => response.json())
+    .then(cart => {
+      console.log('Carrito actual:', cart);
+      
+      // Buscar el índice del producto de garantía
+      const warrantyIndex = cart.items.findIndex(item => item.variant_id === WARRANTY_VARIANT_ID);
+      console.log('Índice de garantía:', warrantyIndex);
+      
+      if (warrantyIndex !== -1) {
+        // IMPORTANTE: Desactivar el switch INMEDIATAMENTE antes de hacer el request
+        if (toggleButton) {
+          toggleButton.classList.remove('active');
+        }
+        
+        // Eliminar el producto (line es 1-indexed)
+        return fetch('/cart/change.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            line: warrantyIndex + 1,
+            quantity: 0
+          })
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Error al remover garantía');
+          }
+          return response.json();
+        })
+        .then(cart => {
+          console.log('✅ Garantía removida exitosamente:', cart);
+          // Esperar un momento para que el servidor procese, luego actualizar el UI
+          return new Promise(resolve => {
+            setTimeout(() => {
+              updateCartUI(true).then(resolve);
+            }, 150);
+          });
+        })
+        .then(() => {
+          // Reactivar el botón después de que todo se actualice
+          if (toggleButton) {
+            toggleButton.style.pointerEvents = 'auto';
+            toggleButton.style.opacity = '1';
+          }
+        });
+      } else {
+        console.log('Garantía no encontrada en el carrito');
+        if (toggleButton) {
+          toggleButton.style.pointerEvents = 'auto';
+          toggleButton.style.opacity = '1';
+        }
+      }
+    })
+    .catch(error => {
+      console.error('Error al procesar garantía:', error);
+      alert('Error al remover la garantía: ' + error.message);
+      
+      // En caso de error, volver a verificar el estado real
+      fetch('/cart.js')
+      .then(response => response.json())
+      .then(cart => {
+        const warrantyStillInCart = cart.items.some(item => item.variant_id === WARRANTY_VARIANT_ID);
+        if (toggleButton) {
+          if (warrantyStillInCart) {
+            toggleButton.classList.add('active');
+          } else {
+            toggleButton.classList.remove('active');
+          }
+          toggleButton.style.pointerEvents = 'auto';
+          toggleButton.style.opacity = '1';
+        }
+      });
+    });
+  }
+  
+  // Actualizar UI del carrito dinámicamente
+  // skipToggleSync: si es true, no sincroniza el estado del toggle (útil después de una acción manual)
+  window.updateCartUI = function(skipToggleSync = false) {
+    const WARRANTY_VARIANT_ID = 52812535595373;
+    
+    console.log('🔄 updateCartUI() llamada, skipToggleSync:', skipToggleSync);
+    
+    // Obtener el carrito actualizado
+    return fetch('/cart.js')
+    .then(response => response.json())
+    .then(cart => {
+      console.log('📦 Carrito obtenido:', cart);
+      console.log('📊 Items en carrito:', cart.item_count);
+      
+      // ============================================
+      // ACTUALIZAR LISTA DE PRODUCTOS
+      // ============================================
+      const cartItemsContainer = document.getElementById('cartItemsContainer');
+      console.log('📍 Container encontrado:', !!cartItemsContainer);
+      
+      if (cartItemsContainer) {
+        let itemsHTML = '';
+        let hasNonWarrantyItems = false;
+        
+        // Generar HTML para los items (excluyendo garantía)
+        cart.items.forEach((item, index) => {
+          console.log('🔍 Procesando item:', item.title, 'Variant ID:', item.variant_id);
+          
+          // Saltar la garantía
+          if (item.variant_id === WARRANTY_VARIANT_ID) {
+            console.log('⚠️ Item es garantía, saltando');
+            return;
+          }
+          
+          hasNonWarrantyItems = true;
+          
+          const itemPrice = formatPrice(item.final_line_price);
+          const itemImage = item.image || item.featured_image?.url || '';
+          const itemTitle = item.product_title || item.title || '';
+          const variantTitle = item.variant_title || '';
+          const showVariant = variantTitle && !variantTitle.includes('Default');
+          
+          console.log('🖼️ Imagen URL:', itemImage);
+          
+          itemsHTML += `
+            <div style="display: flex; gap: 16px; margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid #f3f4f6;">
+              
+              <!-- Imagen del producto -->
+              <div style="flex-shrink: 0;">
+                <img src="${itemImage}" 
+                     alt="${itemTitle}" 
+                     style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
+              </div>
+              
+              <!-- Info del producto -->
+              <div style="flex: 1;">
+                <h3 style="margin: 0 0 8px 0; font-size: 14px; font-weight: 600;">${itemTitle}</h3>
+                
+                ${showVariant ? `<p style="margin: 0 0 8px 0; font-size: 13px; color: #6b7280;">${variantTitle}</p>` : ''}
+                
+                <!-- Cantidad y precio -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px;">
+                  
+                  <!-- Selector de cantidad -->
+                  <div style="display: flex; align-items: center; gap: 12px; border: 1px solid #e5e7eb; border-radius: 6px; padding: 4px 8px;">
+                    <button onclick="updateCartItemQuantity(${index + 1}, ${item.quantity - 1})" 
+                            style="background: none; border: none; cursor: pointer; font-size: 18px; padding: 0 4px;">−</button>
+                    <span style="font-size: 14px; min-width: 20px; text-align: center;">${item.quantity}</span>
+                    <button onclick="updateCartItemQuantity(${index + 1}, ${item.quantity + 1})" 
+                            style="background: none; border: none; cursor: pointer; font-size: 18px; padding: 0 4px;">+</button>
+                  </div>
+                  
+                  <!-- Precio -->
+                  <div style="text-align: right;">
+                    <p style="margin: 0; font-size: 15px; font-weight: 600;">${itemPrice}</p>
+                  </div>
+                  
+                </div>
+              </div>
+              
+              <!-- Botón eliminar -->
+              <button onclick="removeCartItem(${index + 1})" 
+                      style="background: none; border: none; cursor: pointer; color: #6b7280; align-self: flex-start;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="3 6 5 6 21 6"></polyline>
+                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                </svg>
+              </button>
+              
+            </div>
+          `;
+        });
+        
+        // Si no hay items no-garantía, mostrar mensaje vacío
+        if (!hasNonWarrantyItems) {
+          itemsHTML = '<div style="text-align: center; padding: 40px 20px;"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin: 0 auto 16px;"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg><p style="font-size: 16px; color: #6b7280; margin: 0;">Tu carrito está vacío</p></div>';
+        }
+        
+        console.log('✏️ Actualizando HTML del contenedor');
+        console.log('📝 HTML generado (primeros 200 chars):', itemsHTML.substring(0, 200));
+        
+        // Actualizar el contenedor con los nuevos items
+        cartItemsContainer.innerHTML = itemsHTML;
+        
+        console.log('✅ HTML actualizado');
+      } else {
+        console.error('❌ No se encontró el contenedor cartItemsContainer');
+      }
+      
+      // Buscar si la garantía está en el carrito
+      const warrantyItem = cart.items.find(item => item.variant_id === WARRANTY_VARIANT_ID);
+      const warrantyInCart = !!warrantyItem;
+      
+      console.log('🔍 Garantía en carrito:', warrantyInCart);
+      
+      // Actualizar el switch toggle - Solo si NO estamos saltando la sincronización
+      const toggleButton = document.getElementById('warrantyToggle');
+      if (toggleButton && !skipToggleSync) {
+        console.log('🎚️ Actualizando switch toggle. Warranty in cart:', warrantyInCart);
+        
+        if (warrantyInCart) {
+          if (!toggleButton.classList.contains('active')) {
+            console.log('✅ Activando switch');
+            toggleButton.classList.add('active');
+          }
+        } else {
+          if (toggleButton.classList.contains('active')) {
+            console.log('❌ Desactivando switch');
+            toggleButton.classList.remove('active');
+          }
+        }
+        
+        // Reactivar interacción
+        toggleButton.style.pointerEvents = 'auto';
+        toggleButton.style.opacity = '1';
+      } else if (toggleButton && skipToggleSync) {
+        console.log('⏭️ Saltando sincronización del toggle - acción manual');
+        // Solo reactivar interacción si estamos saltando la sincronización
+        toggleButton.style.pointerEvents = 'auto';
+        toggleButton.style.opacity = '1';
+      } else if (!toggleButton) {
+        console.error('❌ No se encontró el botón warrantyToggle');
+      }
+      
+      // Actualizar la sección de precio de la garantía - SIN ANIMACIONES
+      const warrantyPriceSection = document.getElementById('warrantyPrice');
+      const warrantyPriceAmount = document.getElementById('warrantyPriceAmount');
+      
+      if (warrantyPriceSection && warrantyPriceAmount) {
+        if (warrantyInCart && warrantyItem) {
+          // Mostrar instantáneamente
+          const formattedPrice = formatPrice(warrantyItem.final_line_price);
+          warrantyPriceAmount.textContent = formattedPrice;
+          warrantyPriceSection.style.display = 'block';
+        } else {
+          // Ocultar instantáneamente
+          warrantyPriceSection.style.display = 'none';
+        }
+      }
+      
+      // Actualizar el subtotal
+      const subtotalElement = document.getElementById('cartSubtotal');
+      if (subtotalElement) {
+        const formattedSubtotal = formatPrice(cart.total_price);
+        subtotalElement.textContent = formattedSubtotal;
+      }
+      
+      // Actualizar el contador del carrito en el header
+      const cartCountElements = document.querySelectorAll('.cart-count, [data-cart-count]');
+      cartCountElements.forEach(element => {
+        element.textContent = cart.item_count;
+      });
+      
+      // ============================================
+      // MOSTRAR U OCULTAR EL FOOTER
+      // ============================================
+      const cartFooter = document.getElementById('cartFooter');
+      if (cartFooter) {
+        // Contar items reales (sin garantía)
+        const nonWarrantyItemsCount = cart.items.filter(item => item.variant_id !== WARRANTY_VARIANT_ID).length;
+        
+        if (nonWarrantyItemsCount > 0) {
+          console.log('✅ Mostrando footer (hay', nonWarrantyItemsCount, 'items)');
+          cartFooter.style.display = 'block';
+        } else {
+          console.log('⚠️ Ocultando footer (no hay items)');
+          cartFooter.style.display = 'none';
+        }
+      } else {
+        console.error('❌ No se encontró el footer del carrito');
+      }
+      
+      console.log('✅ UI actualizada completamente');
+      return cart; // Retornar el carrito para encadenar promesas
+    })
+    .catch(error => {
+      console.error('❌ Error al actualizar UI:', error);
+      // Si hay error, recargar como fallback
+      location.reload();
+    });
+  }
+  
+  // Función para formatear el precio
+  function formatPrice(cents) {
+    // Convertir centavos a pesos/dólares
+    const amount = cents / 100;
+    
+    // Formatear con punto como separador de miles, sin decimales
+    const formatted = amount.toLocaleString('es-MX', {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    });
+    
+    // Reemplazar coma por punto (formato mexicano)
+    return '$' + formatted.replace(/,/g, '.');
+  }
+</script>

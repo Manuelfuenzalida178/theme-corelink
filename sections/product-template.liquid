@@ -1,0 +1,1634 @@
+<!-- Product Template LAB - Shopify Liquid -->
+
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Custom Typography & Style Overrides -->
+<style>
+  /* RESET Y OVERRIDE DE SHOPIFY */
+  .product-premium-section * {
+    font-family: 'TT Norms Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif !important;
+  }
+
+  /* TÍTULO DEL PRODUCTO */
+  .product-premium-section h1 {
+    font-family: 'TT Norms Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: 1.875rem !important; /* 30px */
+    line-height: 2.25rem !important; /* 36px */
+    font-weight: 600 !important;
+    color: #111827 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    letter-spacing: -0.025em !important;
+  }
+
+  /* PRECIO */
+  .product-premium-section .product-price {
+    font-family: 'TT Norms Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: 2rem !important; /* 32px */
+    line-height: 2.5rem !important; /* 40px */
+    font-weight: 700 !important;
+    color: #2563eb !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .product-premium-section .product-price-compare {
+    font-family: 'TT Norms Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: 1rem !important; /* 16px */
+    line-height: 1.5rem !important; /* 24px */
+    font-weight: 400 !important;
+    color: #9ca3af !important;
+    text-decoration: line-through !important;
+  }
+  
+  .product-premium-section .product-price-discount {
+    font-family: 'TT Norms Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: 0.875rem !important; /* 14px */
+    line-height: 1.25rem !important;
+    font-weight: 600 !important;
+    color: #ef4444 !important;
+    background-color: #fee2e2 !important;
+    padding: 0.25rem 0.625rem !important;
+    border-radius: 0.25rem !important;
+  }
+
+  /* SKU */
+  .product-premium-section .product-sku {
+    font-family: 'TT Norms Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: 0.875rem !important; /* 14px */
+    line-height: 1.25rem !important; /* 20px */
+    font-weight: 400 !important;
+    color: #6b7280 !important;
+  }
+
+  .product-premium-section .product-sku span {
+    font-weight: 600 !important;
+  }
+
+  /* BANNER */
+  .product-premium-section .banner-title {
+    font-family: 'TT Norms Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: 1rem !important; /* 16px */
+    line-height: 1.5rem !important; /* 24px */
+    font-weight: 600 !important;
+    color: #111827 !important;
+    margin: 0 !important;
+  }
+
+  .product-premium-section .banner-text {
+    font-family: 'TT Norms Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: 0.875rem !important; /* 14px */
+    line-height: 1.25rem !important; /* 20px */
+    font-weight: 400 !important;
+    color: #4b5563 !important;
+    margin: 0 !important;
+  }
+
+  /* BOTONES */
+  .product-premium-section button,
+  .product-premium-section .btn {
+    font-family: 'TT Norms Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: 0.875rem !important; /* 14px */
+    line-height: 1.25rem !important; /* 20px */
+    font-weight: 600 !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+  }
+
+  /* RATING */
+  .product-premium-section .rating-text {
+    font-family: 'TT Norms Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: 0.875rem !important; /* 14px */
+    line-height: 1.25rem !important; /* 20px */
+    font-weight: 400 !important;
+    color: #6b7280 !important;
+  }
+
+  /* LINKS Y TEXTOS PEQUEÑOS */
+  .product-premium-section a,
+  .product-premium-section .text-sm {
+    font-family: 'TT Norms Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: 0.875rem !important; /* 14px */
+    line-height: 1.25rem !important; /* 20px */
+    font-weight: 400 !important;
+  }
+
+  /* INPUT QUANTITY */
+  .product-premium-section input[type="number"] {
+    font-family: 'TT Norms Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: 1rem !important; /* 16px */
+    line-height: 1.5rem !important; /* 24px */
+    font-weight: 600 !important;
+    color: #111827 !important;
+  }
+
+  /* SELECT VARIANT */
+  .product-premium-section select {
+    font-family: 'TT Norms Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: 0.875rem !important; /* 14px */
+    line-height: 1.25rem !important; /* 20px */
+    font-weight: 400 !important;
+    color: #111827 !important;
+  }
+
+  /* DESCRIPTION */
+  .product-premium-section .prose,
+  .product-premium-section .product-description {
+    font-family: 'TT Norms Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: 1rem !important; /* 16px */
+    line-height: 1.625rem !important; /* 26px */
+    font-weight: 400 !important;
+    color: #374151 !important;
+  }
+
+  .product-premium-section .prose h2 {
+    font-family: 'TT Norms Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: 1.5rem !important; /* 24px */
+    line-height: 2rem !important; /* 32px */
+    font-weight: 600 !important;
+    color: #111827 !important;
+  }
+
+  /* MOBILE PADDING PERSONALIZADO */
+  @media (max-width: 1023px) {
+    .product-premium-section .px-4 {
+      padding-left: 2rem !important;
+      padding-right: 0.6rem !important;
+    }
+  }
+</style>
+
+<div class="bg-white">
+  <div class="max-w-[1200px] mx-auto px-0 lg:px-0 pt-0 lg:pt-[20px] pb-0">
+    <div class="grid grid-cols-1 lg:grid-cols-[55%_45%] gap-0 lg:gap-8">
+      
+      <!-- Left Column - Product Images -->
+      <div>
+        <!-- Desktop Layout - Vertical Thumbnails -->
+        <div id="desktop-gallery" class="hidden lg:flex gap-4">
+          <!-- Thumbnails -->
+          <div id="thumbnail-column" class="flex flex-col items-center gap-3" style="max-height: 800px;">
+            <button class="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-600" onclick="scrollThumbnails('up')">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/>
+              </svg>
+            </button>
+            
+            <div id="thumbnail-container" class="flex flex-col gap-3 flex-1 overflow-y-auto" style="scrollbar-width: none; -ms-overflow-style: none;">
+              <style>
+                #thumbnail-container::-webkit-scrollbar {
+                  display: none;
+                }
+              </style>
+              {% for image in product.images %}
+                <button
+                  onclick="selectImage({{ forloop.index0 }})"
+                  class="thumbnail-btn w-20 h-20 flex-shrink-0 border-2 rounded overflow-hidden transition-all {% if forloop.first %}border-blue-500{% else %}border-gray-200 hover:border-gray-300{% endif %}"
+                  data-index="{{ forloop.index0 }}"
+                >
+                  <img src="{{ image | img_url: '200x200', crop: 'center' }}" alt="{{ product.title }}" class="w-full h-full object-cover">
+                </button>
+              {% endfor %}
+            </div>
+            
+            <button class="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-600" onclick="scrollThumbnails('down')">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Main Image -->
+          <div id="main-image-container" class="flex-1 relative overflow-hidden bg-white rounded-lg" style="max-width: 650px;">
+            <!-- Discount Badge -->
+            {% if product.compare_at_price > product.price %}
+              {% assign discount = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price %}
+              <div class="absolute top-4 left-4 bg-blue-600 text-white px-3 py-1 rounded text-sm z-10" style="font-weight: 600;">
+                -{{ discount }}%
+              </div>
+            {% endif %}
+
+            <img id="main-image" src="{{ product.featured_image | img_url: 'master' }}" alt="{{ product.title }}" class="w-full h-auto object-contain rounded-lg" onload="syncThumbnailHeight()">
+          </div>
+        </div>
+
+        <!-- Mobile Layout - Horizontal Thumbnails Below -->
+        <div id="mobile-gallery" class="lg:hidden px-4">
+          <!-- Main Image -->
+          <div id="mobile-main-image" class="relative overflow-hidden rounded-lg bg-white" style="width: 100%; aspect-ratio: 1/1; margin: 0 auto;">
+            <!-- Discount Badge -->
+            {% if product.compare_at_price > product.price %}
+              {% assign discount = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price %}
+              <div class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded text-sm z-10" style="font-weight: 600;">
+                -{{ discount }}%
+              </div>
+            {% endif %}
+
+            <img id="mobile-image" src="{{ product.featured_image | img_url: 'master' }}" alt="{{ product.title }}" class="w-full h-full object-contain rounded-lg" style="object-position: center;">
+          </div>
+
+          <!-- Horizontal Thumbnails - Swipe only -->
+          <div id="mobile-thumbnail-container" class="flex gap-3 overflow-x-auto mt-3 px-4" style="scrollbar-width: none; -ms-overflow-style: none;">
+            {% for image in product.images %}
+              <button
+                onclick="selectImage({{ forloop.index0 }})"
+                class="mobile-thumbnail-btn w-20 h-20 flex-shrink-0 border-2 rounded overflow-hidden transition-all {% if forloop.first %}border-blue-500{% else %}border-gray-200 hover:border-gray-300{% endif %}"
+                data-index="{{ forloop.index0 }}"
+              >
+                <img src="{{ image | img_url: '200x200', crop: 'center' }}" alt="{{ product.title }}" class="w-full h-full object-cover">
+              </button>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column - Product Info -->
+      <div class="px-4 lg:px-0">
+        {% for block in section.blocks %}
+          <div {{ block.shopify_attributes }} style="padding-top: {{ block.settings.margin_top | default: 0 }}px; padding-bottom: {{ block.settings.padding_bottom | default: 0 }}px;">
+            {% case block.type %}
+              
+              {% when 'title' %}
+                <!-- Title Block -->
+                <div class="flex items-start justify-between mb-3">
+                  <h1 class="text-3xl text-gray-900" style="font-weight: 600;">
+                    {{ product.title }}
+                  </h1>
+                </div>
+              
+              {% when 'rating' %}
+                <!-- Rating Block -->
+                <div class="flex items-center gap-2 mb-2">
+                  <div class="flex items-center">
+                    {% for i in (1..5) %}
+                      <svg class="w-4 h-4 fill-yellow-400 text-yellow-400" viewBox="0 0 24 24">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                      </svg>
+                    {% endfor %}
+                  </div>
+                  <span class="text-sm text-gray-500 rating-text">({{ block.settings.review_count }} {{ block.settings.review_text }})</span>
+                </div>
+              
+              {% when 'banner' %}
+                <!-- Custom Banner Block -->
+                <div class="bg-{{ block.settings.bg_color }}-50 border border-{{ block.settings.bg_color }}-100 rounded-lg p-4 mb-6">
+                  <div class="flex items-start gap-3 mb-3">
+                    <div class="w-10 h-10 bg-{{ block.settings.bg_color }}-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <svg class="w-5 h-5 text-{{ block.settings.bg_color }}-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                      </svg>
+                    </div>
+                    <div class="flex-1">
+                      <div class="text-gray-900 mb-1 banner-title">{{ block.settings.banner_title }}</div>
+                      <div class="text-sm text-gray-600 banner-text">{{ block.settings.banner_text }}</div>
+                    </div>
+                  </div>
+                  {% if block.settings.show_button %}
+                    <button class="w-full lg:w-auto px-4 py-2 bg-{{ block.settings.bg_color }}-600 text-white rounded hover:bg-{{ block.settings.bg_color }}-700" style="font-weight: 600;">
+                      {{ block.settings.button_text }}
+                    </button>
+                  {% endif %}
+                </div>
+              
+              {% when 'price' %}
+                <!-- Price Block -->
+                <div class="flex items-center gap-3 mb-6">
+                  <span class="product-price" style="font-weight: 700;">{{ product.price | money }}</span>
+                  {% if product.compare_at_price > product.price %}
+                    <span class="product-price-compare">{{ product.compare_at_price | money }}</span>
+                    {% assign discount = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price %}
+                    <span class="product-price-discount">-{{ discount }}%</span>
+                  {% endif %}
+                </div>
+              
+              {% when 'buttons' %}
+                <!-- Buttons Block -->
+                {% form 'product', product %}
+                  <!-- Variant Selector (if variants exist) -->
+                  {% if product.variants.size > 1 %}
+                    <div class="mb-4">
+                      <select name="id" class="w-full border border-gray-300 rounded px-4 py-3">
+                        {% for variant in product.variants %}
+                          <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected{% endif %}>
+                            {{ variant.title }} - {{ variant.price | money }}
+                          </option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  {% else %}
+                    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                  {% endif %}
+
+                  <!-- Add to Cart Section - Desktop -->
+                  <div class="hidden lg:flex items-center gap-3 mb-4 desktop-buttons">
+                    <!-- Quantity Selector - Compact Design -->
+                    <div class="flex items-center border border-gray-300 rounded-md overflow-hidden" style="width: 90px; height: 40px;">
+                      <button type="button" onclick="decreaseQuantity()" class="w-8 h-full flex items-center justify-center hover:bg-gray-50 transition-colors text-gray-700 border-r border-gray-300" style="font-size: 16px;">
+                        −
+                      </button>
+                      <input
+                        type="number"
+                        name="quantity"
+                        id="quantity"
+                        value="1"
+                        min="1"
+                        class="w-full h-full text-center border-0 text-gray-900"
+                        style="font-weight: 500; font-size: 14px; padding: 0;"
+                      />
+                      <button type="button" onclick="increaseQuantity()" class="w-8 h-full flex items-center justify-center hover:bg-gray-50 transition-colors text-gray-700 border-l border-gray-300" style="font-size: 16px;">
+                        +
+                      </button>
+                    </div>
+
+                    <!-- Add to Cart Button -->
+                    <button
+                      type="submit"
+                      class="flex-1 h-10 rounded-lg transition-colors"
+                      style="background-color: #2563eb; color: white; font-weight: 600; font-size: 14px;"
+                      onmouseover="this.style.backgroundColor='#1d4ed8'"
+                      onmouseout="this.style.backgroundColor='#2563eb'"
+                    >
+                      Agregar al carrito
+                    </button>
+                  </div>
+
+                  <!-- Buy Now Button - Desktop (Full Width) -->
+                  {% if block.settings.show_buy_now %}
+                    <div class="hidden lg:block mb-4">
+                      <button
+                        type="button"
+                        onclick="buyNow()"
+                        class="w-full h-10 rounded-lg transition-colors"
+                        style="background-color: #16a34a; color: white; font-weight: 600; font-size: 14px;"
+                        onmouseover="this.style.backgroundColor='#15803d'"
+                        onmouseout="this.style.backgroundColor='#16a34a'"
+                      >
+                        {{ block.settings.buy_now_text }}
+                      </button>
+                    </div>
+                  {% endif %}
+
+                  <!-- Add to Cart Section - Mobile -->
+                  <div class="lg:hidden space-y-3 mb-4 mobile-buttons">
+                    <!-- Quantity + Add to Cart in same row -->
+                    <div class="flex items-center gap-3">
+                      <!-- Quantity Selector - Compact Design -->
+                      <div class="flex items-center border border-gray-300 rounded-md overflow-hidden" style="width: 90px; height: 40px;">
+                        <button type="button" onclick="decreaseQuantity()" class="w-8 h-full flex items-center justify-center hover:bg-gray-50 transition-colors text-gray-700 border-r border-gray-300" style="font-size: 16px;">
+                          −
+                        </button>
+                        <input
+                          type="number"
+                          name="quantity"
+                          id="quantity-mobile"
+                          value="1"
+                          min="1"
+                          class="w-full h-full text-center border-0 text-gray-900"
+                          style="font-weight: 500; font-size: 14px; padding: 0;"
+                        />
+                        <button type="button" onclick="increaseQuantity()" class="w-8 h-full flex items-center justify-center hover:bg-gray-50 transition-colors text-gray-700 border-l border-gray-300" style="font-size: 16px;">
+                          +
+                        </button>
+                      </div>
+
+                      <!-- Add to Cart Button -->
+                      <button
+                        type="submit"
+                        class="flex-1 h-10 rounded-lg transition-colors"
+                        style="background-color: #2563eb; color: white; font-weight: 600; font-size: 14px;"
+                        onmouseover="this.style.backgroundColor='#1d4ed8'"
+                        onmouseout="this.style.backgroundColor='#2563eb'"
+                      >
+                        Agregar al carrito
+                      </button>
+                    </div>
+                  </div>
+                {% endform %}
+              
+              {% when 'compare_wishlist' %}
+                <!-- Compare & Wishlist Block -->
+                <div class="flex items-center gap-4 mb-4 pb-4">
+                  {% if block.settings.show_compare %}
+                    <button class="flex items-center gap-2 text-sm text-gray-600 hover:text-blue-600">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+                      </svg>
+                      {{ block.settings.compare_text }}
+                    </button>
+                  {% endif %}
+                  {% if block.settings.show_wishlist %}
+                    <button class="flex items-center gap-2 text-sm text-gray-600 hover:text-blue-600">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                      </svg>
+                      {{ block.settings.wishlist_text }}
+                    </button>
+                  {% endif %}
+                </div>
+              
+              {% when 'share' %}
+                <!-- Share Block -->
+                <div class="flex items-center justify-between mb-6 pb-6 border-b border-gray-200">
+                  <div class="flex items-center gap-2">
+                    <span class="text-sm text-gray-600">{{ block.settings.share_label }}:</span>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url }}{{ product.url }}" target="_blank" class="text-gray-500 hover:text-blue-600">
+                      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                      </svg>
+                    </a>
+                    <a href="https://twitter.com/intent/tweet?url={{ shop.url }}{{ product.url }}&text={{ product.title }}" target="_blank" class="text-gray-500 hover:text-blue-600">
+                      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                      </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ shop.url }}{{ product.url }}" target="_blank" class="text-gray-500 hover:text-blue-600">
+                      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                      </svg>
+                    </a>
+                    <a href="mailto:?subject={{ product.title }}&body={{ shop.url }}{{ product.url }}" class="text-gray-500 hover:text-blue-600">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              
+              {% when 'custom_liquid' %}
+                <!-- Custom Liquid Block -->
+                <div class="mb-6">
+                  {{ block.settings.custom_liquid }}
+                </div>
+              
+              {% when 'custom_image' %}
+                <!-- Custom Image Block -->
+                <div class="mb-6">
+                  {% if block.settings.image != blank %}
+                    <div class="{% if block.settings.rounded %}rounded-lg overflow-hidden{% endif %}">
+                      {% if block.settings.link != blank %}
+                        <a href="{{ block.settings.link }}" {% if block.settings.open_in_new_tab %}target="_blank"{% endif %}>
+                          <img 
+                            src="{{ block.settings.image | img_url: block.settings.image_size }}" 
+                            alt="{{ block.settings.image_alt | default: product.title }}"
+                            class="w-full h-auto {% if block.settings.hover_effect %}transition-transform duration-300 hover:scale-105{% endif %}"
+                          >
+                        </a>
+                      {% else %}
+                        <img 
+                          src="{{ block.settings.image | img_url: block.settings.image_size }}" 
+                          alt="{{ block.settings.image_alt | default: product.title }}"
+                          class="w-full h-auto"
+                        >
+                      {% endif %}
+                    </div>
+                    {% if block.settings.caption != blank %}
+                      <p class="text-sm text-gray-500 text-center mt-2">{{ block.settings.caption }}</p>
+                    {% endif %}
+                  {% else %}
+                    <div class="bg-gray-100 rounded-lg p-8 text-center">
+                      <svg class="w-12 h-12 mx-auto text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                      </svg>
+                      <p class="text-sm text-gray-500">Selecciona una imagen</p>
+                    </div>
+                  {% endif %}
+                </div>
+              
+              {% when 'shipping_option' %}
+                <!-- Shipping/Delivery Option Block -->
+                <div class="flex items-start justify-between p-4 border border-gray-200 rounded mb-3 {% if block.settings.bg_color != 'none' %}bg-{{ block.settings.bg_color }}-50{% endif %}">
+                  <div class="flex items-start gap-3">
+                    <!-- Icon -->
+                    {% if block.settings.icon_style == 'badge' %}
+                      <div class="w-5 h-5 bg-{{ block.settings.icon_bg_color }}-400 rounded flex-shrink-0 mt-0.5 flex items-center justify-center">
+                        {% case block.settings.icon %}
+                          {% when 'store' %}
+                            <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                            </svg>
+                          {% when 'truck' %}
+                            <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/>
+                            </svg>
+                          {% when 'package' %}
+                            <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                            </svg>
+                          {% when 'shield' %}
+                            <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                            </svg>
+                          {% when 'rotate' %}
+                            <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                            </svg>
+                        {% endcase %}
+                      </div>
+                    {% else %}
+                      {% case block.settings.icon %}
+                        {% when 'store' %}
+                          <svg class="w-5 h-5 text-gray-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                          </svg>
+                        {% when 'truck' %}
+                          <svg class="w-5 h-5 text-gray-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/>
+                          </svg>
+                        {% when 'package' %}
+                          <svg class="w-5 h-5 text-gray-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                          </svg>
+                        {% when 'shield' %}
+                          <svg class="w-5 h-5 text-gray-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                          </svg>
+                        {% when 'rotate' %}
+                          <svg class="w-5 h-5 text-gray-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                          </svg>
+                      {% endcase %}
+                    {% endif %}
+                    
+                    <!-- Text Content -->
+                    <div>
+                      <div class="text-sm" style="font-weight: 600;">{{ block.settings.title }}</div>
+                      {% if block.settings.description != blank %}
+                        <div class="text-xs text-gray-500 mt-1">{{ block.settings.description }}</div>
+                      {% endif %}
+                    </div>
+                  </div>
+                  
+                  <!-- Right Side Info -->
+                  <div class="text-right">
+                    {% if block.settings.show_days and block.settings.days_text != blank %}
+                      <div class="text-xs text-gray-500">{{ block.settings.days_text }}</div>
+                    {% endif %}
+                    <div class="text-sm" style="font-weight: 600;">{{ block.settings.price_text }}</div>
+                  </div>
+                </div>
+            
+            {% endcase %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Fullscreen Modal/Popup -->
+<div id="fullscreen-modal" class="fixed inset-0 bg-black bg-opacity-95 z-50 hidden items-center justify-center">
+  <button onclick="closeFullscreen()" class="absolute top-4 right-4 w-12 h-12 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full flex items-center justify-center transition-colors z-10">
+    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+    </svg>
+  </button>
+
+  <!-- Image Container with Navigation -->
+  <div class="relative flex items-center justify-center w-full h-full">
+    <!-- Previous Button -->
+    <button onclick="previousImage()" class="absolute left-2 w-12 h-12 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full flex items-center justify-center transition-colors z-10">
+      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+      </svg>
+    </button>
+
+    <!-- Image -->
+    <div class="flex items-center justify-center px-20">
+      <img id="fullscreen-image" src="" alt="Fullscreen view" class="max-w-full max-h-[90vh] object-contain">
+    </div>
+
+    <!-- Next Button -->
+    <button onclick="nextImage()" class="absolute right-2 w-12 h-12 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full flex items-center justify-center transition-colors z-10">
+      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Image Counter -->
+  <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white bg-opacity-20 px-4 py-2 rounded-full">
+    <span id="image-counter" class="text-white text-sm"></span>
+  </div>
+</div>
+
+<!-- Cart Drawer is in cart-drawer.liquid snippet -->
+
+<script>
+  // Product Images Array
+  const productImages = [
+    {% for image in product.images %}
+      "{{ image | img_url: 'master' }}"{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ];
+
+  let selectedImageIndex = 0;
+
+  // Select Image Function
+  function selectImage(index) {
+    selectedImageIndex = index;
+    
+    // Update main images
+    const mainImage = document.getElementById('main-image');
+    const mobileImage = document.getElementById('mobile-image');
+    
+    if (mainImage) mainImage.src = productImages[index];
+    if (mobileImage) mobileImage.src = productImages[index];
+
+    // Update thumbnail borders - Desktop
+    const thumbnails = document.querySelectorAll('.thumbnail-btn');
+    thumbnails.forEach((btn, i) => {
+      if (i === index) {
+        btn.classList.remove('border-gray-200', 'hover:border-gray-300');
+        btn.classList.add('border-blue-500');
+      } else {
+        btn.classList.remove('border-blue-500');
+        btn.classList.add('border-gray-200', 'hover:border-gray-300');
+      }
+    });
+
+    // Update thumbnail borders - Mobile
+    const mobileThumbnails = document.querySelectorAll('.mobile-thumbnail-btn');
+    mobileThumbnails.forEach((btn, i) => {
+      if (i === index) {
+        btn.classList.remove('border-gray-200', 'hover:border-gray-300');
+        btn.classList.add('border-blue-500');
+      } else {
+        btn.classList.remove('border-blue-500');
+        btn.classList.add('border-gray-200', 'hover:border-gray-300');
+      }
+    });
+
+    // Auto-scroll thumbnails
+    autoScrollThumbnails(index);
+  }
+
+  // Scroll Thumbnails - Desktop Vertical
+  function scrollThumbnails(direction) {
+    const container = document.getElementById('thumbnail-container');
+    if (!container) return;
+    
+    const scrollAmount = 100;
+    const currentScroll = container.scrollTop;
+    
+    container.scrollTo({
+      top: direction === 'up' ? currentScroll - scrollAmount : currentScroll + scrollAmount,
+      behavior: 'smooth'
+    });
+  }
+
+  // Auto-scroll thumbnails when image is selected
+  function autoScrollThumbnails(index) {
+    // Desktop vertical scroll
+    const desktopContainer = document.getElementById('thumbnail-container');
+    if (desktopContainer) {
+      const thumbnailHeight = 80 + 12; // 80px height + 12px gap
+      const targetScroll = index * thumbnailHeight;
+      desktopContainer.scrollTo({
+        top: targetScroll,
+        behavior: 'smooth'
+      });
+    }
+
+    // Mobile horizontal scroll
+    const mobileContainer = document.getElementById('mobile-thumbnail-container');
+    if (mobileContainer) {
+      const thumbnailWidth = 80 + 12; // 80px width + 12px gap
+      const containerWidth = mobileContainer.offsetWidth;
+      const targetScroll = (index * thumbnailWidth) - (containerWidth / 2) + 40;
+      mobileContainer.scrollTo({
+        left: Math.max(0, targetScroll),
+        behavior: 'smooth'
+      });
+    }
+  }
+
+  // Mobile Touch Swipe for Main Image
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  const mobileMainImage = document.getElementById('mobile-main-image');
+  if (mobileMainImage) {
+    mobileMainImage.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+    });
+
+    mobileMainImage.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].clientX;
+      handleSwipe();
+    });
+  }
+
+  function handleSwipe() {
+    const minSwipeDistance = 50;
+    
+    // Swipe left (next image)
+    if (touchStartX - touchEndX > minSwipeDistance) {
+      const nextIndex = selectedImageIndex < productImages.length - 1 ? selectedImageIndex + 1 : 0;
+      selectImage(nextIndex);
+    }
+    
+    // Swipe right (previous image)
+    if (touchEndX - touchStartX > minSwipeDistance) {
+      const prevIndex = selectedImageIndex > 0 ? selectedImageIndex - 1 : productImages.length - 1;
+      selectImage(prevIndex);
+    }
+  }
+
+  // Quantity Controls
+  function increaseQuantity() {
+    const quantityInputs = document.querySelectorAll('#quantity, #quantity-mobile');
+    quantityInputs.forEach(input => {
+      const currentValue = parseInt(input.value) || 1;
+      input.value = currentValue + 1;
+    });
+  }
+
+  function decreaseQuantity() {
+    const quantityInputs = document.querySelectorAll('#quantity, #quantity-mobile');
+    quantityInputs.forEach(input => {
+      const currentValue = parseInt(input.value) || 1;
+      if (currentValue > 1) {
+        input.value = currentValue - 1;
+      }
+    });
+  }
+
+  // Sync quantity inputs
+  document.addEventListener('DOMContentLoaded', () => {
+    const quantityDesktop = document.getElementById('quantity');
+    const quantityMobile = document.getElementById('quantity-mobile');
+    
+    if (quantityDesktop && quantityMobile) {
+      quantityDesktop.addEventListener('input', () => {
+        quantityMobile.value = quantityDesktop.value;
+      });
+      
+      quantityMobile.addEventListener('input', () => {
+        quantityDesktop.value = quantityMobile.value;
+      });
+    }
+
+    // Intercept Add to Cart Forms
+    const forms = document.querySelectorAll('form[action*="/cart/add"]');
+    forms.forEach(form => {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        addToCart(this);
+      });
+    });
+  });
+
+  // Buy Now Function
+  function buyNow() {
+    // Submit form and redirect to checkout
+    const form = document.querySelector('form[action*="/cart/add"]');
+    if (form) {
+      // Get variant ID
+      let variantId;
+      const variantSelect = form.querySelector('select[name="id"]');
+      const variantInput = form.querySelector('input[name="id"]');
+      
+      if (variantSelect) {
+        variantId = variantSelect.value;
+      } else if (variantInput) {
+        variantId = variantInput.value;
+      }
+      
+      // Get quantity
+      const quantityInput = form.querySelector('input[name="quantity"]');
+      const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
+      
+      // Build request body
+      const data = {
+        items: [{
+          id: variantId,
+          quantity: quantity
+        }]
+      };
+      
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(data => {
+        // Redirect to checkout
+        window.location.href = '/checkout';
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    }
+  }
+
+  // Add to Cart Function
+  function addToCart(form) {
+    const button = form.querySelector('button[type="submit"]');
+    const originalText = button.textContent;
+    
+    // Get variant ID
+    let variantId;
+    const variantSelect = form.querySelector('select[name="id"]');
+    const variantInput = form.querySelector('input[name="id"]');
+    
+    if (variantSelect) {
+      variantId = variantSelect.value;
+    } else if (variantInput) {
+      variantId = variantInput.value;
+    }
+    
+    // Get quantity
+    const quantityInput = form.querySelector('input[name="quantity"]');
+    const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
+    
+    console.log('Adding to cart:', { id: variantId, quantity: quantity });
+    
+    // Show loading state
+    button.textContent = 'Agregando...';
+    button.disabled = true;
+    
+    // Build request body
+    const data = {
+      items: [{
+        id: variantId,
+        quantity: quantity
+      }]
+    };
+    
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => {
+      console.log('Add to cart response status:', response.status);
+      if (!response.ok) {
+        throw new Error('Failed to add to cart');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Added to cart successfully:', data);
+      // Reset button
+      button.textContent = originalText;
+      button.disabled = false;
+      
+      // Open drawer immediately - it will handle cart loading
+      console.log('Opening drawer and loading cart...');
+      if (typeof window.openCartDrawer === 'function') {
+        window.openCartDrawer();
+      } else {
+        console.error('openCartDrawer function not found!');
+      }
+    })
+    .catch(error => {
+      console.error('Error adding to cart:', error);
+      button.textContent = 'Error - Try Again';
+      setTimeout(() => {
+        button.textContent = originalText;
+        button.disabled = false;
+      }, 2000);
+    });
+  }
+
+  // Fullscreen Image
+  function openFullscreen() {
+    // Simple implementation - you can enhance this with a modal/lightbox
+    const currentImage = productImages[selectedImageIndex];
+    const fullscreenImg = document.getElementById('fullscreen-image');
+    const modal = document.getElementById('fullscreen-modal');
+    const counter = document.getElementById('image-counter');
+    
+    if (fullscreenImg && modal && counter) {
+      fullscreenImg.src = currentImage;
+      counter.textContent = `${selectedImageIndex + 1} / ${productImages.length}`;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+  }
+
+  function closeFullscreen() {
+    const modal = document.getElementById('fullscreen-modal');
+    if (modal) {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+  }
+
+  function previousImage() {
+    const prevIndex = selectedImageIndex > 0 ? selectedImageIndex - 1 : productImages.length - 1;
+    selectedImageIndex = prevIndex;
+    selectImage(prevIndex);
+    const fullscreenImg = document.getElementById('fullscreen-image');
+    const counter = document.getElementById('image-counter');
+    if (fullscreenImg && counter) {
+      fullscreenImg.src = productImages[prevIndex];
+      counter.textContent = `${prevIndex + 1} / ${productImages.length}`;
+    }
+  }
+
+  function nextImage() {
+    const nextIndex = selectedImageIndex < productImages.length - 1 ? selectedImageIndex + 1 : 0;
+    selectedImageIndex = nextIndex;
+    selectImage(nextIndex);
+    const fullscreenImg = document.getElementById('fullscreen-image');
+    const counter = document.getElementById('image-counter');
+    if (fullscreenImg && counter) {
+      fullscreenImg.src = productImages[nextIndex];
+      counter.textContent = `${nextIndex + 1} / ${productImages.length}`;
+    }
+  }
+
+  // Sync thumbnail height with main image
+  function syncThumbnailHeight() {
+    const mainImage = document.getElementById('main-image');
+    const thumbnailColumn = document.getElementById('thumbnail-column');
+    
+    if (mainImage && thumbnailColumn) {
+      const mainImageHeight = mainImage.offsetHeight;
+      thumbnailColumn.style.maxHeight = `${mainImageHeight}px`;
+    }
+  }
+
+  // Call sync on window resize and DOM load
+  window.addEventListener('resize', syncThumbnailHeight);
+  window.addEventListener('load', syncThumbnailHeight);
+  document.addEventListener('DOMContentLoaded', syncThumbnailHeight);
+
+  // Parallax scroll effect for desktop gallery - Desktop Only
+  if (window.innerWidth >= 1024) {
+    let lastScrollTop = 0;
+    const galleryColumn = document.querySelector('.grid > div:first-child');
+    
+    window.addEventListener('scroll', function() {
+      if (window.innerWidth >= 1024 && galleryColumn) {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollSpeed = 0.5; // Adjust this value: 0.5 = half speed, 0.3 = slower
+        const translateY = scrollTop * scrollSpeed;
+        
+        galleryColumn.style.transform = `translateY(${translateY}px)`;
+        galleryColumn.style.transition = 'transform 0.1s ease-out';
+        
+        lastScrollTop = scrollTop;
+      }
+    });
+  }
+</script>
+
+<style>
+  /* Hide scrollbars for mobile thumbnails */
+  #mobile-thumbnail-container::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Smooth scrolling */
+  #thumbnail-container,
+  #mobile-thumbnail-container {
+    scroll-behavior: smooth;
+  }
+
+  /* Quantity input - remove arrows */
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
+  /* Quantity selector - compact style */
+  #quantity,
+  #quantity-mobile {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  #quantity:focus,
+  #quantity-mobile:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: transparent !important;
+  }
+
+  /* Cart Drawer Styles */
+  #cart-drawer {
+    font-family: 'TT Norms Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif !important;
+  }
+
+  #cart-drawer-content {
+    max-width: 100%;
+  }
+
+  @media (min-width: 640px) {
+    #cart-drawer-content {
+      max-width: 384px;
+    }
+  }
+
+  /* Smooth transitions */
+  #cart-drawer-content {
+    transition: transform 0.3s ease-in-out;
+  }
+
+  #cart-overlay {
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  /* FIX MOBILE OVERFLOW */
+  body {
+    overflow-x: hidden !important;
+  }
+
+  /* Container fixes */
+  .min-h-screen {
+    overflow-x: hidden !important;
+  }
+
+  /* RESPONSIVE VISIBILITY CONTROLS */
+  @media (max-width: 1023px) {
+    /* Fix mobile layout */
+    .grid {
+      overflow-x: hidden !important;
+      box-sizing: border-box !important;
+    }
+
+    /* Ensure all children respect container width */
+    .grid > div {
+      max-width: 100% !important;
+      overflow-x: hidden !important;
+      box-sizing: border-box !important;
+    }
+
+    /* Fix buttons overflow */
+    .mobile-buttons {
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+    }
+
+    /* Hide desktop gallery on mobile */
+    #desktop-gallery {
+      display: none !important;
+    }
+    /* Show mobile gallery */
+    #mobile-gallery {
+      display: block !important;
+    }
+    /* Hide desktop buttons */
+    .desktop-buttons {
+      display: none !important;
+    }
+    /* Show mobile buttons */
+    .mobile-buttons {
+      display: block !important;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    /* Show desktop gallery on desktop */
+    #desktop-gallery {
+      display: flex !important;
+    }
+    /* Hide mobile gallery */
+    #mobile-gallery {
+      display: none !important;
+    }
+    /* Show desktop buttons */
+    .desktop-buttons {
+      display: flex !important;
+    }
+    /* Hide mobile buttons */
+    .mobile-buttons {
+      display: none !important;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Product Premium Gallery",
+  "class": "product-premium-section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "range",
+          "id": "margin_top",
+          "label": "Margin Top (px)",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "Padding Bottom (px)",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "default": 0
+        }
+      ]
+    },
+    {
+      "type": "rating",
+      "name": "Rating",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "number",
+          "id": "review_count",
+          "label": "Review Count",
+          "default": 2
+        },
+        {
+          "type": "text",
+          "id": "review_text",
+          "label": "Review Text",
+          "default": "customer reviews"
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "label": "Margin Top (px)",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "Padding Bottom (px)",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "default": 0
+        }
+      ]
+    },
+    {
+      "type": "banner",
+      "name": "Promotional Banner",
+      "settings": [
+        {
+          "type": "text",
+          "id": "banner_title",
+          "label": "Banner Title",
+          "default": "Apple Shopping Event"
+        },
+        {
+          "type": "textarea",
+          "id": "banner_text",
+          "label": "Banner Text",
+          "default": "Hurry and get discounts on all Apple devices up to 20%"
+        },
+        {
+          "type": "select",
+          "id": "bg_color",
+          "label": "Background Color",
+          "options": [
+            { "value": "blue", "label": "Blue" },
+            { "value": "green", "label": "Green" },
+            { "value": "red", "label": "Red" },
+            { "value": "yellow", "label": "Yellow" },
+            { "value": "purple", "label": "Purple" },
+            { "value": "pink", "label": "Pink" }
+          ],
+          "default": "blue"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_button",
+          "label": "Show Button",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Sale_coupon_15"
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "label": "Margin Top (px)",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "Padding Bottom (px)",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "default": 0
+        }
+      ]
+    },
+    {
+      "type": "price",
+      "name": "Price",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "range",
+          "id": "margin_top",
+          "label": "Margin Top (px)",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "Padding Bottom (px)",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "default": 0
+        }
+      ]
+    },
+    {
+      "type": "buttons",
+      "name": "Buttons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "add_to_cart_text",
+          "label": "Add to Cart Button Text",
+          "default": "Agregar al carrito"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_buy_now",
+          "label": "Show Buy Now Button",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "buy_now_text",
+          "label": "Buy Now Button Text",
+          "default": "Buy Now"
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "label": "Margin Top (px)",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "Padding Bottom (px)",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "default": 0
+        }
+      ]
+    },
+    {
+      "type": "compare_wishlist",
+      "name": "Compare & Wishlist",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_compare",
+          "label": "Show Compare",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "compare_text",
+          "label": "Compare Text",
+          "default": "Add to compare"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_wishlist",
+          "label": "Show Wishlist",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "wishlist_text",
+          "label": "Wishlist Text",
+          "default": "Add to wishlist"
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "label": "Margin Top (px)",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "Padding Bottom (px)",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "default": 0
+        }
+      ]
+    },
+    {
+      "type": "share",
+      "name": "Share",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "share_label",
+          "label": "Share Label",
+          "default": "Share"
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "label": "Margin Top (px)",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "Padding Bottom (px)",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "default": 0
+        }
+      ]
+    },
+    {
+      "type": "custom_liquid",
+      "name": "Custom Liquid",
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "custom_liquid",
+          "label": "Custom Liquid Code",
+          "info": "Add custom Liquid code here"
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "label": "Margin Top (px)",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "Padding Bottom (px)",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "default": 0
+        }
+      ]
+    },
+    {
+      "type": "custom_image",
+      "name": "Custom Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Texto alternativo",
+          "info": "Describe la imagen para accesibilidad"
+        },
+        {
+          "type": "select",
+          "id": "image_size",
+          "label": "Tamaño de imagen",
+          "options": [
+            { "value": "master", "label": "Original" },
+            { "value": "large", "label": "Grande (600px)" },
+            { "value": "medium", "label": "Mediano (480px)" },
+            { "value": "small", "label": "Pequeño (240px)" }
+          ],
+          "default": "large"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Enlace (opcional)",
+          "info": "URL a la que dirigirá la imagen cuando se haga clic"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_in_new_tab",
+          "label": "Abrir enlace en nueva pestaña",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "rounded",
+          "label": "Esquinas redondeadas",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "hover_effect",
+          "label": "Efecto hover (zoom)",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Pie de imagen (opcional)"
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "label": "Margin Top (px)",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "Padding Bottom (px)",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "default": 0
+        }
+      ]
+    },
+    {
+      "type": "shipping_option",
+      "name": "Shipping/Delivery Option",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Free Shipping"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Free shipping on orders over $50"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "store", "label": "Store" },
+            { "value": "truck", "label": "Truck" },
+            { "value": "package", "label": "Package" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "rotate", "label": "Rotate" }
+          ],
+          "default": "truck"
+        },
+        {
+          "type": "select",
+          "id": "icon_style",
+          "label": "Icon Style",
+          "options": [
+            { "value": "badge", "label": "Badge" },
+            { "value": "icon", "label": "Icon" }
+          ],
+          "default": "badge"
+        },
+        {
+          "type": "select",
+          "id": "icon_bg_color",
+          "label": "Icon Background Color",
+          "options": [
+            { "value": "blue", "label": "Blue" },
+            { "value": "green", "label": "Green" },
+            { "value": "red", "label": "Red" },
+            { "value": "yellow", "label": "Yellow" },
+            { "value": "purple", "label": "Purple" },
+            { "value": "pink", "label": "Pink" }
+          ],
+          "default": "blue"
+        },
+        {
+          "type": "select",
+          "id": "bg_color",
+          "label": "Background Color",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "blue", "label": "Blue" },
+            { "value": "green", "label": "Green" },
+            { "value": "red", "label": "Red" },
+            { "value": "yellow", "label": "Yellow" },
+            { "value": "purple", "label": "Purple" },
+            { "value": "pink", "label": "Pink" }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_days",
+          "label": "Show Days",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "days_text",
+          "label": "Days Text",
+          "default": "3-5 business days"
+        },
+        {
+          "type": "text",
+          "id": "price_text",
+          "label": "Price Text",
+          "default": "Free"
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "label": "Margin Top (px)",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "Padding Bottom (px)",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "default": 0
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Premium Gallery",
+      "blocks": [
+        {
+          "type": "title"
+        },
+        {
+          "type": "rating"
+        },
+        {
+          "type": "banner"
+        },
+        {
+          "type": "price"
+        },
+        {
+          "type": "buttons"
+        },
+        {
+          "type": "compare_wishlist"
+        },
+        {
+          "type": "share"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

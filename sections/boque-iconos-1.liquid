@@ -1,0 +1,247 @@
+{% comment %}
+  Product Features Section - Ultra Premium
+  Compatible with Shopify themes (pre-2.0 and 2.0)
+  Editable from Theme Customizer
+{% endcomment %}
+
+<style>
+  .product-features-section-{{ section.id }} {
+    background-color: {{ section.settings.background_color }};
+    border: 1px solid {{ section.settings.border_color }};
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .product-features-grid-{{ section.id }} {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  @media (min-width: 640px) {
+    .product-features-grid-{{ section.id }} {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .feature-item-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .feature-icon-container-{{ section.id }} {
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: {{ section.settings.icon_bg_color }};
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .feature-icon-{{ section.id }} {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .feature-content-{{ section.id }} {
+    flex: 1;
+  }
+
+  .feature-title-{{ section.id }} {
+    color: {{ section.settings.title_color }};
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  .feature-description-{{ section.id }} {
+    color: {{ section.settings.description_color }};
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
+</style>
+
+<div class="product-features-section-{{ section.id }}">
+  <div class="product-features-grid-{{ section.id }}">
+    {% for block in section.blocks %}
+      <div class="feature-item-{{ section.id }}" {{ block.shopify_attributes }}>
+        <div class="feature-icon-container-{{ section.id }}">
+          {% case block.settings.icon_type %}
+            {% when 'shield' %}
+              <svg class="feature-icon-{{ section.id }}" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2L3 7V12C3 16.55 6.84 20.74 12 22C17.16 20.74 21 16.55 21 12V7L12 2Z" fill="{{ block.settings.icon_color }}" fill-opacity="0.2" stroke="{{ block.settings.icon_color }}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M9 12L11 14L15 10" stroke="{{ block.settings.icon_color }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            {% when 'apps' %}
+              <svg class="feature-icon-{{ section.id }}" viewBox="0 0 24 24" fill="none">
+                <rect x="3" y="3" width="7" height="7" rx="1.5" fill="{{ block.settings.icon_color }}" fill-opacity="0.2" stroke="{{ block.settings.icon_color }}" stroke-width="1.5"/>
+                <rect x="14" y="3" width="7" height="7" rx="1.5" fill="{{ block.settings.icon_color }}" fill-opacity="0.2" stroke="{{ block.settings.icon_color }}" stroke-width="1.5"/>
+                <rect x="3" y="14" width="7" height="7" rx="1.5" fill="{{ block.settings.icon_color }}" fill-opacity="0.2" stroke="{{ block.settings.icon_color }}" stroke-width="1.5"/>
+                <rect x="14" y="14" width="7" height="7" rx="1.5" fill="{{ block.settings.icon_color }}" fill-opacity="0.2" stroke="{{ block.settings.icon_color }}" stroke-width="1.5"/>
+                <circle cx="17.5" cy="6.5" r="1.5" fill="{{ block.settings.icon_color }}"/>
+              </svg>
+            {% when 'lightning' %}
+              <svg class="feature-icon-{{ section.id }}" viewBox="0 0 24 24" fill="none">
+                <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="{{ block.settings.icon_color }}" fill-opacity="0.2" stroke="{{ block.settings.icon_color }}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            {% when 'globe' %}
+              <svg class="feature-icon-{{ section.id }}" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="9" fill="{{ block.settings.icon_color }}" fill-opacity="0.2" stroke="{{ block.settings.icon_color }}" stroke-width="1.5"/>
+                <path d="M12 3C12 3 8 7 8 12C8 17 12 21 12 21" stroke="{{ block.settings.icon_color }}" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M12 3C12 3 16 7 16 12C16 17 12 21 12 21" stroke="{{ block.settings.icon_color }}" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M3 12H21" stroke="{{ block.settings.icon_color }}" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+          {% endcase %}
+        </div>
+        <div class="feature-content-{{ section.id }}">
+          <div class="feature-title-{{ section.id }}">{{ block.settings.title }}</div>
+          <div class="feature-description-{{ section.id }}">{{ block.settings.description }}</div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product Features Grid",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Container Settings"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border Color",
+      "default": "#e5e7eb"
+    },
+    {
+      "type": "color",
+      "id": "icon_bg_color",
+      "label": "Icon Container Background",
+      "default": "#111827"
+    },
+    {
+      "type": "header",
+      "content": "Text Colors"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#111827"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "#4b5563"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature Item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Icon Type",
+          "options": [
+            {
+              "value": "shield",
+              "label": "Shield (Security/Protection)"
+            },
+            {
+              "value": "apps",
+              "label": "Apps (Applications)"
+            },
+            {
+              "value": "lightning",
+              "label": "Lightning (Speed/Power)"
+            },
+            {
+              "value": "globe",
+              "label": "Globe (Universal/Global)"
+            }
+          ],
+          "default": "shield"
+        },
+        {
+          "type": "color",
+          "id": "icon_color",
+          "label": "Icon Color",
+          "default": "#ef4444"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Feature Title"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Feature description text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Features Grid",
+      "category": "Product",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "icon_type": "shield",
+            "icon_color": "#ef4444",
+            "title": "CarPlay & Android Auto",
+            "description": "Conexión inalámbrica instantánea"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon_type": "apps",
+            "icon_color": "#ef4444",
+            "title": "Apps Integradas",
+            "description": "Netflix, YouTube, Spotify y más"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon_type": "lightning",
+            "icon_color": "#ef4444",
+            "title": "Instalación Rápida",
+            "description": "Plug & Play en minutos"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon_type": "globe",
+            "icon_color": "#ef4444",
+            "title": "Compatibilidad Universal",
+            "description": "Funciona en todos los vehículos"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

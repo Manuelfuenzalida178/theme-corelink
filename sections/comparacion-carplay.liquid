@@ -1,0 +1,800 @@
+{% comment %}
+  Product Versus Comparison Section
+  Compatible with Shopify themes pre-2.0 (no schema tags)
+  
+  Instructions:
+  1. Upload to /sections/product-versus-comparison.liquid
+  2. Include in your product template with: {% section 'product-versus-comparison' %}
+  3. Customize images and text directly in this file
+{% endcomment %}
+
+<style>
+  .versus-comparison-section {
+    background-color: #f3f4f6;
+    padding: 4rem 0;
+  }
+  
+  .versus-container {
+    max-width: 1152px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  .versus-title-section {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .versus-title {
+    font-size: 1.875rem;
+    margin-bottom: 0.75rem;
+    color: #111827;
+    font-weight: 800;
+  }
+  
+  @media (min-width: 768px) {
+    .versus-title {
+      font-size: 2.25rem;
+    }
+  }
+  
+  .versus-subtitle {
+    font-size: 1rem;
+    color: #4b5563;
+  }
+  
+  .versus-grid {
+    display: grid;
+    gap: 1.5rem;
+    max-width: 1280px;
+    margin: 0 auto 2.5rem;
+  }
+  
+  @media (min-width: 768px) {
+    .versus-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  /* Our Product Card - Premium */
+  .versus-card-premium {
+    background: linear-gradient(to bottom right, #ffffff, #f9fafb);
+    border-radius: 1rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+    border: 2px solid #ef4444;
+  }
+  
+  .versus-card-header-premium {
+    text-align: center;
+    padding: 1.5rem 1rem 1rem;
+    background-color: rgba(239, 68, 68, 0.03);
+  }
+  
+  .versus-badge-premium {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.375rem 1rem;
+    border-radius: 9999px;
+    margin-bottom: 0.75rem;
+    background-color: #ef4444;
+  }
+  
+  .versus-badge-text-premium {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: white;
+    font-weight: 900;
+  }
+  
+  .versus-card-title-premium {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+    color: #111827;
+    font-weight: 800;
+  }
+  
+  .versus-card-desc {
+    font-size: 0.75rem;
+    color: #4b5563;
+  }
+  
+  .versus-image-container {
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    min-height: 200px;
+  }
+  
+  .versus-image-wrapper {
+    width: 100%;
+    max-width: 200px;
+  }
+  
+  .versus-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  .versus-features-list {
+    padding: 0 1.5rem 1.5rem;
+  }
+  
+  .versus-feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.625rem;
+    margin-bottom: 0.625rem;
+  }
+  
+  .versus-feature-icon-check {
+    flex-shrink: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.125rem;
+    background-color: #22c55e;
+  }
+  
+  .versus-feature-icon-x {
+    flex-shrink: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fee2e2;
+    margin-top: 0.125rem;
+  }
+  
+  .versus-feature-title-premium {
+    font-size: 0.875rem;
+    color: #111827;
+    font-weight: 700;
+    margin: 0 0 0.125rem 0;
+  }
+  
+  .versus-feature-desc {
+    font-size: 0.75rem;
+    color: #4b5563;
+    margin: 0;
+  }
+  
+  /* Competitor Card - Generic */
+  .versus-card-generic {
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+  }
+  
+  .versus-card-header-generic {
+    text-align: center;
+    padding: 1.5rem 1rem 1rem;
+    background-color: #f9fafb;
+  }
+  
+  .versus-badge-generic {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.375rem 1rem;
+    border-radius: 9999px;
+    margin-bottom: 0.75rem;
+    background-color: #e5e7eb;
+  }
+  
+  .versus-badge-text-generic {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #4b5563;
+    font-weight: 700;
+  }
+  
+  .versus-card-title-generic {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+    color: #374151;
+    font-weight: 700;
+  }
+  
+  .versus-image-wrapper-generic {
+    width: 100%;
+    max-width: 200px;
+    opacity: 0.75;
+  }
+  
+  .versus-feature-title-generic {
+    font-size: 0.875rem;
+    color: #4b5563;
+    font-weight: 700;
+    margin: 0 0 0.125rem 0;
+  }
+  
+  .versus-feature-desc-generic {
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin: 0;
+  }
+  
+  /* Bottom CTA */
+  .versus-cta {
+    text-align: center;
+  }
+  
+  .versus-cta-main {
+    font-size: 1rem;
+    color: #374151;
+    margin-bottom: 0.5rem;
+  }
+  
+  .versus-cta-highlight {
+    font-weight: 800;
+    color: #ef4444;
+  }
+  
+  .versus-cta-sub {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin: 0;
+  }
+  
+  /* SVG Icons */
+  .versus-icon {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+  
+  .versus-star-icon {
+    width: 0.875rem;
+    height: 0.875rem;
+    color: white;
+  }
+</style>
+
+<div class="versus-comparison-section">
+  <div class="versus-container">
+    
+    <!-- Title Section -->
+    <div class="versus-title-section">
+      <h2 class="versus-title">
+        {% if section.settings.section_title != blank %}
+          {{ section.settings.section_title }}
+        {% else %}
+          ¿Por Qué Elegir Nuestro Adaptador?
+        {% endif %}
+      </h2>
+      <p class="versus-subtitle">
+        {% if section.settings.section_subtitle != blank %}
+          {{ section.settings.section_subtitle }}
+        {% else %}
+          La diferencia es clara cuando comparas calidad premium vs. alternativas genéricas
+        {% endif %}
+      </p>
+    </div>
+
+    <!-- Comparison Cards -->
+    <div class="versus-grid">
+      
+      <!-- Our Product - Premium -->
+      <div class="versus-card-premium">
+        
+        <!-- Header -->
+        <div class="versus-card-header-premium">
+          <div class="versus-badge-premium">
+            <svg class="versus-star-icon" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+            </svg>
+            <span class="versus-badge-text-premium">Recomendado</span>
+          </div>
+          <h3 class="versus-card-title-premium">
+            {% if section.settings.our_product_title != blank %}
+              {{ section.settings.our_product_title }}
+            {% else %}
+              Nuestro Adaptador
+            {% endif %}
+          </h3>
+          <p class="versus-card-desc">
+            {% if section.settings.our_product_subtitle != blank %}
+              {{ section.settings.our_product_subtitle }}
+            {% else %}
+              Premium CarPlay Inalámbrico
+            {% endif %}
+          </p>
+        </div>
+
+        <!-- Product Image -->
+        <div class="versus-image-container">
+          <div class="versus-image-wrapper">
+            {% if section.settings.our_product_image != blank %}
+              <img 
+                src="{{ section.settings.our_product_image | img_url: 'master' }}"
+                alt="{{ section.settings.our_product_title | default: 'Nuestro Adaptador CarPlay Premium' }}"
+                class="versus-image"
+                loading="lazy"
+              />
+            {% else %}
+              <img 
+                src="https://cdn.shopify.com/s/files/1/0745/7505/2971/files/Diseno_sin_titulo_52.png?v=1767561657"
+                alt="Nuestro Adaptador CarPlay Premium"
+                class="versus-image"
+                loading="lazy"
+              />
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- Features List -->
+        <div class="versus-features-list">
+          
+          <div class="versus-feature-item">
+            <div class="versus-feature-icon-check">
+              <svg class="versus-icon" fill="none" stroke="white" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div>
+              <p class="versus-feature-title-premium">{{ section.settings.our_feature_1_title | default: "YouTube & Netflix Integrados" }}</p>
+              <p class="versus-feature-desc">{{ section.settings.our_feature_1_desc | default: "Streaming completo mientras conduces" }}</p>
+            </div>
+          </div>
+
+          <div class="versus-feature-item">
+            <div class="versus-feature-icon-check">
+              <svg class="versus-icon" fill="none" stroke="white" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div>
+              <p class="versus-feature-title-premium">{{ section.settings.our_feature_2_title | default: "Bluetooth Ultra Estable" }}</p>
+              <p class="versus-feature-desc">{{ section.settings.our_feature_2_desc | default: "Conexión sin cortes ni interrupciones" }}</p>
+            </div>
+          </div>
+
+          <div class="versus-feature-item">
+            <div class="versus-feature-icon-check">
+              <svg class="versus-icon" fill="none" stroke="white" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div>
+              <p class="versus-feature-title-premium">{{ section.settings.our_feature_3_title | default: "Sin Calentamiento" }}</p>
+              <p class="versus-feature-desc">{{ section.settings.our_feature_3_desc | default: "Tecnología de enfriamiento avanzada" }}</p>
+            </div>
+          </div>
+
+          <div class="versus-feature-item">
+            <div class="versus-feature-icon-check">
+              <svg class="versus-icon" fill="none" stroke="white" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div>
+              <p class="versus-feature-title-premium">{{ section.settings.our_feature_4_title | default: "Conexión Instantánea" }}</p>
+              <p class="versus-feature-desc">{{ section.settings.our_feature_4_desc | default: "Listo en menos de 3 segundos" }}</p>
+            </div>
+          </div>
+
+          <div class="versus-feature-item">
+            <div class="versus-feature-icon-check">
+              <svg class="versus-icon" fill="none" stroke="white" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div>
+              <p class="versus-feature-title-premium">{{ section.settings.our_feature_5_title | default: "Compatibilidad Total" }}</p>
+              <p class="versus-feature-desc">{{ section.settings.our_feature_5_desc | default: "Funciona con todos los iPhones y Android" }}</p>
+            </div>
+          </div>
+
+          <div class="versus-feature-item">
+            <div class="versus-feature-icon-check">
+              <svg class="versus-icon" fill="none" stroke="white" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div>
+              <p class="versus-feature-title-premium">{{ section.settings.our_feature_6_title | default: "Garantía Extendida" }}</p>
+              <p class="versus-feature-desc">{{ section.settings.our_feature_6_desc | default: "24 meses de protección completa" }}</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Competitor Product - Generic -->
+      <div class="versus-card-generic">
+        
+        <!-- Header -->
+        <div class="versus-card-header-generic">
+          <div class="versus-badge-generic">
+            <span class="versus-badge-text-generic">Estándar</span>
+          </div>
+          <h3 class="versus-card-title-generic">
+            {% if section.settings.competitor_title != blank %}
+              {{ section.settings.competitor_title }}
+            {% else %}
+              Adaptador Genérico
+            {% endif %}
+          </h3>
+          <p class="versus-card-desc">
+            {% if section.settings.competitor_subtitle != blank %}
+              {{ section.settings.competitor_subtitle }}
+            {% else %}
+              Alternativa Económica
+            {% endif %}
+          </p>
+        </div>
+
+        <!-- Product Image -->
+        <div class="versus-image-container">
+          <div class="versus-image-wrapper-generic">
+            {% if section.settings.competitor_image != blank %}
+              <img 
+                src="{{ section.settings.competitor_image | img_url: 'master' }}"
+                alt="{{ section.settings.competitor_title | default: 'Adaptador de la Competencia' }}"
+                class="versus-image"
+                loading="lazy"
+              />
+            {% else %}
+              <img 
+                src="https://cdn.shopify.com/s/files/1/0964/1384/3821/files/Ha04353be7ff34788847a209ef0787f4dR.jpg?v=1765005728"
+                alt="Adaptador de la Competencia"
+                class="versus-image"
+                loading="lazy"
+              />
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- Features List -->
+        <div class="versus-features-list">
+          
+          <div class="versus-feature-item">
+            <div class="versus-feature-icon-x">
+              <svg class="versus-icon" fill="none" stroke="#dc2626" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </div>
+            <div>
+              <p class="versus-feature-title-generic">{{ section.settings.comp_feature_1_title | default: "Sin Apps de Streaming" }}</p>
+              <p class="versus-feature-desc-generic">{{ section.settings.comp_feature_1_desc | default: "No incluye YouTube ni Netflix" }}</p>
+            </div>
+          </div>
+
+          <div class="versus-feature-item">
+            <div class="versus-feature-icon-x">
+              <svg class="versus-icon" fill="none" stroke="#dc2626" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </div>
+            <div>
+              <p class="versus-feature-title-generic">{{ section.settings.comp_feature_2_title | default: "Conexión Inestable" }}</p>
+              <p class="versus-feature-desc-generic">{{ section.settings.comp_feature_2_desc | default: "Frecuentes desconexiones y fallos" }}</p>
+            </div>
+          </div>
+
+          <div class="versus-feature-item">
+            <div class="versus-feature-icon-x">
+              <svg class="versus-icon" fill="none" stroke="#dc2626" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </div>
+            <div>
+              <p class="versus-feature-title-generic">{{ section.settings.comp_feature_3_title | default: "Se Sobrecalienta" }}</p>
+              <p class="versus-feature-desc-generic">{{ section.settings.comp_feature_3_desc | default: "Puede dañarse con uso prolongado" }}</p>
+            </div>
+          </div>
+
+          <div class="versus-feature-item">
+            <div class="versus-feature-icon-x">
+              <svg class="versus-icon" fill="none" stroke="#dc2626" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </div>
+            <div>
+              <p class="versus-feature-title-generic">{{ section.settings.comp_feature_4_title | default: "Conexión Lenta" }}</p>
+              <p class="versus-feature-desc-generic">{{ section.settings.comp_feature_4_desc | default: "Demora hasta 30 segundos en conectar" }}</p>
+            </div>
+          </div>
+
+          <div class="versus-feature-item">
+            <div class="versus-feature-icon-x">
+              <svg class="versus-icon" fill="none" stroke="#dc2626" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </div>
+            <div>
+              <p class="versus-feature-title-generic">{{ section.settings.comp_feature_5_title | default: "Compatibilidad Limitada" }}</p>
+              <p class="versus-feature-desc-generic">{{ section.settings.comp_feature_5_desc | default: "No funciona con todos los modelos" }}</p>
+            </div>
+          </div>
+
+          <div class="versus-feature-item">
+            <div class="versus-feature-icon-x">
+              <svg class="versus-icon" fill="none" stroke="#dc2626" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </div>
+            <div>
+              <p class="versus-feature-title-generic">{{ section.settings.comp_feature_6_title | default: "Garantía Básica" }}</p>
+              <p class="versus-feature-desc-generic">{{ section.settings.comp_feature_6_desc | default: "Solo 3-6 meses de cobertura" }}</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="versus-cta">
+      <p class="versus-cta-main">
+        {% if section.settings.cta_text != blank %}
+          {{ section.settings.cta_text }}
+        {% else %}
+          La elección es clara: <span class="versus-cta-highlight">Calidad que dura</span> vs. problemas constantes
+        {% endif %}
+      </p>
+      <p class="versus-cta-sub">
+        {% if section.settings.cta_subtext != blank %}
+          {{ section.settings.cta_subtext }}
+        {% else %}
+          Invierte en tecnología premium y olvídate de los dolores de cabeza
+        {% endif %}
+      </p>
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Comparación",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Configuración de Comparación"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Título Principal",
+      "default": "¿Por Qué Elegir Nuestro Adaptador?"
+    },
+    {
+      "type": "text",
+      "id": "section_subtitle",
+      "label": "Subtítulo",
+      "default": "La diferencia es clara cuando comparas calidad premium vs. alternativas genéricas"
+    },
+    {
+      "type": "header",
+      "content": "Nuestro Producto (Izquierda)"
+    },
+    {
+      "type": "text",
+      "id": "our_product_title",
+      "label": "Título",
+      "default": "Nuestro Adaptador"
+    },
+    {
+      "type": "text",
+      "id": "our_product_subtitle",
+      "label": "Subtítulo",
+      "default": "Premium CarPlay Inalámbrico"
+    },
+    {
+      "type": "image_picker",
+      "id": "our_product_image",
+      "label": "Imagen del Producto"
+    },
+    {
+      "type": "header",
+      "content": "Producto Competencia (Derecha)"
+    },
+    {
+      "type": "text",
+      "id": "competitor_title",
+      "label": "Título",
+      "default": "Adaptador Genérico"
+    },
+    {
+      "type": "text",
+      "id": "competitor_subtitle",
+      "label": "Subtítulo",
+      "default": "Alternativa Económica"
+    },
+    {
+      "type": "image_picker",
+      "id": "competitor_image",
+      "label": "Imagen del Competidor"
+    },
+    {
+      "type": "header",
+      "content": "CTA Final"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Texto Principal",
+      "default": "La elección es clara: Calidad que dura vs. problemas constantes"
+    },
+    {
+      "type": "text",
+      "id": "cta_subtext",
+      "label": "Texto Secundario",
+      "default": "Invierte en tecnología premium y olvídate de los dolores de cabeza"
+    },
+    {
+      "type": "header",
+      "content": "Características de Nuestro Producto"
+    },
+    {
+      "type": "text",
+      "id": "our_feature_1_title",
+      "label": "Título de la Característica 1",
+      "default": "YouTube & Netflix Integrados"
+    },
+    {
+      "type": "text",
+      "id": "our_feature_1_desc",
+      "label": "Descripción de la Característica 1",
+      "default": "Streaming completo mientras conduces"
+    },
+    {
+      "type": "text",
+      "id": "our_feature_2_title",
+      "label": "Título de la Característica 2",
+      "default": "Bluetooth Ultra Estable"
+    },
+    {
+      "type": "text",
+      "id": "our_feature_2_desc",
+      "label": "Descripción de la Característica 2",
+      "default": "Conexión sin cortes ni interrupciones"
+    },
+    {
+      "type": "text",
+      "id": "our_feature_3_title",
+      "label": "Título de la Característica 3",
+      "default": "Sin Calentamiento"
+    },
+    {
+      "type": "text",
+      "id": "our_feature_3_desc",
+      "label": "Descripción de la Característica 3",
+      "default": "Tecnología de enfriamiento avanzada"
+    },
+    {
+      "type": "text",
+      "id": "our_feature_4_title",
+      "label": "Título de la Característica 4",
+      "default": "Conexión Instantánea"
+    },
+    {
+      "type": "text",
+      "id": "our_feature_4_desc",
+      "label": "Descripción de la Característica 4",
+      "default": "Listo en menos de 3 segundos"
+    },
+    {
+      "type": "text",
+      "id": "our_feature_5_title",
+      "label": "Título de la Característica 5",
+      "default": "Compatibilidad Total"
+    },
+    {
+      "type": "text",
+      "id": "our_feature_5_desc",
+      "label": "Descripción de la Característica 5",
+      "default": "Funciona con todos los iPhones y Android"
+    },
+    {
+      "type": "text",
+      "id": "our_feature_6_title",
+      "label": "Título de la Característica 6",
+      "default": "Garantía Extendida"
+    },
+    {
+      "type": "text",
+      "id": "our_feature_6_desc",
+      "label": "Descripción de la Característica 6",
+      "default": "24 meses de protección completa"
+    },
+    {
+      "type": "header",
+      "content": "Características del Competidor"
+    },
+    {
+      "type": "text",
+      "id": "comp_feature_1_title",
+      "label": "Título de la Característica 1",
+      "default": "Sin Apps de Streaming"
+    },
+    {
+      "type": "text",
+      "id": "comp_feature_1_desc",
+      "label": "Descripción de la Característica 1",
+      "default": "No incluye YouTube ni Netflix"
+    },
+    {
+      "type": "text",
+      "id": "comp_feature_2_title",
+      "label": "Título de la Característica 2",
+      "default": "Conexión Inestable"
+    },
+    {
+      "type": "text",
+      "id": "comp_feature_2_desc",
+      "label": "Descripción de la Característica 2",
+      "default": "Frecuentes desconexiones y fallos"
+    },
+    {
+      "type": "text",
+      "id": "comp_feature_3_title",
+      "label": "Título de la Característica 3",
+      "default": "Se Sobrecalienta"
+    },
+    {
+      "type": "text",
+      "id": "comp_feature_3_desc",
+      "label": "Descripción de la Característica 3",
+      "default": "Puede dañarse con uso prolongado"
+    },
+    {
+      "type": "text",
+      "id": "comp_feature_4_title",
+      "label": "Título de la Característica 4",
+      "default": "Conexión Lenta"
+    },
+    {
+      "type": "text",
+      "id": "comp_feature_4_desc",
+      "label": "Descripción de la Característica 4",
+      "default": "Demora hasta 30 segundos en conectar"
+    },
+    {
+      "type": "text",
+      "id": "comp_feature_5_title",
+      "label": "Título de la Característica 5",
+      "default": "Compatibilidad Limitada"
+    },
+    {
+      "type": "text",
+      "id": "comp_feature_5_desc",
+      "label": "Descripción de la Característica 5",
+      "default": "No funciona con todos los modelos"
+    },
+    {
+      "type": "text",
+      "id": "comp_feature_6_title",
+      "label": "Título de la Característica 6",
+      "default": "Garantía Básica"
+    },
+    {
+      "type": "text",
+      "id": "comp_feature_6_desc",
+      "label": "Descripción de la Característica 6",
+      "default": "Solo 3-6 meses de cobertura"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comparación",
+      "category": "Producto"
+    }
+  ]
+}
+{% endschema %}

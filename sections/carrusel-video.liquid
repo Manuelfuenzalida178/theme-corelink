@@ -1,0 +1,569 @@
+{% comment %}
+  Sección de Carrusel de Videos
+  - Videos en formato vertical (9:16)
+  - Navegación por flechas en desktop
+  - Scroll táctil en móvil
+  - Textos editables y opcionales
+{% endcomment %}
+
+<style>
+  /* Reset agresivo y específico para Shopify */
+  .video-carousel-section-{{ section.id }} {
+    all: initial;
+    display: block !important;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif !important;
+    background: linear-gradient(to bottom, #F9FAFB, #FFFFFF) !important;
+    padding-top: {{ section.settings.padding_top_mobile }}px !important;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px !important;
+    position: relative !important;
+    width: 100% !important;
+  }
+
+  @media (min-width: 768px) {
+    .video-carousel-section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top_desktop }}px !important;
+      padding-bottom: {{ section.settings.padding_bottom_desktop }}px !important;
+    }
+  }
+
+  .video-carousel-container-{{ section.id }} {
+    max-width: 1600px !important;
+    margin: 0 auto !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    display: block !important;
+  }
+
+  @media (min-width: 768px) {
+    .video-carousel-container-{{ section.id }} {
+      padding-left: 1.5rem !important;
+      padding-right: 1.5rem !important;
+    }
+  }
+
+  /* Header Styles */
+  .video-carousel-header-{{ section.id }} {
+    margin-bottom: 2rem !important;
+    text-align: center !important;
+    display: block !important;
+  }
+
+  @media (min-width: 768px) {
+    .video-carousel-header-{{ section.id }} {
+      margin-bottom: 3.5rem !important;
+    }
+  }
+
+  .video-carousel-badge-{{ section.id }} {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 9999px !important;
+    background: rgba(0, 0, 0, 0.05) !important;
+    backdrop-filter: blur(4px) !important;
+    margin-bottom: 1rem !important;
+  }
+
+  @media (min-width: 768px) {
+    .video-carousel-badge-{{ section.id }} {
+      margin-bottom: 1.5rem !important;
+    }
+  }
+
+  .video-carousel-badge-dot-{{ section.id }} {
+    width: 0.5rem !important;
+    height: 0.5rem !important;
+    border-radius: 9999px !important;
+    background-color: #00D9FF !important;
+    animation: videoPulse{{ section.id }} 2s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
+    display: block !important;
+  }
+
+  @keyframes videoPulse{{ section.id }} {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  .video-carousel-badge-text-{{ section.id }} {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
+    color: #1F2937 !important;
+    line-height: 1 !important;
+  }
+
+  @media (min-width: 768px) {
+    .video-carousel-badge-text-{{ section.id }} {
+      font-size: 13px !important;
+    }
+  }
+
+  .video-carousel-title-{{ section.id }} {
+    font-size: 28px !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.03em !important;
+    line-height: 1.2 !important;
+    color: #000000 !important;
+    margin: 0 auto 0.75rem auto !important;
+    max-width: 48rem !important;
+    display: block !important;
+    padding: 0 !important;
+  }
+
+  @media (min-width: 768px) {
+    .video-carousel-title-{{ section.id }} {
+      font-size: 42px !important;
+      margin-bottom: 1rem !important;
+    }
+  }
+
+  .video-carousel-description-{{ section.id }} {
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    line-height: 1.6 !important;
+    color: #4B5563 !important;
+    max-width: 42rem !important;
+    margin: 0 auto !important;
+    display: block !important;
+    padding: 0 !important;
+  }
+
+  @media (min-width: 768px) {
+    .video-carousel-description-{{ section.id }} {
+      font-size: 18px !important;
+    }
+  }
+
+  .video-carousel-divider-{{ section.id }} {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.5rem !important;
+    margin-top: 1.5rem !important;
+  }
+
+  @media (min-width: 768px) {
+    .video-carousel-divider-{{ section.id }} {
+      margin-top: 2rem !important;
+    }
+  }
+
+  .video-carousel-divider-line-{{ section.id }} {
+    height: 2px !important;
+    width: 3rem !important;
+    display: block !important;
+  }
+
+  .video-carousel-divider-line-left-{{ section.id }} {
+    background: linear-gradient(to right, transparent, #00D9FF) !important;
+  }
+
+  .video-carousel-divider-line-right-{{ section.id }} {
+    background: linear-gradient(to left, transparent, #00D9FF) !important;
+  }
+
+  .video-carousel-divider-dot-{{ section.id }} {
+    width: 0.375rem !important;
+    height: 0.375rem !important;
+    border-radius: 9999px !important;
+    background-color: #00D9FF !important;
+    display: block !important;
+  }
+
+  /* Carousel Styles */
+  .video-carousel-wrapper-{{ section.id }} {
+    position: relative !important;
+    display: block !important;
+  }
+
+  .video-carousel-nav-button-{{ section.id }} {
+    display: none !important;
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 10 !important;
+    width: 3rem !important;
+    height: 3rem !important;
+    background-color: #FFFFFF !important;
+    border-radius: 9999px !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: 1px solid #E5E7EB !important;
+    cursor: pointer !important;
+    transition: all 0.2s !important;
+  }
+
+  @media (min-width: 1024px) {
+    .video-carousel-nav-button-{{ section.id }} {
+      display: flex !important;
+    }
+  }
+
+  .video-carousel-nav-button-{{ section.id }}:hover {
+    background-color: #F9FAFB !important;
+    transform: translateY(-50%) scale(1.1) !important;
+  }
+
+  .video-carousel-nav-left-{{ section.id }} {
+    left: -1.5rem !important;
+  }
+
+  .video-carousel-nav-right-{{ section.id }} {
+    right: -1.5rem !important;
+  }
+
+  .video-carousel-nav-icon-{{ section.id }} {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+    color: #000000 !important;
+    display: block !important;
+  }
+
+  .video-carousel-scroll-{{ section.id }} {
+    display: flex !important;
+    gap: 0.75rem !important;
+    overflow-x: auto !important;
+    scroll-behavior: smooth !important;
+    padding-bottom: 1rem !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+
+  .video-carousel-scroll-{{ section.id }}::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  @media (min-width: 768px) {
+    .video-carousel-scroll-{{ section.id }} {
+      gap: 1rem !important;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .video-carousel-scroll-{{ section.id }} {
+      gap: 1.5rem !important;
+    }
+  }
+
+  .video-carousel-item-{{ section.id }} {
+    position: relative !important;
+    flex-shrink: 0 !important;
+    width: 240px !important;
+    aspect-ratio: 9 / 16 !important;
+    border-radius: 1rem !important;
+    overflow: hidden !important;
+    background-color: #000000 !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+    display: block !important;
+  }
+
+  @media (min-width: 640px) {
+    .video-carousel-item-{{ section.id }} {
+      width: 336px !important;
+      border-radius: 1.5rem !important;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .video-carousel-item-{{ section.id }} {
+      width: calc(25% - 1.125rem) !important;
+      max-width: none !important;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .video-carousel-item-{{ section.id }} {
+      width: calc(25% - 1.125rem) !important;
+      max-width: none !important;
+    }
+  }
+
+  .video-carousel-thumbnail-{{ section.id }} {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+
+  .video-carousel-video-{{ section.id }} {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+</style>
+
+<div class="video-carousel-section-{{ section.id }}">
+  <div class="video-carousel-container-{{ section.id }}">
+    
+    <!-- Header -->
+    {% if section.settings.show_badge or section.settings.show_title or section.settings.show_description %}
+      <div class="video-carousel-header-{{ section.id }}">
+        
+        <!-- Badge -->
+        {% if section.settings.show_badge and section.settings.badge_text != blank %}
+          <div class="video-carousel-badge-{{ section.id }}">
+            <div class="video-carousel-badge-dot-{{ section.id }}"></div>
+            <span class="video-carousel-badge-text-{{ section.id }}">{{ section.settings.badge_text }}</span>
+          </div>
+        {% endif %}
+        
+        <!-- Title -->
+        {% if section.settings.show_title and section.settings.title != blank %}
+          <h2 class="video-carousel-title-{{ section.id }}">{{ section.settings.title }}</h2>
+        {% endif %}
+        
+        <!-- Description -->
+        {% if section.settings.show_description and section.settings.description != blank %}
+          <p class="video-carousel-description-{{ section.id }}">{{ section.settings.description }}</p>
+        {% endif %}
+        
+        <!-- Decorative Divider -->
+        {% if section.settings.show_divider %}
+          <div class="video-carousel-divider-{{ section.id }}">
+            <div class="video-carousel-divider-line-{{ section.id }} video-carousel-divider-line-left-{{ section.id }}"></div>
+            <div class="video-carousel-divider-dot-{{ section.id }}"></div>
+            <div class="video-carousel-divider-line-{{ section.id }} video-carousel-divider-line-right-{{ section.id }}"></div>
+          </div>
+        {% endif %}
+        
+      </div>
+    {% endif %}
+
+    <!-- Carousel -->
+    <div class="video-carousel-wrapper-{{ section.id }}">
+      
+      <!-- Navigation Arrows -->
+      <button 
+        class="video-carousel-nav-button-{{ section.id }} video-carousel-nav-left-{{ section.id }}"
+        onclick="scrollVideoCarousel{{ section.id }}('left')"
+        aria-label="Anterior"
+      >
+        <svg class="video-carousel-nav-icon-{{ section.id }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+      </button>
+
+      <button 
+        class="video-carousel-nav-button-{{ section.id }} video-carousel-nav-right-{{ section.id }}"
+        onclick="scrollVideoCarousel{{ section.id }}('right')"
+        aria-label="Siguiente"
+      >
+        <svg class="video-carousel-nav-icon-{{ section.id }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+      </button>
+
+      <!-- Videos -->
+      <div class="video-carousel-scroll-{{ section.id }}" id="videoCarouselScroll{{ section.id }}">
+        {% for block in section.blocks %}
+          <div class="video-carousel-item-{{ section.id }}">
+            {% if block.settings.video_url != blank %}
+              <!-- Video con URL -->
+              <video 
+                class="video-carousel-video-{{ section.id }}"
+                autoplay
+                muted
+                loop
+                playsinline
+                poster="{% if block.settings.video_thumbnail != blank %}{{ block.settings.video_thumbnail | image_url: width: 1080 }}{% endif %}"
+              >
+                <source src="{{ block.settings.video_url }}" type="video/mp4">
+                Tu navegador no soporta videos HTML5.
+              </video>
+            {% elsif block.settings.video_thumbnail != blank %}
+              <!-- Imagen fallback -->
+              <img 
+                src="{{ block.settings.video_thumbnail | image_url: width: 1080 }}" 
+                alt="Video {{ forloop.index }}"
+                class="video-carousel-thumbnail-{{ section.id }}"
+                loading="lazy"
+              >
+            {% else %}
+              <!-- Placeholder si no hay nada -->
+              <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: block;"></div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  function scrollVideoCarousel{{ section.id }}(direction) {
+    const container = document.getElementById('videoCarouselScroll{{ section.id }}');
+    if (!container) return;
+    
+    // Calcular el ancho de scroll basado en el ancho del contenedor
+    const containerWidth = container.offsetWidth;
+    const scrollAmount = containerWidth * 0.75; // Desplaza 75% del ancho visible
+    
+    const newScrollLeft = direction === 'left' 
+      ? container.scrollLeft - scrollAmount
+      : container.scrollLeft + scrollAmount;
+    
+    container.scrollTo({
+      left: newScrollLeft,
+      behavior: 'smooth'
+    });
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Carrusel de Videos",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Espaciado"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Padding superior (móvil)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Padding inferior (móvil)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "label": "Padding superior (desktop)",
+      "min": 0,
+      "max": 144,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "label": "Padding inferior (desktop)",
+      "min": 0,
+      "max": 144,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "header",
+      "content": "Badge"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Mostrar badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Texto del badge",
+      "default": "Testimonios Reales"
+    },
+    {
+      "type": "header",
+      "content": "Título"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_title",
+      "label": "Mostrar título",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Innovación Premium en Cada Detalle"
+    },
+    {
+      "type": "header",
+      "content": "Descripción"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "Mostrar descripción",
+      "default": true
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Descripción",
+      "default": "Tecnología de vanguardia respaldada por miles de conductores satisfechos"
+    },
+    {
+      "type": "header",
+      "content": "Línea decorativa"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_divider",
+      "label": "Mostrar línea decorativa",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Video",
+      "settings": [
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "URL del video (MP4)",
+          "info": "URL del archivo de video MP4. Ejemplo: https://cdn.shopify.com/s/files/1/xxxxx/files/video.mp4"
+        },
+        {
+          "type": "image_picker",
+          "id": "video_thumbnail",
+          "label": "Imagen de portada",
+          "info": "Imagen que se muestra mientras carga el video o como alternativa si no hay URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Carrusel de Videos",
+      "blocks": [
+        {
+          "type": "video"
+        },
+        {
+          "type": "video"
+        },
+        {
+          "type": "video"
+        },
+        {
+          "type": "video"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

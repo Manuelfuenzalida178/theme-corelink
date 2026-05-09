@@ -1,0 +1,246 @@
+{% comment %}
+  Specifications Section - Shopify Liquid
+  Compatible with Tailwind CSS
+{% endcomment %}
+
+<div class="bg-white" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+  <div class="max-w-6xl mx-auto px-4">
+    {%- if section.settings.title != blank -%}
+      <h2 class="text-3xl md:text-4xl text-center mb-3 text-gray-900">
+        {{ section.settings.title }}
+      </h2>
+    {%- endif -%}
+    
+    {%- if section.settings.description != blank -%}
+      <p class="text-center text-gray-500 mb-16 max-w-2xl mx-auto">
+        {{ section.settings.description }}
+      </p>
+    {%- endif -%}
+
+    <!-- Gray Container Table -->
+    <div class="bg-gray-50 rounded-3xl p-5 md:p-10 border border-gray-200">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-8">
+        <!-- Producto -->
+        <div class="flex flex-col items-center text-center">
+          <div class="w-12 h-12 rounded-2xl bg-black flex items-center justify-center flex-shrink-0 mb-3">
+            <svg class="w-6 h-6" fill="none" stroke="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 7H4M4 7V19C4 19.5304 4.21071 20.0391 4.58579 20.4142C4.96086 20.7893 5.46957 21 6 21H18C18.5304 21 19.0391 20.7893 19.4142 20.4142C19.7893 20.0391 20 19.5304 20 19V7M4 7L6 3H18L20 7M10 11H14" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="text-xs uppercase tracking-widest mb-1.5 text-gray-400">Producto</h3>
+          <p class="text-sm text-gray-900 mb-0.5">CyberDock™</p>
+          <p class="text-xs text-gray-500">3-en-1</p>
+        </div>
+
+        <!-- Dimensiones -->
+        <div class="flex flex-col items-center text-center">
+          <div class="w-12 h-12 rounded-2xl bg-black flex items-center justify-center flex-shrink-0 mb-3">
+            <svg class="w-6 h-6" fill="none" stroke="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7 4V16M7 4L3 8M7 4L11 8M17 20V8M17 20L21 16M17 20L13 16M4 12H20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="text-xs uppercase tracking-widest mb-1.5 text-gray-400">Dimensiones</h3>
+          <p class="text-sm text-gray-900 mb-0.5">205×76×97mm</p>
+          <p class="text-xs text-gray-500">Compacto</p>
+        </div>
+
+        <!-- Material -->
+        <div class="flex flex-col items-center text-center">
+          <div class="w-12 h-12 rounded-2xl bg-black flex items-center justify-center flex-shrink-0 mb-3">
+            <svg class="w-6 h-6" fill="none" stroke="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 12L11 14L15 10M20.618 5.984C19.807 5.343 18.803 5 17.764 5C17.139 5 16.527 5.148 15.972 5.433C14.862 6.003 13.947 7 13.947 7C13.947 7 13.032 6.003 11.922 5.433C11.367 5.148 10.755 5 10.13 5C9.091 5 8.087 5.343 7.276 5.984C5.655 7.265 5.562 9.467 6.764 10.882L12 16.5L17.236 10.882C18.438 9.467 18.345 7.265 16.724 5.984H20.618Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 22C17.523 22 22 17.523 22 12C22 6.477 17.523 2 12 2C6.477 2 2 6.477 2 12C2 17.523 6.477 22 12 22Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="text-xs uppercase tracking-widest mb-1.5 text-gray-400">Material</h3>
+          <p class="text-sm text-gray-900 mb-0.5">ABS + PC</p>
+          <p class="text-xs text-gray-500">Premium</p>
+        </div>
+
+        <!-- Peso -->
+        <div class="flex flex-col items-center text-center">
+          <div class="w-12 h-12 rounded-2xl bg-black flex items-center justify-center flex-shrink-0 mb-3">
+            <svg class="w-6 h-6" fill="none" stroke="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 7V17C3 17.5304 3.21071 18.0391 3.58579 18.4142C3.96086 18.7893 4.46957 19 5 19H19C19.5304 19 20.0391 18.7893 20.4142 18.4142C20.7893 18.0391 21 17.5304 21 17V7M3 7L5 3H19L21 7M3 7H21M8 11H16" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="text-xs uppercase tracking-widest mb-1.5 text-gray-400">Peso</h3>
+          <p class="text-sm text-gray-900 mb-0.5">362 g</p>
+          <p class="text-xs text-gray-500">Ultraligero</p>
+        </div>
+
+        <!-- Entrada -->
+        <div class="flex flex-col items-center text-center">
+          <div class="w-12 h-12 rounded-2xl bg-black flex items-center justify-center flex-shrink-0 mb-3">
+            <svg class="w-6 h-6" fill="none" stroke="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M13 10V3L4 14H11V21L20 10H13Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="text-xs uppercase tracking-widest mb-1.5 text-gray-400">Entrada</h3>
+          <p class="text-sm text-gray-900 mb-0.5">9V⎓3A</p>
+          <p class="text-xs text-gray-500">27W máx</p>
+        </div>
+
+        <!-- iPhone -->
+        <div class="flex flex-col items-center text-center">
+          <div class="w-12 h-12 rounded-2xl bg-black flex items-center justify-center flex-shrink-0 mb-3">
+            <svg class="w-6 h-6" fill="none" stroke="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <rect x="7" y="3" width="10" height="18" rx="2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M10 6H14" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="text-xs uppercase tracking-widest mb-1.5 text-gray-400">iPhone</h3>
+          <p class="text-sm text-gray-900 mb-0.5">15W</p>
+          <p class="text-xs text-gray-500">MagSafe</p>
+        </div>
+
+        <!-- AirPods -->
+        <div class="flex flex-col items-center text-center">
+          <div class="w-12 h-12 rounded-2xl bg-black flex items-center justify-center flex-shrink-0 mb-3">
+            <svg class="w-6 h-6" fill="none" stroke="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="12" width="12" height="8" rx="2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M9 12V8C9 7.44772 9.44772 7 10 7H14C14.5523 7 15 7.44772 15 8V12" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="9.5" cy="16" r="0.5" fill="white"/>
+              <circle cx="14.5" cy="16" r="0.5" fill="white"/>
+            </svg>
+          </div>
+          <h3 class="text-xs uppercase tracking-widest mb-1.5 text-gray-400">AirPods</h3>
+          <p class="text-sm text-gray-900 mb-0.5">5W</p>
+          <p class="text-xs text-gray-500">Qi</p>
+        </div>
+
+        <!-- Apple Watch -->
+        <div class="flex flex-col items-center text-center">
+          <div class="w-12 h-12 rounded-2xl bg-black flex items-center justify-center flex-shrink-0 mb-3">
+            <svg class="w-6 h-6" fill="none" stroke="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <rect x="8" y="6" width="8" height="12" rx="3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M11 5H13M11 19H13" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="12" cy="12" r="2.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="text-xs uppercase tracking-widest mb-1.5 text-gray-400">Apple Watch</h3>
+          <p class="text-sm text-gray-900 mb-0.5">2.5W</p>
+          <p class="text-xs text-gray-500">Rápida</p>
+        </div>
+      </div>
+
+      <!-- What's Included Section -->
+      <div class="mt-8 pt-8 border-t border-gray-300">
+        <h3 class="text-center text-xs uppercase tracking-widest mb-5 text-gray-400">Contenido del Paquete</h3>
+        <div class="grid grid-cols-2 gap-5 max-w-2xl mx-auto">
+          <div class="flex flex-col items-center text-center gap-3">
+            <div class="w-11 h-11 rounded-xl bg-black flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm md:text-base text-gray-900">1× CyberDock™</p>
+              <p class="text-xs text-gray-500">Base 3-en-1</p>
+            </div>
+          </div>
+          <div class="flex flex-col items-center text-center gap-3">
+            <div class="w-11 h-11 rounded-xl bg-black flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm md:text-base text-gray-900">1× Cable USB-C</p>
+              <p class="text-xs text-gray-500">1.2m longitud</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Fallback styles if Tailwind is not available */
+  .bg-white { background-color: #ffffff; }
+  .bg-black { background-color: #000000; }
+  .bg-gray-50 { background-color: #f9fafb; }
+  .text-white { color: #ffffff; }
+  .text-gray-400 { color: #9ca3af; }
+  .text-gray-500 { color: #6b7280; }
+  .text-gray-900 { color: #111827; }
+  .border-gray-200 { border-color: #e5e7eb; }
+  .border-gray-300 { border-color: #d1d5db; }
+  
+  .max-w-2xl { max-width: 42rem; }
+  .max-w-6xl { max-width: 72rem; }
+  .mx-auto { margin-left: auto; margin-right: auto; }
+  
+  .rounded-xl { border-radius: 0.75rem; }
+  .rounded-2xl { border-radius: 1rem; }
+  .rounded-3xl { border-radius: 1.5rem; }
+  
+  .uppercase { text-transform: uppercase; }
+  .tracking-widest { letter-spacing: 0.1em; }
+  
+  .grid { display: grid; }
+  .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  
+  .flex { display: flex; }
+  .flex-col { flex-direction: column; }
+  .items-center { align-items: center; }
+  .justify-center { justify-content: center; }
+  .text-center { text-align: center; }
+  
+  .border { border-width: 1px; }
+  .border-t { border-top-width: 1px; }
+  
+  @media (min-width: 768px) {
+    .md\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .md\:p-10 { padding: 2.5rem; }
+    .md\:gap-8 { gap: 2rem; }
+    .md\:text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+    .md\:text-base { font-size: 1rem; line-height: 1.5rem; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Especificaciones Técnicas",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Especificaciones Técnicas"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Descripción",
+      "default": "Diseñado con materiales premium y tecnología de carga avanzada para tu ecosistema Apple"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Superior",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Inferior",
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "Especificaciones Técnicas"
+    }
+  ]
+}
+{% endschema %}s

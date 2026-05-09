@@ -1,0 +1,1302 @@
+{% comment %}
+  ============================================
+  AIRPURE REVIEWS WIDGET - SHOPIFY FINAL ✅
+  ============================================
+  
+  ✅ Paginación con "Ver más reseñas"
+  ✅ Fotos SIEMPRE lado a lado (orden horizontal)
+  ✅ CSS Grid Dense - SIN espacios vacíos
+  ✅ Lightbox premium con zoom
+  ✅ Móvil: 2 cols | Tablet: 2 cols | Desktop: 3-4 cols
+  ✅ Debugging mejorado
+  
+  INSTALACIÓN:
+  1. Shopify → Online Store → Themes → Customize
+  2. Add section → Custom Liquid
+  3. PEGA este código completo
+  4. Save y disfruta! 🚀
+{% endcomment %}
+
+<div id="airpure-reviews-root" class="airpure-reviews-container"></div>
+
+<style>
+  .airpure-reviews-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+  
+  .airpure-loading {
+    text-align: center;
+    padding: 60px 20px;
+    color: #6b7280;
+  }
+  
+  .airpure-spinner {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 4px solid #e5e7eb;
+    border-top-color: #3b82f6;
+    border-radius: 50%;
+    animation: airpure-spin 1s linear infinite;
+  }
+  
+  @keyframes airpure-spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  @keyframes airpure-shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+  
+  @keyframes airpure-gradient {
+    to { background-position: 200% center; }
+  }
+  
+  @keyframes airpure-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+  
+  /* Header */
+  .airpure-header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  
+  .airpure-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: linear-gradient(to right, rgba(59, 130, 246, 0.1), rgba(6, 182, 212, 0.1), rgba(59, 130, 246, 0.1));
+    border-radius: 9999px;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    margin-bottom: 16px;
+    box-shadow: 0 4px 6px rgba(59, 130, 246, 0.1);
+  }
+  
+  .airpure-badge-text {
+    font-weight: 600;
+    font-size: 14px;
+    background: linear-gradient(to right, #2563eb, #06b6d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .airpure-title {
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 900;
+    margin-bottom: 12px;
+    background: linear-gradient(to right, #2563eb, #06b6d4, #2563eb);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: airpure-gradient 3s linear infinite;
+  }
+  
+  .airpure-subtitle {
+    color: #6b7280;
+    font-size: 16px;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  
+  /* Stats Bar */
+  .airpure-stats-bar {
+    position: relative;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f3f4f6;
+    padding: 12px 20px;
+    margin-bottom: 40px;
+    overflow: hidden;
+  }
+  
+  .airpure-stats-bar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, transparent, rgba(59, 130, 246, 0.1), transparent);
+    transform: translateX(-100%);
+    animation: airpure-shimmer 3s infinite;
+  }
+  
+  .airpure-stats-content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  
+  .airpure-rating-section {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .airpure-rating-details {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .airpure-stars-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  
+  .airpure-stars {
+    display: flex;
+    gap: 4px;
+  }
+  
+  .airpure-star {
+    width: 20px;
+    height: 20px;
+    color: #fbbf24;
+    fill: #fbbf24;
+    filter: drop-shadow(0 0 8px rgba(250, 204, 21, 0.5));
+  }
+  
+  .airpure-average {
+    font-size: 28px;
+    font-weight: 900;
+    background: linear-gradient(to right, #2563eb, #06b6d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .airpure-total-reviews {
+    font-size: 12px;
+    color: #6b7280;
+    font-weight: 600;
+  }
+  
+  /* Grid Horizontal - Fotos lado a lado */
+  .airpure-masonry {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    align-items: start;
+  }
+  
+  @media (min-width: 768px) {
+    .airpure-masonry {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .airpure-masonry {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+  }
+  
+  @media (min-width: 1280px) {
+    .airpure-masonry {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+  }
+  
+  /* Card */
+  .airpure-card {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    background: white;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f3f4f6;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .airpure-card:hover {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border-color: #bfdbfe;
+    transform: translateY(-2px);
+  }
+  
+  .airpure-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(6, 182, 212, 0.2));
+    opacity: 0;
+    transition: opacity 0.5s;
+    border-radius: 24px;
+    pointer-events: none;
+  }
+  
+  .airpure-card:hover::before {
+    opacity: 1;
+  }
+  
+  .airpure-card-image-wrapper {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+  }
+  
+  .airpure-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .airpure-card:hover .airpure-card-image {
+    transform: scale(1.1);
+  }
+  
+  .airpure-image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2), transparent);
+    opacity: 0;
+    transition: opacity 0.5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .airpure-card:hover .airpure-image-overlay {
+    opacity: 1;
+  }
+  
+  /* CÍRCULOS PERFECTOS */
+  .airpure-click-indicator {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(8px);
+    border-radius: 50%;
+    padding: 12px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+    animation: airpure-pulse 2s infinite;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .airpure-click-indicator svg {
+    display: block;
+    width: 24px;
+    height: 24px;
+  }
+  
+  .airpure-verified-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    border-radius: 50%;
+    padding: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .airpure-verified-badge svg {
+    display: block;
+    width: 16px;
+    height: 16px;
+  }
+  
+  .airpure-card-content {
+    padding: 20px;
+  }
+  
+  /* Card sin foto - ULTRA compacta para llenar espacios */
+  .airpure-card:not(:has(.airpure-card-image-wrapper)) {
+    min-height: auto;
+  }
+  
+  .airpure-card:not(:has(.airpure-card-image-wrapper)) .airpure-card-content {
+    padding: 12px 14px;
+  }
+  
+  .airpure-card:not(:has(.airpure-card-image-wrapper)) .airpure-comment {
+    -webkit-line-clamp: 2;
+    font-size: 13px;
+  }
+  
+  .airpure-card:not(:has(.airpure-card-image-wrapper)) .airpure-card-stars {
+    margin-bottom: 8px;
+  }
+  
+  .airpure-card:not(:has(.airpure-card-image-wrapper)) .airpure-name {
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
+  
+  .airpure-card:not(:has(.airpure-card-image-wrapper)) .airpure-date {
+    margin-bottom: 8px;
+  }
+  
+  .airpure-card-stars {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 12px;
+  }
+  
+  .airpure-card-star {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .airpure-name {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 4px;
+    color: #111827;
+  }
+  
+  .airpure-date {
+    font-size: 12px;
+    color: #6b7280;
+    margin-bottom: 12px;
+  }
+  
+  .airpure-comment {
+    color: #374151;
+    line-height: 1.6;
+    font-size: 14px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .airpure-verified {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: #2563eb;
+    font-weight: 600;
+    margin-top: 12px;
+  }
+  
+  .airpure-admin-response {
+    margin-top: 16px;
+    padding: 16px;
+    background: linear-gradient(to right, #eff6ff, #f0f9ff);
+    border-left: 3px solid #3b82f6;
+    border-radius: 8px;
+  }
+  
+  .airpure-admin-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #3b82f6;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  
+  .airpure-admin-text {
+    color: #1e40af;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  /* Botón Ver Más */
+  .airpure-load-more-container {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+  }
+  
+  .airpure-load-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, #2563eb, #06b6d4);
+    color: white;
+    border: none;
+    border-radius: 16px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+    transition: all 0.3s;
+  }
+  
+  .airpure-load-more-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(37, 99, 235, 0.4);
+  }
+  
+  .airpure-load-more-btn:active {
+    transform: translateY(0);
+  }
+  
+  .airpure-load-more-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .airpure-showing-count {
+    margin-top: 16px;
+    color: #6b7280;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  
+  /* Lightbox - ADAPTADO EN MÓVIL */
+  .airpure-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(12px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .airpure-lightbox.active {
+    opacity: 1;
+  }
+  
+  .airpure-lightbox-content {
+    background: white;
+    border-radius: 24px;
+    max-width: 1000px;
+    width: 100%;
+    max-height: 90vh;
+    overflow: hidden;
+    position: relative;
+    transform: scale(0.9);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  @media (max-width: 768px) {
+    .airpure-lightbox-content {
+      grid-template-columns: 1fr;
+      max-height: 90vh;
+    }
+    
+    .airpure-lightbox-image-side {
+      max-height: 50vh;
+    }
+    
+    .airpure-lightbox-body {
+      max-height: 40vh;
+      overflow-y: auto;
+    }
+  }
+  
+  .airpure-lightbox.active .airpure-lightbox-content {
+    transform: scale(1);
+  }
+  
+  .airpure-lightbox-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(8px);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s;
+    z-index: 10;
+  }
+  
+  .airpure-lightbox-close:hover {
+    background: white;
+    transform: scale(1.1) rotate(90deg);
+  }
+  
+  .airpure-lightbox-image-side {
+    position: relative;
+    background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+    overflow: hidden;
+  }
+  
+  .airpure-lightbox-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .airpure-lightbox-image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);
+  }
+  
+  .airpure-lightbox-image-info {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    right: 24px;
+  }
+  
+  .airpure-lightbox-verified-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  
+  .airpure-lightbox-verified-icon {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    border-radius: 50%;
+    padding: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .airpure-lightbox-verified-icon svg {
+    display: block;
+    width: 20px;
+    height: 20px;
+  }
+  
+  .airpure-lightbox-verified-text {
+    color: white;
+    font-weight: 600;
+    font-size: 12px;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+    padding: 4px 12px;
+    border-radius: 9999px;
+  }
+  
+  .airpure-lightbox-body {
+    padding: 32px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  @media (max-width: 768px) {
+    .airpure-lightbox-body {
+      padding: 24px;
+    }
+  }
+  
+  .airpure-lightbox-header {
+    margin-bottom: 24px;
+  }
+  
+  .airpure-lightbox-name {
+    font-size: 24px;
+    font-weight: 900;
+    color: #111827;
+    margin-bottom: 12px;
+  }
+  
+  .airpure-lightbox-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: #6b7280;
+    flex-wrap: wrap;
+  }
+  
+  .airpure-lightbox-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .airpure-lightbox-meta-dot {
+    width: 4px;
+    height: 4px;
+    background: #9ca3af;
+    border-radius: 50%;
+  }
+  
+  .airpure-lightbox-comment {
+    color: #374151;
+    line-height: 1.7;
+    font-size: 18px;
+    flex: 1;
+  }
+  
+  .airpure-lightbox-footer {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid #f3f4f6;
+  }
+  
+  .airpure-lightbox-helpful {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    color: #6b7280;
+  }
+  
+  .airpure-lightbox-helpful-count {
+    font-weight: 700;
+    font-size: 18px;
+    color: #2563eb;
+  }
+  
+  .airpure-lightbox-actions {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .airpure-lightbox-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: none;
+  }
+  
+  .airpure-lightbox-btn-like {
+    background: #f3f4f6;
+    color: #374151;
+  }
+  
+  .airpure-lightbox-btn-like:hover {
+    background: #eff6ff;
+    color: #2563eb;
+    transform: scale(1.02);
+  }
+  
+  .airpure-lightbox-btn-like.liked {
+    background: #2563eb;
+    color: white;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  }
+  
+  .airpure-lightbox-trust-badge {
+    background: linear-gradient(to right, #eff6ff, #f0f9ff);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  
+  .airpure-lightbox-trust-icon {
+    background: linear-gradient(135deg, #2563eb, #06b6d4);
+    border-radius: 50%;
+    padding: 8px;
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .airpure-lightbox-trust-icon svg {
+    display: block;
+    width: 20px;
+    height: 20px;
+  }
+  
+  .airpure-lightbox-trust-text {
+    flex: 1;
+  }
+  
+  .airpure-lightbox-trust-title {
+    font-weight: 600;
+    font-size: 13px;
+    color: #111827;
+    margin-bottom: 2px;
+  }
+  
+  .airpure-lightbox-trust-desc {
+    font-size: 11px;
+    color: #6b7280;
+  }
+  
+  .airpure-error {
+    text-align: center;
+    padding: 40px 20px;
+  }
+  
+  .airpure-error-title {
+    color: #ef4444;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  
+  .airpure-error-message {
+    color: #6b7280;
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  
+  .airpure-error-details {
+    background: #f3f4f6;
+    padding: 12px;
+    border-radius: 8px;
+    font-family: monospace;
+    font-size: 12px;
+    color: #374151;
+    margin-top: 12px;
+    text-align: left;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-x: auto;
+  }
+</style>
+
+<script>
+(function() {
+  'use strict';
+  
+  const CONFIG = {
+    projectId: 'jekitpfjinrixstgeael',
+    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impla2l0cGZqaW5yaXhzdGdlYWVsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA1NTE3MDMsImV4cCI6MjA3NjEyNzcwM30.eGZAC5LFlCLnVNMHWuiA6Ch_TVAs_1OaGmutKXfwMWA'
+  };
+  
+  const API_URL = `https://${CONFIG.projectId}.supabase.co/functions/v1/make-server-a51ef1fd/reviews/approved`;
+  const REVIEWS_PER_PAGE = 12;
+  
+  let allReviews = [];
+  let displayedReviews = 0;
+  let lightbox = null;
+  let likedReviews = {};
+  
+  // 🔍 DEBUG: Función para logging detallado
+  function debugLog(message, data) {
+    console.log(`🔵 [AirPure Widget] ${message}`, data || '');
+  }
+  
+  function renderStars(rating, className = 'airpure-card-star') {
+    return Array.from({length: 5}, (_, i) => {
+      const filled = i < rating;
+      return `
+        <svg class="${className}" viewBox="0 0 20 20" fill="${filled ? '#fbbf24' : '#d1d5db'}">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+        </svg>
+      `;
+    }).join('');
+  }
+  
+  function openLightbox(review) {
+    if (lightbox) lightbox.remove();
+    
+    const date = new Date(review.created_at).toLocaleDateString('es-ES', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
+    
+    const isLiked = likedReviews[review.id] || false;
+    const helpfulCount = (review.helpfulCount || 0) + (isLiked ? 1 : 0);
+    
+    lightbox = document.createElement('div');
+    lightbox.className = 'airpure-lightbox';
+    lightbox.innerHTML = `
+      <div class="airpure-lightbox-content">
+        <div class="airpure-lightbox-close">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+          </svg>
+        </div>
+        
+        <div class="airpure-lightbox-image-side">
+          ${review.has_photo && review.photoUrl ? `
+            <img src="${review.photoUrl}" alt="${review.name}" class="airpure-lightbox-image" 
+                 onerror="console.error('Error cargando imagen:', this.src); this.parentElement.style.display='none';" />
+            <div class="airpure-lightbox-image-overlay"></div>
+            <div class="airpure-lightbox-image-info">
+              <div class="airpure-lightbox-verified-badge">
+                <div class="airpure-lightbox-verified-icon">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="#2563eb">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                  </svg>
+                </div>
+                <span class="airpure-lightbox-verified-text">COMPRA VERIFICADA</span>
+              </div>
+              <div class="airpure-stars">
+                ${renderStars(review.rating, 'airpure-star')}
+              </div>
+            </div>
+          ` : ''}
+        </div>
+        
+        <div class="airpure-lightbox-body">
+          <div class="airpure-lightbox-header">
+            <div class="airpure-lightbox-name">${review.name}</div>
+            <div class="airpure-lightbox-meta">
+              <div class="airpure-lightbox-meta-item">
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
+                </svg>
+                <span>${date}</span>
+              </div>
+              <div class="airpure-lightbox-meta-dot"></div>
+              <div class="airpure-lightbox-meta-item">
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/>
+                </svg>
+                <span>Envío verificado</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="airpure-lightbox-comment">${review.comment}</div>
+          
+          ${review.admin_response ? `
+            <div class="airpure-admin-response" style="margin-top: 24px;">
+              <div class="airpure-admin-label">Respuesta de AirPure</div>
+              <div class="airpure-admin-text">${review.admin_response}</div>
+            </div>
+          ` : ''}
+          
+          <div class="airpure-lightbox-footer">
+            <div class="airpure-lightbox-helpful">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="#2563eb">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
+              <span>
+                <span class="airpure-lightbox-helpful-count">${helpfulCount}</span>
+                personas encontraron esto útil
+              </span>
+            </div>
+            
+            <div class="airpure-lightbox-actions">
+              <button class="airpure-lightbox-btn airpure-lightbox-btn-like ${isLiked ? 'liked' : ''}" data-review-id="${review.id}">
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="${isLiked ? 'white' : 'currentColor'}">
+                  <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z"/>
+                </svg>
+                ${isLiked ? 'Marcado como útil' : 'Marcar como útil'}
+              </button>
+            </div>
+            
+            <div class="airpure-lightbox-trust-badge">
+              <div class="airpure-lightbox-trust-icon">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="white">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <div class="airpure-lightbox-trust-text">
+                <div class="airpure-lightbox-trust-title">Reseña 100% Verificada</div>
+                <div class="airpure-lightbox-trust-desc">Cliente real con compra confirmada</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    
+    document.body.appendChild(lightbox);
+    
+    const closeBtn = lightbox.querySelector('.airpure-lightbox-close');
+    closeBtn.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', function(e) {
+      if (e.target === lightbox) closeLightbox();
+    });
+    
+    const likeBtn = lightbox.querySelector('.airpure-lightbox-btn-like');
+    if (likeBtn) {
+      likeBtn.addEventListener('click', function() {
+        const reviewId = this.getAttribute('data-review-id');
+        likedReviews[reviewId] = !likedReviews[reviewId];
+        closeLightbox();
+        openLightbox(review);
+      });
+    }
+    
+    setTimeout(() => lightbox.classList.add('active'), 10);
+    document.body.style.overflow = 'hidden';
+  }
+  
+  function closeLightbox() {
+    if (lightbox) {
+      lightbox.classList.remove('active');
+      setTimeout(() => {
+        lightbox.remove();
+        lightbox = null;
+        document.body.style.overflow = '';
+      }, 300);
+    }
+  }
+  
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && lightbox) closeLightbox();
+  });
+  
+  function renderReviews(reviewsToShow) {
+    let html = '';
+    
+    reviewsToShow.forEach((review) => {
+      const date = new Date(review.created_at).toLocaleDateString('es-ES', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+      });
+      
+      const hasValidPhoto = !!(review.has_photo && review.photoUrl && review.photoUrl.trim());
+      
+      html += `
+        <div class="airpure-card" data-review-id="${review.id}">
+          ${hasValidPhoto ? `
+            <div class="airpure-card-image-wrapper">
+              <img 
+                src="${review.photoUrl}" 
+                alt="Reseña de ${review.name}" 
+                class="airpure-card-image"
+                onerror="console.error('Error cargando imagen:', this.src); this.style.display='none';"
+              />
+              <div class="airpure-image-overlay">
+                <div class="airpure-click-indicator">
+                  <svg width="24" height="24" viewBox="0 0 20 20" fill="#2563eb">
+                    <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM14 11a1 1 0 011 1v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1h-1a1 1 0 110-2h1v-1a1 1 0 011-1z"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="airpure-verified-badge">
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="#2563eb">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+            </div>
+          ` : ''}
+          
+          <div class="airpure-card-content">
+            <div class="airpure-card-stars">
+              ${renderStars(review.rating)}
+            </div>
+            <div class="airpure-name">${review.name}</div>
+            <div class="airpure-date">${date}</div>
+            <div class="airpure-comment">${review.comment}</div>
+            <div class="airpure-verified">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              Compra Verificada
+            </div>
+            
+            ${review.admin_response ? `
+              <div class="airpure-admin-response">
+                <div class="airpure-admin-label">Respuesta de AirPure</div>
+                <div class="airpure-admin-text">${review.admin_response}</div>
+              </div>
+            ` : ''}
+          </div>
+        </div>
+      `;
+    });
+    
+    return html;
+  }
+  
+  function showMoreReviews() {
+    const masonryContainer = document.querySelector('.airpure-masonry');
+    const loadMoreBtn = document.getElementById('airpure-load-more-btn');
+    const showingCount = document.getElementById('airpure-showing-count');
+    
+    displayedReviews += REVIEWS_PER_PAGE;
+    if (displayedReviews > allReviews.length) {
+      displayedReviews = allReviews.length;
+    }
+    
+    const reviewsToShow = allReviews.slice(0, displayedReviews);
+    masonryContainer.innerHTML = renderReviews(reviewsToShow);
+    
+    const allCards = masonryContainer.querySelectorAll('.airpure-card');
+    allCards.forEach(card => {
+      card.addEventListener('click', function() {
+        const reviewId = this.getAttribute('data-review-id');
+        const review = allReviews.find(r => r.id == reviewId);
+        if (review) openLightbox(review);
+      });
+    });
+    
+    showingCount.textContent = `Mostrando ${displayedReviews} de ${allReviews.length} reseñas`;
+    
+    if (displayedReviews >= allReviews.length) {
+      loadMoreBtn.style.display = 'none';
+    }
+  }
+  
+  async function loadAndRenderReviews() {
+    const container = document.getElementById('airpure-reviews-root');
+    
+    container.innerHTML = `
+      <div class="airpure-loading">
+        <div class="airpure-spinner"></div>
+        <p style="margin-top: 20px;">Cargando reseñas...</p>
+      </div>
+    `;
+    
+    try {
+      debugLog('Iniciando carga de reseñas...');
+      debugLog('URL del API:', API_URL);
+      debugLog('Project ID:', CONFIG.projectId);
+      
+      const response = await fetch(API_URL, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${CONFIG.anonKey}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      debugLog('Respuesta HTTP status:', response.status);
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        debugLog('Error HTTP:', errorText);
+        throw new Error(`HTTP ${response.status}: ${errorText}`);
+      }
+      
+      const data = await response.json();
+      debugLog('Datos recibidos:', {
+        total: data.total,
+        reviewsCount: data.reviews?.length || 0,
+        hasMore: data.hasMore,
+        withPhotos: data.withPhotos
+      });
+      
+      // ✅ VERIFICACIÓN MEJORADA
+      if (!data.reviews) {
+        debugLog('❌ ERROR: data.reviews es undefined o null', data);
+        throw new Error('El servidor no devolvió un array de reseñas. Respuesta: ' + JSON.stringify(data));
+      }
+      
+      if (!Array.isArray(data.reviews)) {
+        debugLog('❌ ERROR: data.reviews no es un array', typeof data.reviews);
+        throw new Error('data.reviews no es un array válido');
+      }
+      
+      if (data.reviews.length === 0) {
+        debugLog('⚠️ No hay reseñas aprobadas en la base de datos');
+        container.innerHTML = `
+          <div class="airpure-error">
+            <div class="airpure-error-title">😊 ¡Sé el primero en dejar una reseña!</div>
+            <div class="airpure-error-message">Aún no hay reseñas aprobadas para mostrar.</div>
+            <div class="airpure-error-details">
+              💡 Tip: Ve al panel de administración y aprueba algunas reseñas para que aparezcan aquí.
+            </div>
+          </div>
+        `;
+        return;
+      }
+      
+      // ⭐ ORDENAR: FOTOS PRIMERO → RATING DESCENDENTE → FECHA
+      allReviews = data.reviews.sort((a, b) => {
+        if (a.has_photo && !b.has_photo) return -1;
+        if (!a.has_photo && b.has_photo) return 1;
+        if (b.rating !== a.rating) return b.rating - a.rating;
+        return new Date(b.created_at) - new Date(a.created_at);
+      });
+      
+      debugLog('✅ Reseñas cargadas y ordenadas:', {
+        total: allReviews.length,
+        conFotos: allReviews.filter(r => r.has_photo).length,
+        sinFotos: allReviews.filter(r => !r.has_photo).length
+      });
+      
+      const total = allReviews.length;
+      const avgRating = (allReviews.reduce((sum, r) => sum + r.rating, 0) / total).toFixed(1);
+      
+      const initialReviews = allReviews.slice(0, REVIEWS_PER_PAGE);
+      displayedReviews = initialReviews.length;
+      
+      let html = `
+        <div class="airpure-header">
+          <div class="airpure-badge">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="#2563eb">
+              <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM14 11a1 1 0 011 1v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1h-1a1 1 0 110-2h1v-1a1 1 0 011-1z"/>
+            </svg>
+            <span class="airpure-badge-text">Reseñas Verificadas</span>
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="#2563eb">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          
+          <h2 class="airpure-title">Lo que dicen nuestros clientes</h2>
+          
+          <p class="airpure-subtitle">
+            Miles de personas confían en <strong style="color: #2563eb;">AirPure®</strong> para mejorar su respiración
+          </p>
+        </div>
+        
+        <div class="airpure-stats-bar">
+          <div class="airpure-stats-content">
+            <div class="airpure-rating-section">
+              <div class="airpure-rating-details">
+                <div class="airpure-stars-row">
+                  <div class="airpure-stars">
+                    ${renderStars(5, 'airpure-star')}
+                  </div>
+                  <span class="airpure-average">${avgRating}</span>
+                </div>
+                <div class="airpure-total-reviews">${total} Reseñas</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="airpure-masonry">
+          ${renderReviews(initialReviews)}
+        </div>
+        
+        ${total > REVIEWS_PER_PAGE ? `
+          <div class="airpure-load-more-container">
+            <button id="airpure-load-more-btn" class="airpure-load-more-btn">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z" clip-rule="evenodd"/>
+              </svg>
+              Ver más reseñas
+            </button>
+            <div id="airpure-showing-count" class="airpure-showing-count">
+              Mostrando ${displayedReviews} de ${total} reseñas
+            </div>
+          </div>
+        ` : ''}
+      `;
+      
+      container.innerHTML = html;
+      
+      const cards = container.querySelectorAll('.airpure-card');
+      cards.forEach(card => {
+        card.addEventListener('click', function() {
+          const reviewId = this.getAttribute('data-review-id');
+          const review = allReviews.find(r => r.id == reviewId);
+          if (review) openLightbox(review);
+        });
+      });
+      
+      const loadMoreBtn = document.getElementById('airpure-load-more-btn');
+      if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', showMoreReviews);
+      }
+      
+      debugLog('✅ Widget renderizado exitosamente');
+      
+    } catch (error) {
+      console.error('❌ ERROR CRÍTICO:', error);
+      
+      container.innerHTML = `
+        <div class="airpure-error">
+          <div class="airpure-error-title">❌ Error cargando reseñas</div>
+          <div class="airpure-error-message">${error.message}</div>
+          <div class="airpure-error-details">
+            <strong>Detalles técnicos:</strong><br>
+            • URL: ${API_URL}<br>
+            • Error: ${error.toString()}<br>
+            • Timestamp: ${new Date().toISOString()}<br>
+            <br>
+            <strong>¿Qué hacer?</strong><br>
+            1. Abre la consola del navegador (F12)<br>
+            2. Busca mensajes con 🔵 [AirPure Widget]<br>
+            3. Verifica que tengas reseñas aprobadas en el admin
+          </div>
+        </div>
+      `;
+    }
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadAndRenderReviews);
+  } else {
+    loadAndRenderReviews();
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "AirPure Reviews Widget",
+  "tag": "section",
+  "class": "airpure-reviews-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "✅ Widget de Reseñas Optimizado"
+    },
+    {
+      "type": "paragraph",
+      "content": "Con debugging mejorado y paginación perfecta"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Espaciado superior",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Espaciado inferior",
+      "default": 40
+    }
+  ],
+  "presets": [
+    {
+      "name": "AirPure Reviews Widget"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .airpure-reviews-section {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+</style>

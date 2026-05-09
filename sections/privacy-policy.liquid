@@ -1,0 +1,445 @@
+{% comment %}
+  ============================================
+  PRIVACY POLICY SECTION - SHOPIFY
+  ============================================
+  
+  Página de Políticas de Privacidad completa
+  Diseño profesional con Tailwind CSS
+  
+  Instalación:
+  1. Shopify Admin > Online Store > Themes > Edit Code
+  2. Sections > Add a new section
+  3. Nombre: "privacy-policy"
+  4. Pega este código completo
+  5. Guarda y usa en cualquier página
+{% endcomment %}
+
+<div class="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+  
+  {% comment %} ============================================ {% endcomment %}
+  {% comment %} HERO SECTION {% endcomment %}
+  {% comment %} ============================================ {% endcomment %}
+  <div class="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      {% comment %} Shield Icon {% endcomment %}
+      <div class="flex items-center justify-center mb-6">
+        <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl">
+          <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+          </svg>
+        </div>
+      </div>
+      
+      {% comment %} Title and Description {% endcomment %}
+      <h1 class="text-4xl md:text-5xl font-bold text-center mb-4">
+        {{ section.settings.page_title }}
+      </h1>
+      <p class="text-xl text-blue-100 text-center max-w-2xl mx-auto">
+        {{ section.settings.page_description }}
+      </p>
+      <p class="text-sm text-blue-200 text-center mt-4">
+        Última actualización: {{ 'now' | date: "%d de %B de %Y" }}
+      </p>
+      
+    </div>
+  </div>
+
+  {% comment %} ============================================ {% endcomment %}
+  {% comment %} CONTENT SECTION {% endcomment %}
+  {% comment %} ============================================ {% endcomment %}
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    
+    {% comment %} ========== INTRODUCTION ========== {% endcomment %}
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mb-8">
+      <div class="flex items-start gap-4 mb-6">
+        <div class="bg-blue-100 p-3 rounded-xl">
+          <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold text-gray-900 mb-2">Introducción</h2>
+          <p class="text-gray-600">
+            Bienvenido a {{ shop.name }}. Respetamos tu privacidad y estamos comprometidos a proteger tus datos personales. 
+            Esta política de privacidad te informará sobre cómo cuidamos tus datos personales cuando visitas nuestro 
+            sitio web y te dirá sobre tus derechos de privacidad y cómo la ley te protege.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {% comment %} ========== INFORMATION WE COLLECT ========== {% endcomment %}
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mb-8">
+      <div class="flex items-start gap-4 mb-6">
+        <div class="bg-purple-100 p-3 rounded-xl">
+          <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+          </svg>
+        </div>
+        <div class="flex-1">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">Información que Recopilamos</h2>
+          
+          <div class="space-y-4">
+            {% comment %} Personal Information {% endcomment %}
+            <div>
+              <h3 class="font-semibold text-gray-900 mb-2">Información Personal</h3>
+              <p class="text-gray-600 mb-2">
+                Podemos recopilar la siguiente información personal:
+              </p>
+              <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
+                <li>Nombre y detalles de contacto (email, número de teléfono)</li>
+                <li>Dirección de facturación y envío</li>
+                <li>Información de pago (procesada de forma segura a través de nuestro proveedor de pago)</li>
+                <li>Historial de pedidos y preferencias de compra</li>
+              </ul>
+            </div>
+            
+            {% comment %} Technical Information {% endcomment %}
+            <div>
+              <h3 class="font-semibold text-gray-900 mb-2">Información Técnica</h3>
+              <p class="text-gray-600 mb-2">
+                Recopilamos automáticamente cierta información cuando visitas nuestro sitio web:
+              </p>
+              <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
+                <li>Dirección IP y tipo de navegador</li>
+                <li>Información del dispositivo y sistema operativo</li>
+                <li>Páginas visitadas y tiempo que pasas en nuestro sitio web</li>
+                <li>Sitio web de referencia y términos de búsqueda utilizados</li>
+              </ul>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+    {% comment %} ========== HOW WE USE YOUR INFORMATION ========== {% endcomment %}
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mb-8">
+      <div class="flex items-start gap-4 mb-6">
+        <div class="bg-green-100 p-3 rounded-xl">
+          <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <div class="flex-1">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">Cómo Usamos Tu Información</h2>
+          <p class="text-gray-600 mb-4">
+            Usamos tu información personal para los siguientes propósitos:
+          </p>
+          
+          <div class="space-y-3">
+            <div class="flex items-start gap-3">
+              <div class="w-2 h-2 bg-green-600 rounded-full mt-2"></div>
+              <p class="text-gray-600">Para procesar y cumplir tus pedidos</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-2 h-2 bg-green-600 rounded-full mt-2"></div>
+              <p class="text-gray-600">Para comunicarnos contigo sobre tus pedidos y proporcionar soporte al cliente</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-2 h-2 bg-green-600 rounded-full mt-2"></div>
+              <p class="text-gray-600">Para enviarte comunicaciones de marketing (con tu consentimiento)</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-2 h-2 bg-green-600 rounded-full mt-2"></div>
+              <p class="text-gray-600">Para mejorar nuestro sitio web y servicios</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-2 h-2 bg-green-600 rounded-full mt-2"></div>
+              <p class="text-gray-600">Para prevenir el fraude y asegurar la seguridad del sitio web</p>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+    {% comment %} ========== DATA SECURITY ========== {% endcomment %}
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mb-8">
+      <div class="flex items-start gap-4 mb-6">
+        <div class="bg-red-100 p-3 rounded-xl">
+          <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+          </svg>
+        </div>
+        <div class="flex-1">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">Seguridad de los Datos</h2>
+          <p class="text-gray-600 mb-4">
+            Hemos implementado medidas de seguridad adecuadas para prevenir la pérdida accidental, uso o acceso no autorizado de tus datos personales. Limitamos el acceso a tus datos personales a los empleados, agentes, contratistas y otras terceras partes que tienen una necesidad comercial de conocerlos.
+          </p>
+          
+          {% comment %} Security Notice Box {% endcomment %}
+          <div class="bg-red-50 border border-red-200 rounded-xl p-4">
+            <div class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+              </svg>
+              <p class="text-sm text-red-900">
+                Toda la información de pago está cifrada y se procesa de forma segura a través de nuestro proveedor de pago de confianza. Nunca almacenamos tu información completa de tarjeta de crédito en nuestros servidores.
+              </p>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+    {% comment %} ========== YOUR RIGHTS ========== {% endcomment %}
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mb-8">
+      <div class="flex items-start gap-4 mb-6">
+        <div class="bg-blue-100 p-3 rounded-xl">
+          <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <div class="flex-1">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">Tus Derechos</h2>
+          <p class="text-gray-600 mb-4">
+            Según las leyes de protección de datos, tienes los siguientes derechos:
+          </p>
+          
+          {% comment %} Rights Grid {% endcomment %}
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="bg-gray-50 rounded-lg p-4">
+              <h3 class="font-semibold text-gray-900 mb-1">Acceso</h3>
+              <p class="text-sm text-gray-600">Solicitar acceso a tus datos personales</p>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-4">
+              <h3 class="font-semibold text-gray-900 mb-1">Corrección</h3>
+              <p class="text-sm text-gray-600">Solicitar corrección de datos inexactos</p>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-4">
+              <h3 class="font-semibold text-gray-900 mb-1">Eliminación</h3>
+              <p class="text-sm text-gray-600">Solicitar eliminación de tus datos personales</p>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-4">
+              <h3 class="font-semibold text-gray-900 mb-1">Objeción</h3>
+              <p class="text-sm text-gray-600">Objetar el procesamiento de tus datos</p>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+    {% comment %} ========== CONTACT INFORMATION ========== {% endcomment %}
+    <div class="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-8 text-white text-center">
+      <h2 class="text-2xl font-bold mb-4">¿Preguntas sobre la Privacidad?</h2>
+      <p class="text-blue-100 mb-6 max-w-2xl mx-auto">
+        Si tienes alguna pregunta sobre esta Política de Privacidad o cómo manejamos tus datos personales, 
+        no dudes en contactarnos.
+      </p>
+      
+      {% comment %} Contact Buttons {% endcomment %}
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a 
+          href="mailto:{{ section.settings.contact_email }}" 
+          class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
+        >
+          Envíanos un Email
+        </a>
+        <a 
+          href="{{ section.settings.contact_page_url }}" 
+          class="bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-400 transition-colors"
+        >
+          Página de Contacto
+        </a>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<style>
+  /* ============================================ */
+  /* TAILWIND CSS STYLES - EMBEDDED */
+  /* ============================================ */
+  
+  /* Si tu tema ya tiene Tailwind CSS, puedes eliminar este bloque <style> */
+  
+  /* Utilities base */
+  .min-h-screen { min-height: 100vh; }
+  
+  /* Gradientes */
+  .bg-gradient-to-b { background-image: linear-gradient(to bottom, var(--tw-gradient-stops)); }
+  .bg-gradient-to-r { background-image: linear-gradient(to right, var(--tw-gradient-stops)); }
+  .from-gray-50 { --tw-gradient-from: #f9fafb; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(249, 250, 251, 0)); }
+  .to-white { --tw-gradient-to: #ffffff; }
+  .from-blue-600 { --tw-gradient-from: #2563eb; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(37, 99, 235, 0)); }
+  .to-blue-700 { --tw-gradient-to: #1d4ed8; }
+  
+  /* Backdrop blur */
+  .backdrop-blur-sm { backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+  
+  /* Padding y Margins */
+  .py-20 { padding-top: 5rem; padding-bottom: 5rem; }
+  .py-16 { padding-top: 4rem; padding-bottom: 4rem; }
+  .px-4 { padding-left: 1rem; padding-right: 1rem; }
+  .p-8 { padding: 2rem; }
+  .p-4 { padding: 1rem; }
+  .p-3 { padding: 0.75rem; }
+  .mb-8 { margin-bottom: 2rem; }
+  .mb-6 { margin-bottom: 1.5rem; }
+  .mb-4 { margin-bottom: 1rem; }
+  .mb-2 { margin-bottom: 0.5rem; }
+  .mb-1 { margin-bottom: 0.25rem; }
+  .mt-4 { margin-top: 1rem; }
+  .mt-2 { margin-top: 0.5rem; }
+  .ml-4 { margin-left: 1rem; }
+  
+  /* Borders y rounded */
+  .rounded-2xl { border-radius: 1rem; }
+  .rounded-xl { border-radius: 0.75rem; }
+  .rounded-lg { border-radius: 0.5rem; }
+  .rounded-full { border-radius: 9999px; }
+  .border { border-width: 1px; }
+  .border-gray-200 { border-color: #e5e7eb; }
+  .border-red-200 { border-color: #fecaca; }
+  
+  /* Shadow */
+  .shadow-sm { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); }
+  
+  /* Background Colors */
+  .bg-white { background-color: #ffffff; }
+  .bg-blue-50 { background-color: #eff6ff; }
+  .bg-blue-100 { background-color: #dbeafe; }
+  .bg-blue-500 { background-color: #3b82f6; }
+  .bg-purple-100 { background-color: #f3e8ff; }
+  .bg-green-100 { background-color: #dcfce7; }
+  .bg-green-600 { background-color: #16a34a; }
+  .bg-red-100 { background-color: #fee2e2; }
+  .bg-red-50 { background-color: #fef2f2; }
+  .bg-gray-50 { background-color: #f9fafb; }
+  
+  /* Text Colors */
+  .text-white { color: #ffffff; }
+  .text-gray-900 { color: #111827; }
+  .text-gray-600 { color: #4b5563; }
+  .text-blue-600 { color: #2563eb; }
+  .text-blue-100 { color: #dbeafe; }
+  .text-blue-200 { color: #bfdbfe; }
+  .text-purple-600 { color: #9333ea; }
+  .text-green-600 { color: #16a34a; }
+  .text-red-600 { color: #dc2626; }
+  .text-red-900 { color: #7f1d1d; }
+  
+  /* Typography */
+  .text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+  .text-2xl { font-size: 1.5rem; line-height: 2rem; }
+  .text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+  .text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+  .font-bold { font-weight: 700; }
+  .font-semibold { font-weight: 600; }
+  .text-center { text-align: center; }
+  
+  /* Flexbox */
+  .flex { display: flex; }
+  .flex-1 { flex: 1 1 0%; }
+  .flex-col { flex-direction: column; }
+  .flex-shrink-0 { flex-shrink: 0; }
+  .items-center { align-items: center; }
+  .items-start { align-items: flex-start; }
+  .justify-center { justify-content: center; }
+  .gap-4 { gap: 1rem; }
+  .gap-3 { gap: 0.75rem; }
+  
+  /* Grid */
+  .grid { display: grid; }
+  
+  /* Spacing utilities */
+  .space-y-4 > * + * { margin-top: 1rem; }
+  .space-y-3 > * + * { margin-top: 0.75rem; }
+  .space-y-1 > * + * { margin-top: 0.25rem; }
+  
+  /* List styles */
+  .list-disc { list-style-type: disc; }
+  .list-inside { list-style-position: inside; }
+  
+  /* Width & Height */
+  .w-12 { width: 3rem; }
+  .h-12 { height: 3rem; }
+  .w-6 { width: 1.5rem; }
+  .h-6 { height: 1.5rem; }
+  .w-5 { width: 1.25rem; }
+  .h-5 { height: 1.25rem; }
+  .w-2 { width: 0.5rem; }
+  .h-2 { height: 0.5rem; }
+  .max-w-4xl { max-width: 56rem; }
+  .max-w-2xl { max-width: 42rem; }
+  .mx-auto { margin-left: auto; margin-right: auto; }
+  
+  /* Transitions */
+  .transition-colors { 
+    transition-property: color, background-color, border-color; 
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); 
+    transition-duration: 150ms; 
+  }
+  
+  /* Hover states */
+  .hover\:bg-blue-50:hover { background-color: #eff6ff; }
+  .hover\:bg-blue-400:hover { background-color: #60a5fa; }
+  
+  /* Responsive - Tablet (640px+) */
+  @media (min-width: 640px) {
+    .sm\:px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .sm\:flex-row { flex-direction: row; }
+  }
+  
+  /* Responsive - Desktop (768px+) */
+  @media (min-width: 768px) {
+    .md\:text-5xl { font-size: 3rem; line-height: 1; }
+    .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  
+  /* Responsive - Large Desktop (1024px+) */
+  @media (min-width: 1024px) {
+    .lg\:px-8 { padding-left: 2rem; padding-right: 2rem; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Política de Privacidad",
+  "tag": "section",
+  "class": "privacy-policy-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Configuración de Política de Privacidad"
+    },
+    {
+      "type": "text",
+      "id": "page_title",
+      "label": "Título de la Página",
+      "default": "Política de Privacidad"
+    },
+    {
+      "type": "textarea",
+      "id": "page_description",
+      "label": "Descripción de la Página",
+      "default": "Tu privacidad es importante para nosotros. Aprende cómo recopilamos, usamos y protegemos tu información personal."
+    },
+    {
+      "type": "text",
+      "id": "contact_email",
+      "label": "Email de Contacto",
+      "default": "hello@corelink.cl",
+      "info": "Dirección de email para consultas de privacidad"
+    },
+    {
+      "type": "text",
+      "id": "contact_page_url",
+      "label": "URL de Página de Contacto",
+      "default": "/pages/contact",
+      "info": "URL de tu página de contacto (ej. /pages/contact)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Política de Privacidad"
+    }
+  ]
+}
+{% endschema %}
