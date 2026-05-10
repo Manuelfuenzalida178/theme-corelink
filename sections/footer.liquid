@@ -1,189 +1,250 @@
-<!-- CoreLink Footer — Ultra Modern Dark Design -->
-<style>
-  .cl-foot * { box-sizing: border-box !important; }
+<!-- CoreLink Footer — Built with ui-ux-pro-max v2.5.0 -->
+<!-- Design System: Automotive/Dark | Palette: #0f172a + #dc2626 | Font: Inter -->
 
-  .cl-foot {
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ── Design tokens (ui-ux-pro-max: Automotive/Car Dealership) ── */
+  .clf {
+    --clf-bg:           {{ section.settings.footer_bg }};
+    --clf-bg-surface:   rgba(255,255,255,0.03);
+    --clf-border:       rgba(255,255,255,0.07);
+    --clf-text:         #f1f5f9;
+    --clf-muted:        #64748b;
+    --clf-heading:      #ffffff;
+    --clf-accent:       {{ section.settings.accent_color }};
+    --clf-accent-dim:   rgba(220,38,38,0.12);
+    --clf-input-bg:     rgba(255,255,255,0.05);
+    --clf-radius:       0.625rem;
+    --clf-transition:   all 0.2s cubic-bezier(0.4,0,0.2,1);
+    --clf-font:         'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --clf-max-w:        1240px;
+  }
+
+  /* ── Base reset ── */
+  .clf *, .clf *::before, .clf *::after {
+    box-sizing: border-box !important;
+  }
+
+  .clf {
     all: initial;
     display: block;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+    font-family: var(--clf-font) !important;
     -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+    background-color: var(--clf-bg) !important;
+    width: 100% !important;
   }
 
-  /* ── Accent Top Border ── */
-  .cl-foot__accent {
+  /* ── Accent bar ── */
+  .clf__accent-bar {
     height: 3px !important;
-    background: linear-gradient(90deg, {{ section.settings.accent_color }}, {{ section.settings.accent_color_2 }}) !important;
+    background: linear-gradient(90deg, var(--clf-accent) 0%, #ef4444 50%, var(--clf-accent) 100%) !important;
     width: 100% !important;
     display: block !important;
   }
 
-  /* ── Wrapper ── */
-  .cl-foot__body {
-    background-color: {{ section.settings.footer_bg }} !important;
-    width: 100% !important;
-    display: block !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  .cl-foot__inner {
-    max-width: 1240px !important;
+  /* ── Inner container ── */
+  .clf__wrap {
+    max-width: var(--clf-max-w) !important;
     margin: 0 auto !important;
-    padding: 0 1.5rem !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
   }
 
-  /* ── TOP: Logo + Newsletter ── */
-  .cl-foot__top {
+  /* ── Divider ── */
+  .clf__divider {
+    border: none !important;
+    border-top: 1px solid var(--clf-border) !important;
+    margin: 0 !important;
+  }
+
+  /* ════════════════════════════════════════
+     TOP SECTION — Brand + Newsletter
+  ════════════════════════════════════════ */
+  .clf__top {
     display: flex !important;
     flex-direction: column !important;
     gap: 2.5rem !important;
-    padding: 3.5rem 0 3rem !important;
-    border-bottom: 1px solid {{ section.settings.divider_color }} !important;
+    padding: 4rem 0 3rem !important;
   }
 
   @media (min-width: 900px) {
-    .cl-foot__top {
+    .clf__top {
       flex-direction: row !important;
-      align-items: center !important;
+      align-items: flex-start !important;
       justify-content: space-between !important;
-      gap: 4rem !important;
+      gap: 5rem !important;
     }
   }
 
-  .cl-foot__brand {
-    flex: 1 !important;
-    min-width: 0 !important;
-  }
+  /* Brand */
+  .clf__brand { flex: 1 !important; min-width: 0 !important; }
 
-  .cl-foot__logo {
-    height: 2.5rem !important;
-    max-width: 180px !important;
+  .clf__logo {
+    height: 2.25rem !important;
+    max-width: 160px !important;
     object-fit: contain !important;
     object-position: left center !important;
     display: block !important;
-    margin-bottom: 1rem !important;
+    margin-bottom: 1.25rem !important;
   }
 
-  .cl-foot__tagline {
-    color: {{ section.settings.muted_color }} !important;
+  .clf__tagline {
+    color: var(--clf-muted) !important;
     font-size: 0.9375rem !important;
-    line-height: 1.7 !important;
+    line-height: 1.75 !important;
     margin: 0 !important;
-    max-width: 340px !important;
+    max-width: 320px !important;
+    font-weight: 400 !important;
   }
 
-  /* ── Newsletter ── */
-  .cl-foot__nl {
+  /* Newsletter */
+  .clf__nl {
     flex: 0 0 auto !important;
     width: 100% !important;
+    background: var(--clf-bg-surface) !important;
+    border: 1px solid var(--clf-border) !important;
+    border-radius: calc(var(--clf-radius) * 1.5) !important;
+    padding: 1.75rem !important;
   }
 
   @media (min-width: 900px) {
-    .cl-foot__nl {
-      width: 380px !important;
-    }
+    .clf__nl { width: 400px !important; }
   }
 
-  .cl-foot__nl-label {
-    display: block !important;
+  .clf__nl-badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.375rem !important;
+    background: var(--clf-accent-dim) !important;
+    border: 1px solid rgba(220,38,38,0.25) !important;
+    border-radius: 9999px !important;
+    padding: 0.25rem 0.75rem !important;
     font-size: 0.6875rem !important;
-    font-weight: 700 !important;
-    letter-spacing: 0.14em !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.1em !important;
     text-transform: uppercase !important;
-    color: {{ section.settings.accent_color }} !important;
-    margin-bottom: 0.375rem !important;
+    color: var(--clf-accent) !important;
+    margin-bottom: 0.875rem !important;
   }
 
-  .cl-foot__nl-title {
-    font-size: 1.125rem !important;
+  .clf__nl-badge-dot {
+    width: 0.375rem !important;
+    height: 0.375rem !important;
+    border-radius: 50% !important;
+    background: var(--clf-accent) !important;
+    display: block !important;
+  }
+
+  .clf__nl-title {
+    font-size: 1.0625rem !important;
     font-weight: 700 !important;
-    color: {{ section.settings.heading_color }} !important;
-    margin: 0 0 0.875rem 0 !important;
+    color: var(--clf-heading) !important;
+    margin: 0 0 0.375rem !important;
     line-height: 1.35 !important;
+    letter-spacing: -0.01em !important;
   }
 
-  .cl-foot__nl-form {
-    display: flex !important;
-    gap: 0.5rem !important;
-    flex-direction: column !important;
-  }
-
-  @media (min-width: 480px) {
-    .cl-foot__nl-form { flex-direction: row !important; }
-  }
-
-  .cl-foot__nl-input {
-    flex: 1 !important;
-    background: {{ section.settings.input_bg }} !important;
-    border: 1px solid {{ section.settings.divider_color }} !important;
-    border-radius: 0.5rem !important;
-    padding: 0.75rem 1rem !important;
-    font-size: 0.875rem !important;
-    color: {{ section.settings.text_color }} !important;
-    outline: none !important;
-    transition: border-color 0.2s !important;
-    min-width: 0 !important;
-  }
-
-  .cl-foot__nl-input::placeholder {
-    color: {{ section.settings.muted_color }} !important;
-  }
-
-  .cl-foot__nl-input:focus {
-    border-color: {{ section.settings.accent_color }} !important;
-  }
-
-  .cl-foot__nl-btn {
-    padding: 0.75rem 1.375rem !important;
-    background: {{ section.settings.accent_color }} !important;
-    color: #ffffff !important;
-    font-size: 0.875rem !important;
-    font-weight: 700 !important;
-    border: none !important;
-    border-radius: 0.5rem !important;
-    cursor: pointer !important;
-    white-space: nowrap !important;
-    transition: opacity 0.2s, transform 0.15s !important;
-    letter-spacing: 0.02em !important;
-  }
-
-  .cl-foot__nl-btn:hover {
-    opacity: 0.85 !important;
-    transform: translateY(-1px) !important;
-  }
-
-  .cl-foot__nl-note {
-    font-size: 0.75rem !important;
-    color: {{ section.settings.muted_color }} !important;
-    margin-top: 0.625rem !important;
+  .clf__nl-sub {
+    font-size: 0.8125rem !important;
+    color: var(--clf-muted) !important;
+    margin: 0 0 1.25rem !important;
     line-height: 1.5 !important;
   }
 
-  .cl-foot__nl-note a {
-    color: {{ section.settings.muted_color }} !important;
+  .clf__nl-form {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+  }
+
+  @media (min-width: 480px) {
+    .clf__nl-form { flex-direction: row !important; }
+  }
+
+  .clf__nl-input {
+    flex: 1 !important;
+    background: var(--clf-input-bg) !important;
+    border: 1px solid var(--clf-border) !important;
+    border-radius: var(--clf-radius) !important;
+    padding: 0.6875rem 1rem !important;
+    font-size: 0.875rem !important;
+    font-family: var(--clf-font) !important;
+    color: var(--clf-text) !important;
+    outline: none !important;
+    transition: var(--clf-transition) !important;
+    min-width: 0 !important;
+  }
+
+  .clf__nl-input::placeholder { color: var(--clf-muted) !important; }
+
+  .clf__nl-input:focus {
+    border-color: var(--clf-accent) !important;
+    background: rgba(255,255,255,0.07) !important;
+    box-shadow: 0 0 0 3px var(--clf-accent-dim) !important;
+  }
+
+  .clf__nl-btn {
+    padding: 0.6875rem 1.375rem !important;
+    background: var(--clf-accent) !important;
+    color: #ffffff !important;
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    font-family: var(--clf-font) !important;
+    border: none !important;
+    border-radius: var(--clf-radius) !important;
+    cursor: pointer !important;
+    white-space: nowrap !important;
+    letter-spacing: 0.01em !important;
+    transition: var(--clf-transition) !important;
+  }
+
+  .clf__nl-btn:hover {
+    background: #ef4444 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 16px rgba(220,38,38,0.35) !important;
+  }
+
+  .clf__nl-btn:active { transform: translateY(0) !important; }
+
+  .clf__nl-note {
+    font-size: 0.75rem !important;
+    color: var(--clf-muted) !important;
+    margin-top: 0.75rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .clf__nl-note a {
+    color: var(--clf-muted) !important;
     text-decoration: underline !important;
     text-underline-offset: 2px !important;
+    transition: color 0.15s !important;
   }
 
-  .cl-foot__nl-note a:hover { color: {{ section.settings.text_color }} !important; }
+  .clf__nl-note a:hover { color: var(--clf-text) !important; }
 
-  /* ── MIDDLE: Nav columns ── */
-  .cl-foot__mid {
+  /* ════════════════════════════════════════
+     MIDDLE — Nav Columns
+  ════════════════════════════════════════ */
+  .clf__mid {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
-    gap: 2rem !important;
+    gap: 1.5rem !important;
     padding: 3rem 0 !important;
-    border-bottom: 1px solid {{ section.settings.divider_color }} !important;
   }
 
-  @media (min-width: 768px) {
-    .cl-foot__mid {
-      grid-template-columns: repeat(4, 1fr) !important;
-      gap: 2.5rem !important;
-    }
+  @media (min-width: 640px) {
+    .clf__mid { grid-template-columns: repeat(4, 1fr) !important; gap: 2rem !important; }
   }
 
-  .cl-foot__col-head {
+  @media (min-width: 1024px) {
+    .clf__mid { gap: 3rem !important; }
+  }
+
+  .clf__col-hd {
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
@@ -192,111 +253,114 @@
     padding: 0 !important;
     width: 100% !important;
     cursor: pointer !important;
-    margin-bottom: 1.25rem !important;
+    margin-bottom: 1.125rem !important;
     text-align: left !important;
+    min-height: 44px !important;
   }
 
-  @media (min-width: 768px) {
-    .cl-foot__col-head { pointer-events: none !important; cursor: default !important; }
+  @media (min-width: 640px) {
+    .clf__col-hd { pointer-events: none !important; cursor: default !important; }
   }
 
-  .cl-foot__col-title {
+  .clf__col-title {
+    font-family: var(--clf-font) !important;
     font-size: 0.6875rem !important;
     font-weight: 700 !important;
     letter-spacing: 0.14em !important;
     text-transform: uppercase !important;
-    color: {{ section.settings.heading_color }} !important;
+    color: var(--clf-heading) !important;
     margin: 0 !important;
   }
 
-  .cl-foot__chevron {
+  .clf__chevron {
     width: 1rem !important;
     height: 1rem !important;
-    color: {{ section.settings.muted_color }} !important;
-    transition: transform 0.25s !important;
+    color: var(--clf-muted) !important;
+    transition: transform 0.25s cubic-bezier(0.4,0,0.2,1) !important;
     flex-shrink: 0 !important;
   }
 
-  @media (min-width: 768px) {
-    .cl-foot__chevron { display: none !important; }
-  }
+  @media (min-width: 640px) { .clf__chevron { display: none !important; } }
 
-  .cl-foot__chevron--open { transform: rotate(180deg) !important; }
+  .clf__chevron--open { transform: rotate(180deg) !important; }
 
-  .cl-foot__links {
+  /* Links */
+  .clf__links {
     list-style: none !important;
     margin: 0 !important;
     padding: 0 !important;
-    overflow: hidden !important;
     max-height: 0 !important;
-    transition: max-height 0.35s ease !important;
+    overflow: hidden !important;
+    transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1) !important;
   }
 
-  @media (min-width: 768px) {
-    .cl-foot__links { max-height: none !important; }
-  }
+  @media (min-width: 640px) { .clf__links { max-height: none !important; } }
 
-  .cl-foot__links--open { max-height: 40rem !important; }
+  .clf__links--open { max-height: 40rem !important; }
 
-  .cl-foot__links li {
-    margin: 0 0 0.625rem !important;
-    padding: 0 !important;
-  }
+  .clf__links li { margin: 0 0 0.625rem !important; padding: 0 !important; }
+  .clf__links li:last-child { margin-bottom: 0 !important; }
 
-  .cl-foot__links li:last-child { margin-bottom: 0 !important; }
-
-  .cl-foot__links a,
-  .cl-foot__links span {
-    color: {{ section.settings.muted_color }} !important;
+  .clf__links a {
+    color: var(--clf-muted) !important;
+    font-family: var(--clf-font) !important;
     font-size: 0.875rem !important;
+    font-weight: 400 !important;
     text-decoration: none !important;
-    transition: color 0.2s !important;
+    display: inline-block !important;
+    cursor: pointer !important;
+    transition: color 0.2s ease, padding-left 0.2s ease !important;
     line-height: 1.5 !important;
-    display: block !important;
   }
 
-  .cl-foot__links a:hover { color: {{ section.settings.accent_color }} !important; }
+  .clf__links a:hover {
+    color: var(--clf-text) !important;
+    padding-left: 0.375rem !important;
+  }
 
   /* Contact items */
-  .cl-foot__contact-item {
+  .clf__contact-item {
     display: flex !important;
     align-items: flex-start !important;
     gap: 0.5rem !important;
-    margin-bottom: 0.75rem !important;
-    color: {{ section.settings.muted_color }} !important;
+    color: var(--clf-muted) !important;
     font-size: 0.875rem !important;
-    line-height: 1.5 !important;
+    font-family: var(--clf-font) !important;
+    margin-bottom: 0.75rem !important;
+    line-height: 1.55 !important;
   }
 
-  .cl-foot__contact-item:last-child { margin-bottom: 0 !important; }
+  .clf__contact-item:last-child { margin-bottom: 0 !important; }
 
-  .cl-foot__contact-icon {
+  .clf__ci-icon {
     width: 1rem !important;
     height: 1rem !important;
+    color: var(--clf-accent) !important;
     flex-shrink: 0 !important;
-    margin-top: 0.125rem !important;
-    color: {{ section.settings.accent_color }} !important;
+    margin-top: 0.1875rem !important;
   }
 
-  .cl-foot__contact-link {
+  .clf__ci-link {
     color: inherit !important;
     text-decoration: none !important;
-    transition: color 0.2s !important;
+    cursor: pointer !important;
+    transition: color 0.2s ease !important;
   }
 
-  .cl-foot__contact-link:hover { color: {{ section.settings.accent_color }} !important; }
+  .clf__ci-link:hover { color: var(--clf-text) !important; }
 
-  /* ── BOTTOM: Social + Payments + Copyright ── */
-  .cl-foot__bottom {
+  /* ════════════════════════════════════════
+     BOTTOM — Social + Payments
+  ════════════════════════════════════════ */
+  .clf__bottom {
     display: flex !important;
     flex-direction: column !important;
     gap: 1.25rem !important;
-    padding: 1.75rem 0 2rem !important;
-    border-bottom: 1px solid {{ section.settings.divider_color }} !important;
+    padding: 1.75rem 0 !important;
   }
 
   @media (min-width: 768px) {
-    .cl-foot__bottom {
+    .clf__bottom {
       flex-direction: row !important;
       align-items: center !important;
       justify-content: space-between !important;
@@ -304,340 +368,371 @@
   }
 
   /* Social */
-  .cl-foot__social {
+  .clf__social {
     display: flex !important;
     align-items: center !important;
     gap: 0.5rem !important;
     flex-wrap: wrap !important;
   }
 
-  .cl-foot__social-link {
+  .clf__social-link {
     width: 2.25rem !important;
     height: 2.25rem !important;
-    border-radius: 0.5rem !important;
-    background: {{ section.settings.input_bg }} !important;
-    border: 1px solid {{ section.settings.divider_color }} !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    border-radius: var(--clf-radius) !important;
+    background: var(--clf-bg-surface) !important;
+    border: 1px solid var(--clf-border) !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     text-decoration: none !important;
-    transition: background 0.2s, border-color 0.2s, transform 0.15s !important;
+    cursor: pointer !important;
+    transition: var(--clf-transition) !important;
   }
 
-  .cl-foot__social-link:hover {
-    background: {{ section.settings.accent_color }} !important;
-    border-color: {{ section.settings.accent_color }} !important;
+  .clf__social-link:hover {
+    background: var(--clf-accent) !important;
+    border-color: var(--clf-accent) !important;
     transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(220,38,38,0.3) !important;
   }
 
-  .cl-foot__social-link svg {
+  .clf__social-link:focus-visible {
+    outline: 2px solid var(--clf-accent) !important;
+    outline-offset: 2px !important;
+  }
+
+  .clf__social-link svg {
     width: 1rem !important;
     height: 1rem !important;
-    color: {{ section.settings.muted_color }} !important;
-    transition: color 0.2s !important;
+    color: var(--clf-muted) !important;
+    transition: color 0.2s ease !important;
     display: block !important;
   }
 
-  .cl-foot__social-link:hover svg { color: #ffffff !important; }
+  .clf__social-link:hover svg { color: #ffffff !important; }
 
-  /* Payment */
-  .cl-foot__pay {
+  /* Payments */
+  .clf__pay {
     display: flex !important;
     align-items: center !important;
-    gap: 0.5rem !important;
+    gap: 0.625rem !important;
     flex-wrap: wrap !important;
   }
 
-  .cl-foot__pay-label {
+  .clf__pay-label {
     font-size: 0.75rem !important;
-    color: {{ section.settings.muted_color }} !important;
+    font-family: var(--clf-font) !important;
     font-weight: 500 !important;
+    color: var(--clf-muted) !important;
     white-space: nowrap !important;
-    margin-right: 0.125rem !important;
   }
 
-  .cl-foot__pay-icons {
+  .clf__pay-icons {
     display: flex !important;
     align-items: center !important;
     gap: 0.375rem !important;
     flex-wrap: wrap !important;
   }
 
-  .cl-foot__pay-icons svg {
-    height: 1.625rem !important;
+  .clf__pay-icons svg {
+    height: 1.5rem !important;
     width: auto !important;
     border-radius: 0.25rem !important;
-    border: 1px solid {{ section.settings.divider_color }} !important;
+    border: 1px solid var(--clf-border) !important;
     display: block !important;
   }
 
-  /* ── Bar: Copyright + Links ── */
-  .cl-foot__bar {
+  /* ════════════════════════════════════════
+     BAR — Copyright
+  ════════════════════════════════════════ */
+  .clf__bar {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     gap: 0.625rem !important;
-    padding: 1.375rem 0 !important;
+    padding: 1.25rem 0 1.75rem !important;
     text-align: center !important;
   }
 
   @media (min-width: 768px) {
-    .cl-foot__bar {
+    .clf__bar {
       flex-direction: row !important;
       justify-content: space-between !important;
       text-align: left !important;
     }
   }
 
-  .cl-foot__copy {
+  .clf__copy {
+    font-family: var(--clf-font) !important;
     font-size: 0.8125rem !important;
-    color: {{ section.settings.muted_color }} !important;
+    font-weight: 400 !important;
+    color: var(--clf-muted) !important;
     margin: 0 !important;
   }
 
-  .cl-foot__bar-links {
+  .clf__bar-links {
     display: flex !important;
     align-items: center !important;
-    gap: 0.125rem 1.25rem !important;
     flex-wrap: wrap !important;
     justify-content: center !important;
+    gap: 0.125rem 1.25rem !important;
     list-style: none !important;
     margin: 0 !important;
     padding: 0 !important;
   }
 
-  @media (min-width: 768px) {
-    .cl-foot__bar-links { justify-content: flex-end !important; }
-  }
+  @media (min-width: 768px) { .clf__bar-links { justify-content: flex-end !important; } }
 
-  .cl-foot__bar-links a {
+  .clf__bar-links a {
+    font-family: var(--clf-font) !important;
     font-size: 0.8125rem !important;
-    color: {{ section.settings.muted_color }} !important;
+    color: var(--clf-muted) !important;
     text-decoration: none !important;
-    transition: color 0.2s !important;
+    cursor: pointer !important;
+    transition: color 0.2s ease !important;
   }
 
-  .cl-foot__bar-links a:hover { color: {{ section.settings.accent_color }} !important; }
+  .clf__bar-links a:hover { color: var(--clf-text) !important; }
+
+  /* ── prefers-reduced-motion ── */
+  @media (prefers-reduced-motion: reduce) {
+    .clf *, .clf *::before, .clf *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+  }
 </style>
 
-<div class="cl-foot">
-  <!-- Accent line -->
-  <div class="cl-foot__accent"></div>
+<div class="clf">
 
-  <div class="cl-foot__body">
+  <!-- Accent bar -->
+  <div class="clf__accent-bar"></div>
 
-    <!-- ────── TOP: Brand + Newsletter ────── -->
-    <div class="cl-foot__inner">
-      <div class="cl-foot__top">
+  <!-- ─── TOP: Brand + Newsletter ─── -->
+  <div class="clf__wrap">
+    <div class="clf__top">
 
-        <!-- Brand -->
-        <div class="cl-foot__brand">
-          {% if section.settings.logo != blank %}
-            <img src="{{ section.settings.logo | img_url: '240x' }}" alt="{{ shop.name }}" class="cl-foot__logo">
-          {% else %}
-            <img src="https://cdn.shopify.com/s/files/1/0745/7505/2971/files/Diseno_sin_titulo_9.svg?v=1767416974" alt="{{ shop.name }}" class="cl-foot__logo">
-          {% endif %}
-          <p class="cl-foot__tagline">{{ section.settings.brand_description }}</p>
-        </div>
-
-        <!-- Newsletter -->
-        {% if section.settings.show_newsletter %}
-        <div class="cl-foot__nl">
-          <span class="cl-foot__nl-label">Newsletter</span>
-          <h2 class="cl-foot__nl-title">{{ section.settings.newsletter_title }}</h2>
-          <form class="cl-foot__nl-form" action="/contact#newsletter" method="post" accept-charset="UTF-8">
-            <input type="hidden" name="form_type" value="customer">
-            <input type="hidden" name="utf8" value="✓">
-            <input type="hidden" name="contact[tags]" value="newsletter">
-            <input
-              type="email"
-              name="contact[email]"
-              class="cl-foot__nl-input"
-              placeholder="{{ section.settings.newsletter_placeholder }}"
-              required
-            >
-            <button type="submit" class="cl-foot__nl-btn">{{ section.settings.newsletter_button_text }}</button>
-          </form>
-          {% if section.settings.newsletter_disclaimer != blank %}
-          <p class="cl-foot__nl-note">
-            {{ section.settings.newsletter_disclaimer }}
-            {% if section.settings.privacy_link != blank %}
-              <a href="{{ section.settings.privacy_link }}">{{ section.settings.privacy_link_text }}</a>
-            {% endif %}
-          </p>
-          {% endif %}
-        </div>
+      <!-- Brand -->
+      <div class="clf__brand">
+        {% if section.settings.logo != blank %}
+          <img src="{{ section.settings.logo | img_url: '240x' }}" alt="{{ shop.name }}" class="clf__logo">
+        {% else %}
+          <img src="https://cdn.shopify.com/s/files/1/0745/7505/2971/files/Diseno_sin_titulo_9.svg?v=1767416974" alt="{{ shop.name }}" class="clf__logo">
         {% endif %}
-
+        <p class="clf__tagline">{{ section.settings.brand_description }}</p>
       </div>
-    </div>
 
-    <!-- ────── MIDDLE: Nav Columns ────── -->
-    <div class="cl-foot__inner">
-      <div class="cl-foot__mid">
-
-        <!-- Menú 1 -->
-        <div>
-          <button class="cl-foot__col-head" type="button" onclick="clFootToggle(this,'cl-m1')">
-            <h3 class="cl-foot__col-title">{{ section.settings.menu1_title }}</h3>
-            <svg class="cl-foot__chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <ul class="cl-foot__links" id="cl-m1">
-            {% for link in linklists[section.settings.menu1].links %}
-              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-            {% endfor %}
-          </ul>
+      <!-- Newsletter -->
+      {% if section.settings.show_newsletter %}
+      <div class="clf__nl">
+        <div class="clf__nl-badge">
+          <span class="clf__nl-badge-dot"></span>
+          Newsletter
         </div>
-
-        <!-- Menú 2 -->
-        <div>
-          <button class="cl-foot__col-head" type="button" onclick="clFootToggle(this,'cl-m2')">
-            <h3 class="cl-foot__col-title">{{ section.settings.menu2_title }}</h3>
-            <svg class="cl-foot__chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <ul class="cl-foot__links" id="cl-m2">
-            {% for link in linklists[section.settings.menu2].links %}
-              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-            {% endfor %}
-          </ul>
-        </div>
-
-        <!-- Menú 3 -->
-        <div>
-          <button class="cl-foot__col-head" type="button" onclick="clFootToggle(this,'cl-m3')">
-            <h3 class="cl-foot__col-title">{{ section.settings.menu3_title }}</h3>
-            <svg class="cl-foot__chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <ul class="cl-foot__links" id="cl-m3">
-            {% for link in linklists[section.settings.menu3].links %}
-              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-            {% endfor %}
-          </ul>
-        </div>
-
-        <!-- Contacto -->
-        <div>
-          <button class="cl-foot__col-head" type="button" onclick="clFootToggle(this,'cl-ct')">
-            <h3 class="cl-foot__col-title">{{ section.settings.contact_title }}</h3>
-            <svg class="cl-foot__chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <ul class="cl-foot__links" id="cl-ct">
-            {% if section.settings.phone != blank %}
-            <li>
-              <div class="cl-foot__contact-item">
-                <svg class="cl-foot__contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                <a href="tel:{{ section.settings.phone | remove: ' ' }}" class="cl-foot__contact-link">{{ section.settings.phone }}</a>
-              </div>
-            </li>
-            {% endif %}
-            {% if section.settings.email != blank %}
-            <li>
-              <div class="cl-foot__contact-item">
-                <svg class="cl-foot__contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                <a href="mailto:{{ section.settings.email }}" class="cl-foot__contact-link">{{ section.settings.email }}</a>
-              </div>
-            </li>
-            {% endif %}
-            {% if section.settings.address != blank %}
-            <li>
-              <div class="cl-foot__contact-item">
-                <svg class="cl-foot__contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-                <span>{{ section.settings.address }}</span>
-              </div>
-            </li>
-            {% endif %}
-            {% if section.settings.store_hours != blank %}
-            <li>
-              <div class="cl-foot__contact-item">
-                <svg class="cl-foot__contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                <span>{{ section.settings.store_hours }}</span>
-              </div>
-            </li>
-            {% endif %}
-          </ul>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- ────── BOTTOM: Social + Payments ────── -->
-    <div class="cl-foot__inner">
-      <div class="cl-foot__bottom">
-
-        <!-- Social -->
-        {% if section.settings.show_social %}
-        <div class="cl-foot__social">
-          {% if section.settings.instagram_url != blank %}
-          <a href="{{ section.settings.instagram_url }}" class="cl-foot__social-link" target="_blank" rel="noopener" aria-label="Instagram">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-          </a>
+        <h2 class="clf__nl-title">{{ section.settings.newsletter_title }}</h2>
+        <p class="clf__nl-sub">{{ section.settings.newsletter_sub }}</p>
+        <form class="clf__nl-form" action="/contact#newsletter" method="post" accept-charset="UTF-8">
+          <input type="hidden" name="form_type" value="customer">
+          <input type="hidden" name="utf8" value="✓">
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <input
+            type="email"
+            name="contact[email]"
+            class="clf__nl-input"
+            placeholder="{{ section.settings.newsletter_placeholder }}"
+            required
+            aria-label="Correo electrónico"
+          >
+          <button type="submit" class="clf__nl-btn">{{ section.settings.newsletter_btn }}</button>
+        </form>
+        {% if section.settings.newsletter_note != blank %}
+        <p class="clf__nl-note">
+          {{ section.settings.newsletter_note }}
+          {% if section.settings.privacy_link != blank %}
+            · <a href="{{ section.settings.privacy_link }}">{{ section.settings.privacy_link_text }}</a>
           {% endif %}
-          {% if section.settings.facebook_url != blank %}
-          <a href="{{ section.settings.facebook_url }}" class="cl-foot__social-link" target="_blank" rel="noopener" aria-label="Facebook">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-          </a>
-          {% endif %}
-          {% if section.settings.tiktok_url != blank %}
-          <a href="{{ section.settings.tiktok_url }}" class="cl-foot__social-link" target="_blank" rel="noopener" aria-label="TikTok">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.15 8.15 0 0 0 4.77 1.52V6.76a4.85 4.85 0 0 1-1-.07z"/></svg>
-          </a>
-          {% endif %}
-          {% if section.settings.whatsapp_url != blank %}
-          <a href="{{ section.settings.whatsapp_url }}" class="cl-foot__social-link" target="_blank" rel="noopener" aria-label="WhatsApp">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-          </a>
-          {% endif %}
-          {% if section.settings.youtube_url != blank %}
-          <a href="{{ section.settings.youtube_url }}" class="cl-foot__social-link" target="_blank" rel="noopener" aria-label="YouTube">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
-          </a>
-          {% endif %}
-          {% if section.settings.twitter_url != blank %}
-          <a href="{{ section.settings.twitter_url }}" class="cl-foot__social-link" target="_blank" rel="noopener" aria-label="X / Twitter">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
-          </a>
-          {% endif %}
-        </div>
+        </p>
         {% endif %}
-
-        <!-- Payment icons -->
-        {% if section.settings.show_payment_icons %}
-        <div class="cl-foot__pay">
-          <span class="cl-foot__pay-label">{{ section.settings.payment_label }}</span>
-          <div class="cl-foot__pay-icons">
-            {% for type in shop.enabled_payment_types %}
-              {{ type | payment_type_svg_tag }}
-            {% endfor %}
-          </div>
-        </div>
-        {% endif %}
-
       </div>
-    </div>
+      {% endif %}
 
-    <!-- ────── BAR: Copyright + Legal ────── -->
-    <div class="cl-foot__inner">
-      <div class="cl-foot__bar">
-        <p class="cl-foot__copy">{{ section.settings.copyright_text }}</p>
-        <ul class="cl-foot__bar-links">
-          {% for link in linklists[section.settings.bottom_menu].links %}
+    </div>
+  </div>
+
+  <div class="clf__wrap"><hr class="clf__divider"></div>
+
+  <!-- ─── MIDDLE: Nav Columns ─── -->
+  <div class="clf__wrap">
+    <div class="clf__mid">
+
+      <!-- Menú 1 -->
+      <div>
+        <button class="clf__col-hd" type="button" onclick="clfToggle(this,'clf-m1')" aria-expanded="false">
+          <h3 class="clf__col-title">{{ section.settings.menu1_title }}</h3>
+          <svg class="clf__chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul class="clf__links" id="clf-m1" role="list">
+          {% for link in linklists[section.settings.menu1].links %}
             <li><a href="{{ link.url }}">{{ link.title }}</a></li>
           {% endfor %}
         </ul>
       </div>
-    </div>
 
+      <!-- Menú 2 -->
+      <div>
+        <button class="clf__col-hd" type="button" onclick="clfToggle(this,'clf-m2')" aria-expanded="false">
+          <h3 class="clf__col-title">{{ section.settings.menu2_title }}</h3>
+          <svg class="clf__chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul class="clf__links" id="clf-m2" role="list">
+          {% for link in linklists[section.settings.menu2].links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <!-- Menú 3 -->
+      <div>
+        <button class="clf__col-hd" type="button" onclick="clfToggle(this,'clf-m3')" aria-expanded="false">
+          <h3 class="clf__col-title">{{ section.settings.menu3_title }}</h3>
+          <svg class="clf__chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul class="clf__links" id="clf-m3" role="list">
+          {% for link in linklists[section.settings.menu3].links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <!-- Contacto -->
+      <div>
+        <button class="clf__col-hd" type="button" onclick="clfToggle(this,'clf-ct')" aria-expanded="false">
+          <h3 class="clf__col-title">{{ section.settings.contact_title }}</h3>
+          <svg class="clf__chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul class="clf__links" id="clf-ct" role="list">
+          {% if section.settings.phone != blank %}
+          <li>
+            <div class="clf__contact-item">
+              <svg class="clf__ci-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <a href="tel:{{ section.settings.phone | remove: ' ' }}" class="clf__ci-link">{{ section.settings.phone }}</a>
+            </div>
+          </li>
+          {% endif %}
+          {% if section.settings.email != blank %}
+          <li>
+            <div class="clf__contact-item">
+              <svg class="clf__ci-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              <a href="mailto:{{ section.settings.email }}" class="clf__ci-link">{{ section.settings.email }}</a>
+            </div>
+          </li>
+          {% endif %}
+          {% if section.settings.address != blank %}
+          <li>
+            <div class="clf__contact-item">
+              <svg class="clf__ci-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>{{ section.settings.address }}</span>
+            </div>
+          </li>
+          {% endif %}
+          {% if section.settings.store_hours != blank %}
+          <li>
+            <div class="clf__contact-item">
+              <svg class="clf__ci-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>{{ section.settings.store_hours }}</span>
+            </div>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+
+    </div>
   </div>
+
+  <div class="clf__wrap"><hr class="clf__divider"></div>
+
+  <!-- ─── BOTTOM: Social + Payments ─── -->
+  {% if section.settings.show_social or section.settings.show_payment_icons %}
+  <div class="clf__wrap">
+    <div class="clf__bottom">
+
+      {% if section.settings.show_social %}
+      <div class="clf__social" role="list" aria-label="Redes sociales">
+        {% if section.settings.instagram_url != blank %}
+        <a href="{{ section.settings.instagram_url }}" class="clf__social-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+        </a>
+        {% endif %}
+        {% if section.settings.facebook_url != blank %}
+        <a href="{{ section.settings.facebook_url }}" class="clf__social-link" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        {% endif %}
+        {% if section.settings.tiktok_url != blank %}
+        <a href="{{ section.settings.tiktok_url }}" class="clf__social-link" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.15 8.15 0 0 0 4.77 1.52V6.76a4.85 4.85 0 0 1-1-.07z"/></svg>
+        </a>
+        {% endif %}
+        {% if section.settings.whatsapp_url != blank %}
+        <a href="{{ section.settings.whatsapp_url }}" class="clf__social-link" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        </a>
+        {% endif %}
+        {% if section.settings.youtube_url != blank %}
+        <a href="{{ section.settings.youtube_url }}" class="clf__social-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
+        </a>
+        {% endif %}
+        {% if section.settings.twitter_url != blank %}
+        <a href="{{ section.settings.twitter_url }}" class="clf__social-link" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+        </a>
+        {% endif %}
+      </div>
+      {% endif %}
+
+      {% if section.settings.show_payment_icons %}
+      <div class="clf__pay">
+        <span class="clf__pay-label">{{ section.settings.payment_label }}</span>
+        <div class="clf__pay-icons">
+          {% for type in shop.enabled_payment_types %}
+            {{ type | payment_type_svg_tag }}
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+    </div>
+  </div>
+
+  <div class="clf__wrap"><hr class="clf__divider"></div>
+  {% endif %}
+
+  <!-- ─── BAR: Copyright + Legal ─── -->
+  <div class="clf__wrap">
+    <div class="clf__bar">
+      <p class="clf__copy">{{ section.settings.copyright_text }}</p>
+      <ul class="clf__bar-links" role="list">
+        {% for link in linklists[section.settings.bottom_menu].links %}
+          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
 </div>
 
 <script>
-  function clFootToggle(btn, id) {
-    if (window.innerWidth >= 768) return;
+  function clfToggle(btn, id) {
+    if (window.innerWidth >= 640) return;
     var panel = document.getElementById(id);
-    var icon  = btn.querySelector('.cl-foot__chevron');
+    var icon  = btn.querySelector('.clf__chevron');
     if (!panel) return;
-    var open = panel.classList.toggle('cl-foot__links--open');
-    if (icon) icon.classList.toggle('cl-foot__chevron--open', open);
+    var open = panel.classList.toggle('clf__links--open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (icon) icon.classList.toggle('clf__chevron--open', open);
   }
 </script>
 
@@ -653,49 +748,13 @@
       "type": "color",
       "id": "footer_bg",
       "label": "Fondo del footer",
-      "default": "#111827"
-    },
-    {
-      "type": "color",
-      "id": "heading_color",
-      "label": "Color de títulos",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Color de texto",
-      "default": "#d1d5db"
-    },
-    {
-      "type": "color",
-      "id": "muted_color",
-      "label": "Color de texto secundario",
-      "default": "#6b7280"
-    },
-    {
-      "type": "color",
-      "id": "input_bg",
-      "label": "Fondo de input",
-      "default": "#1f2937"
-    },
-    {
-      "type": "color",
-      "id": "divider_color",
-      "label": "Color de divisores",
-      "default": "#1f2937"
+      "default": "#0f172a"
     },
     {
       "type": "color",
       "id": "accent_color",
-      "label": "Color de acento (inicio gradiente)",
+      "label": "Color de acento",
       "default": "#dc2626"
-    },
-    {
-      "type": "color",
-      "id": "accent_color_2",
-      "label": "Color de acento (fin gradiente)",
-      "default": "#b91c1c"
     },
     {
       "type": "header",
@@ -730,20 +789,26 @@
     },
     {
       "type": "text",
-      "id": "newsletter_placeholder",
-      "label": "Placeholder del input",
-      "default": "tu@email.com"
+      "id": "newsletter_sub",
+      "label": "Descripción corta",
+      "default": "Descuentos, lanzamientos y novedades directo a tu correo."
     },
     {
       "type": "text",
-      "id": "newsletter_button_text",
+      "id": "newsletter_placeholder",
+      "label": "Placeholder del input",
+      "default": "tu@correo.com"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_btn",
       "label": "Texto del botón",
       "default": "Suscribirse"
     },
     {
       "type": "text",
-      "id": "newsletter_disclaimer",
-      "label": "Texto legal",
+      "id": "newsletter_note",
+      "label": "Texto legal (opcional)",
       "default": "Sin spam. Cancela cuando quieras."
     },
     {
@@ -802,7 +867,7 @@
     {
       "type": "text",
       "id": "contact_title",
-      "label": "Título Contacto",
+      "label": "Título",
       "default": "Contacto"
     },
     {
@@ -825,7 +890,7 @@
     {
       "type": "text",
       "id": "store_hours",
-      "label": "Horario de atención",
+      "label": "Horario",
       "default": "Lun – Vie: 9:00 – 18:00"
     },
     {
